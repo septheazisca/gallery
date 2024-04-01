@@ -80,6 +80,12 @@
                   <ul class="dropdown-menu">
                     <li><a href="login.html">Login</a></li>
                     <li><a href="signup.html">Sign up</a></li>
+                    <li>
+                      <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                      </form>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -125,62 +131,17 @@
       <div class="mobile-menu-list">
         <ul>
           <li>
-            <a href="#">
-              <i class="cv cvicon-cv-play-circle"></i>
-              <p>Popular Videos</p>
-            </a>
+            <a href="">Pages</a>
           </li>
+          <hr>
           <li>
-            <a href="#">
-              <i class="cv cvicon-cv-playlist"></i>
-              <p>Browse Categories</p>
-              <span class="caret"></span>
-            </a>
-            <ul class="mobile-menu-categories">
-              <li class="color-active">
-                <a href="#">Pages <span class="caret"></span></a>
-                <ul>
-                  <li><a href="index.html">Home Page</a></li>
-                  <li><a href="single-video.html">Single Video Page</a></li>
-                  <li><a href="single-video-youtube.html">Single Video Youtube Embedded Page</a></li>
-                  <li><a href="single-video-vimeo.html">Single Video Vimeo Embedded Page</a></li>
-                  <li><a href="upload.html">Upload Video Page</a></li>
-                  <li><a href="upload-edit.html">Upload Video Edit Page</a></li>
-                  <li><a href="search.html">Searched Videos Page</a></li>
-                  <li><a href="channel.html">Single Channel Page</a></li>
-                  <li><a href="channels.html">Channels Page</a></li>
-                  <li><a href="single-video-tabs.html">Single Videos Page With Tabs</a></li>
-                  <li><a href="single-video-playlist.html">Single Videos Page With Playlist</a></li>
-                  <li><a href="history.html">History Page</a></li>
-                  <li><a href="categories.html">Browse Categories Page</a></li>
-                  <li><a href="categories_side_menu.html">Browse Categories Side Menu Page</a></li>
-                  <li><a href="subscription.html">Subscription Page</a></li>
-                  <li><a href="login.html">Login Page</a></li>
-                  <li><a href="signup.html">Signup Page</a></li>
-                </ul>
-              </li>
-              <li><a href="categories.html">Categories</a></li>
-              <li><a href="channel.html">Channels</a></li>
-            </ul>
+            <a href="">Categories</a>
           </li>
+          <hr>
           <li>
-            <a href="#">
-              <i class="cv cvicon-cv-liked"></i>
-              <p>Liked Videos</p>
-            </a>
+            <a href="">Channels</a>
           </li>
-          <li>
-            <a href="#">
-              <i class="cv cvicon-cv-history"></i>
-              <p>History</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="cv cvicon-cv-purchased"></i>
-              <p>Purchased Videos</p>
-            </a>
-          </li>
+          <hr>
         </ul>
       </div>
       <a href="#" class="btn mobile-menu-logout">Log out</a>

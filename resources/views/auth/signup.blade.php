@@ -45,28 +45,29 @@
             Sign Up for Free
           </div>
           <div class="l-form">
-            <form action="https://azyrusthemes.com/circlevideo/signup.html">
+            <form method="POST" action="{{ route('register') }}">
+            @csrf
               <div class="" style="display: flex; gap: 10px;">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nama Lengkap</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="sample@gmail.com">
+                  <label for="nama_lengkap">Nama Lengkap</label>
+                  <input class="form-control"  type="text" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}" placeholder="Masukan nama lengkap anda">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Username</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="sample@gmail.com">
+                  <label for="username">Username</label>
+                  <input class="form-control" type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Masukan username anda">
                 </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="sample@gmail.com">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}" placeholder="sample@gmail.com">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="**********">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="password" placeholder="**********">
               </div>
               <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <textarea name="" id="" cols="30" rows="3"></textarea>
+                <textarea id="alamat" name="alamat" cols="30" rows="3">{{ old('alamat') }}</textarea>
               </div>
               <div class="row">
                 <div class="col-lg-7"><button type="submit" class="btn btn-cv1">Sign Up</button></div>
