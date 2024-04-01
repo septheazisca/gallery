@@ -16,6 +16,25 @@ Route::get('/signup', function () {
 
 
 
+// DASHBOARD ------------------------------------------------------------
+Route::get('/dashboard-index', function () {
+    return view('dashboard.index');
+});
+Route::get('/dashboard-kategori', function () {
+    return view('dashboard.kategori');
+});
+Route::get('/dashboard-postingan', function () {
+    return view('dashboard.postingan');
+});
+Route::get('/dashboard-pengguna', function () {
+    return view('dashboard.pengguna');
+});
+Route::get('/dashboard-profil', function () {
+    return view('dashboard.profil');
+});
+
+
+
 // LANDING ------------------------------------------------------------
 Route::get('/gallery', function () {
     return view('landing.index');
