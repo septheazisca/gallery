@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\ProfilController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,9 +31,8 @@ Route::get('/dashboard-postingan', function () {
 Route::get('/dashboard-pengguna', function () {
     return view('dashboard.pengguna');
 });
-Route::get('/dashboard-profil', function () {
-    return view('dashboard.profil');
-});
+Route::get('/dashboard-profil', [ProfilController::class, 'profil'])->name('profil');
+Route::post('/dashboard/profile/update', [ProfilController::class, 'update'])->name('update');
 
 
 
