@@ -13,7 +13,7 @@ class ProfilController extends Controller
     public function profil()
     {
         $user = Auth::user(); 
-        $data = User::where('id', $user->id)->get(); 
+        $data = User::where('user_id', $user->user_id)->get(); 
         return view('dashboard.profil', ['data' => $data]);
     }
 

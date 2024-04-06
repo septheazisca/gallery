@@ -27,9 +27,6 @@
   <link href="asset-dashboard/vendor/simple-datatables/style.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+IgW3P5izmzrdFcjMW1bZHyxTcJw2ylOs6HtgVT9T2NaezJ5mcX/pKjpXJQjlh7S" crossorigin="anonymous">
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-
   <!-- Template Main CSS File -->
   <link href="asset-dashboard/css/style.css" rel="stylesheet">
 </head>
