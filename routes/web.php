@@ -23,9 +23,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/dashboard-index', function () {
     return view('dashboard.index');
 });
-Route::get('/dashboard-kategori', function () {
-    return view('dashboard.kategori');
-});
+// Route::get('/dashboard-kategori', function () {
+//     return view('dashboard.kategori');
+// });
 Route::get('/dashboard-postingan', function () {
     return view('dashboard.postingan');
 });
@@ -35,6 +35,7 @@ Route::get('/dashboard-pengguna', function () {
 Route::get('/dashboard-profil', [ProfilController::class, 'profil'])->name('profil');
 Route::post('/dashboard/profile/update', [ProfilController::class, 'update'])->name('update');
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+Route::get('/dashboard-kategori', [KategoriController::class, 'index'])->name('index');
 
 
 // LANDING ------------------------------------------------------------

@@ -5,9 +5,16 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\KategoriFoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class KategoriController extends Controller
 {
+  public function index()
+  {
+    $kategoris = KategoriFoto::all();
+    return view('dashboard.kategori', compact('kategoris'));
+  }
+
   public function store(Request $request)
   {
     $request->validate([
@@ -17,7 +24,15 @@ class KategoriController extends Controller
     ]);
 
     try {
-      $thumbnailPath = $request->file('thumbnail')->store('thumbnails');
+      $thumbnail = $request->file('thumbnail');
+
+      // Memeriksa apakah file yang diunggah adalah gambar yang valid
+      if (!$thumbnail->isValid()) {
+        return redirect()->back()->with('error', 'File gambar tidak valid.');
+      }
+
+      // Menyimpan file dengan nama yang unik di dalam direktori storage/app/thumbnails
+      $thumbnailPath = $thumbnail->store('thumbnails', 'public');
 
       KategoriFoto::create([
         'thumbnail_kategori' => $thumbnailPath,
@@ -27,6 +42,8 @@ class KategoriController extends Controller
 
       return redirect('/dashboard-kategori')->with('success', 'Kategori berhasil ditambahkan!');
     } catch (\Exception $e) {
+      // Logging error
+      Log::error('Error occurred while storing category: ' . $e->getMessage());
       return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
     }
   }
