@@ -5,6 +5,49 @@
 @endsection
 
 @section('content')
+
+@if(session('success'))
+<script>
+  // Menampilkan SweetAlert dengan pesan sukses
+  Swal.fire({
+    icon: 'success',
+    title: 'Sukses!',
+    text: '{{ session('
+    success ') }}',
+    showConfirmButton: false,
+    timer: 2000 
+  });
+</script>
+@endif
+
+@if ($errors->any())
+<script>
+  // Menampilkan SweetAlert dengan pesan error input kosong
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Ada inputan yang kosong. Silakan isi semua inputan.',
+  });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+  // Menampilkan SweetAlert dengan pesan error lainnya
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '{{ session('
+    error ') }}',
+  });
+</script>
+@endif
+
+
+
+
+
+
 <main id="main" class="main">
 
   <div class="pagetitle">
@@ -142,24 +185,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form>
+                    <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
                       <div class="mb-3">
                         <label for="thumbnail" class="col-form-label">Thumbnail Kategori:</label>
-                        <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .mp4, .avi" id="thumbnail">
+                        <input type="file" name="thumbnail" class="form-control" accept=".png, .jpg, .jpeg" id="thumbnail">
                       </div>
                       <div class="mb-3">
                         <label for="judul" class="col-form-label">Judul Kategori:</label>
-                        <input type="text" class="form-control" id="judul">
+                        <input type="text" name="judul" class="form-control" id="judul">
                       </div>
                       <div class="mb-3">
                         <label for="detail" class="col-form-label">Detail Kategori:</label>
-                        <textarea class="form-control" id="detail"></textarea>
+                        <textarea name="detail" class="form-control" id="detail"></textarea>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
                     </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Datal</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
                   </div>
                 </div>
               </div>

@@ -25,7 +25,9 @@
   <link href="asset-dashboard/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="asset-dashboard/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="asset-dashboard/vendor/simple-datatables/style.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+IgW3P5izmzrdFcjMW1bZHyxTcJw2ylOs6HtgVT9T2NaezJ5mcX/pKjpXJQjlh7S" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+IgW3P5izmzrdFcjMW1bZHyxTcJw2ylOs6HtgVT9T2NaezJ5mcX/pKjpXJQjlh7S" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Template Main CSS File -->
   <link href="asset-dashboard/css/style.css" rel="stylesheet">
