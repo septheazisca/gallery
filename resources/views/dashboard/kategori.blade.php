@@ -96,7 +96,7 @@
                   <td>{{ $kategori->deskripsi_kategori }}</td>
                   <td>{{ $kategori->created_at->format('Y/m/d') }}</td>
                   <td>
-                    <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategori" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
                     <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                   </td>
                 </tr>
@@ -118,6 +118,39 @@
                   <div class="modal-body">
                     <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
                       @csrf
+                      <div class="mb-3">
+                        <label for="thumbnail" class="col-form-label">Thumbnail Kategori:</label>
+                        <input type="file" name="thumbnail" class="form-control" accept=".png, .jpg, .jpeg" id="thumbnail">
+                      </div>
+                      <div class="mb-3">
+                        <label for="judul" class="col-form-label">Judul Kategori:</label>
+                        <input type="text" name="judul" class="form-control" id="judul">
+                      </div>
+                      <div class="mb-3">
+                        <label for="detail" class="col-form-label">Detail Kategori:</label>
+                        <textarea name="detail" class="form-control" id="detail"></textarea>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Edit Tambah -->
+            <div class="modal fade" id="editKategori" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kategori</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
                       <div class="mb-3">
                         <label for="thumbnail" class="col-form-label">Thumbnail Kategori:</label>
                         <input type="file" name="thumbnail" class="form-control" accept=".png, .jpg, .jpeg" id="thumbnail">
