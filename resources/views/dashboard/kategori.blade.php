@@ -94,9 +94,9 @@
                   </td>
                   <td>{{ $kategori->judul_kategori }}</td>
                   <td>{{ $kategori->deskripsi_kategori }}</td>
-                  <td>{{ $kategori->created_at->format('Y/m/d') }}</td>
+                  <td>{{ $kategori->created_at->format('d/m/Y') }}</td>
                   <td>
-                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategori" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategori{{$kategori->kategori_id}}" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
                     <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                   </td>
                 </tr>
@@ -142,36 +142,52 @@
 
 
             <!-- Edit Tambah -->
-            <div class="modal fade" id="editKategori" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kategori</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="mb-3">
-                        <label for="thumbnail" class="col-form-label">Thumbnail Kategori:</label>
-                        <input type="file" name="thumbnail" class="form-control" accept=".png, .jpg, .jpeg" id="thumbnail">
-                      </div>
-                      <div class="mb-3">
-                        <label for="judul" class="col-form-label">Judul Kategori:</label>
-                        <input type="text" name="judul" class="form-control" id="judul">
-                      </div>
-                      <div class="mb-3">
-                        <label for="detail" class="col-form-label">Detail Kategori:</label>
-                        <textarea name="detail" class="form-control" id="detail"></textarea>
+            @foreach($kategoris as $kategori)
+            <form action="">
+              <div class="modal fade" id="editKategori{{$kategori->kategori_id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kategori</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-lg-12">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="row">
+                              <img src="{{ asset('storage/' . $kategori->thumbnail_kategori) }}" alt="{{ $kategori->judul_kategori }}" class="pb-3" style="width: 100%;">
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="row">
+                              <div class="mb-3">
+                                <br>
+                                <label for="thumbnail" class="col-form-label">Thumbnail Kategori:</label>
+                                <input type="file" name="thumbnail" class="form-control" accept=".png, .jpg, .jpeg" id="thumbnail">
+                              </div>
+                              <div class="mb-3">
+                                <label for="judul" class="col-form-label">Judul Kategori:</label>
+                                <input type="text" name="judul" class="form-control" id="judul" value="{{ $kategori->judul_kategori }}">
+                              </div>
+                              <div class="mb-3">
+                                <label for="detail" class="col-form-label">Detail Kategori:</label>
+                                <textarea name="detail" class="form-control" id="detail">{{ $kategori->deskripsi_kategori }}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
+            @endforeach
           </div>
         </div>
 
