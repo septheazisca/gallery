@@ -12,19 +12,30 @@
         <br>
         <!-- Popular Channels -->
         <div class="content-block">
-          <div class="cb-header">
+          <!-- <div class="cb-header">
             <div class="row">
               <div class="col-lg-10">
                 <ul class="list-inline">
                   <li><a href="#" class="color-active">Cari berdasarkan kategori</a></li>
-                  <!-- <li><a href="#">Most Popular</a></li>
+                  <li><a href="#">Most Popular</a></li>
                   <li><a href="#">Trending</a></li>
                   <li class="hidden-xs"><a href="#">Most Recent</a></li>
                   <li class="hidden-xs"><a href="#">A - Z</a></li>
-                </ul> -->
+                </ul>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="cb-header">
+            <div class="row">
+              <div class="col-lg-12 col-sm-10 col-xs-10">
+                <ul class="list-inline">
+                  <li><a href="#">Cari berdasarkan Kategori</a></li>
+                </ul>
               </div>
             </div>
           </div>
+
           <div class="cb-content">
             <div class="row">
               @foreach($kategoris as $kategori)
