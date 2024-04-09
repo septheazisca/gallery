@@ -36,6 +36,7 @@ Route::get('/dashboard-profil', [ProfilController::class, 'profil'])->name('prof
 Route::post('/dashboard/profile/update', [ProfilController::class, 'update'])->name('update');
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
 Route::get('/dashboard-kategori', [KategoriController::class, 'index'])->name('index');
+Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->name('kategori.update');
 
 
 // LANDING ------------------------------------------------------------

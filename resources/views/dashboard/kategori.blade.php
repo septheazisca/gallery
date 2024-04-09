@@ -143,12 +143,14 @@
 
             <!-- Edit Tambah -->
             @foreach($kategoris as $kategori)
-            <form action="">
+            <form action="{{ route('kategori.update', $kategori->kategori_id) }}" method="POST" enctype="multipart/form-data">
+              @csrf
               <div class="modal fade" id="editKategori{{$kategori->kategori_id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kategori</h1>
+                      <input type="hidden" name="id" value="{{ $kategori->kategori_id }}">
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
