@@ -68,7 +68,7 @@
           <div class="card-body">
             <h5 class="card-title">Data Kategori</h5>
             <div class="d-flex align-items-center gap-2">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahKategori" data-bs-target="#staticBackdrop">Tambah Kategori</button>
+              <button type="button" class="btn btn-primary-1" data-bs-toggle="modal" data-bs-target="#tambahKategori" data-bs-target="#staticBackdrop">Tambah Kategori</button>
               <p class="mb-0">Tambah, lihat dan edit data seputar kategori unggahan.</p>
             </div>
             <hr>
@@ -96,8 +96,8 @@
                   <td>{{ $kategori->deskripsi_kategori }}</td>
                   <td>{{ $kategori->created_at->format('d/m/Y') }}</td>
                   <td>
-                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editKategori{{$kategori->kategori_id}}" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
-                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-warning-1" data-bs-toggle="modal" data-bs-target="#editKategori{{$kategori->kategori_id}}" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-danger-1"><i class="bi bi-trash"></i></button>
                   </td>
                 </tr>
                 @endforeach
