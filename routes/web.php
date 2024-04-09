@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
+use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
+use App\Http\Controllers\landing\LandingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,12 +42,8 @@ Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->nam
 Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 // LANDING ------------------------------------------------------------
-Route::get('/gallery', function () {
-    return view('landing.index');
-});
-Route::get('/kategori', function () {
-    return view('landing.kategori');
-});
+Route::get('/gallery', [LandingController::class, 'index'])->name('index');
+Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
 Route::get('/profil', function () {
     return view('landing.profil');
 });

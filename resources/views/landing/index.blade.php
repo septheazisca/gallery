@@ -20,26 +20,9 @@
           <div class="">
             <div class="row">
               <ul class="category-list" style="padding: 20px;">
-                <li><a href="#">interior</a></li>
-                <li><a href="#">design</a></li>
-                <li><a href="#">web</a></li>
-                <li><a href="#">house</a></li>
-                <li><a href="#">nature</a></li>
-                <li><a href="#">architecture</a></li>
-                <li><a href="#">food</a></li>
-                <li><a href="#">photography</a></li>
-                <li><a href="#">lifestyle</a></li>
-                <li><a href="#">photoshop</a></li>
-                <li><a href="#">interior</a></li>
-                <li><a href="#">design</a></li>
-                <li><a href="#">web</a></li>
-                <li><a href="#">house</a></li>
-                <li><a href="#">nature</a></li>
-                <li><a href="#">architecture</a></li>
-                <li><a href="#">food</a></li>
-                <li><a href="#">photography</a></li>
-                <li><a href="#">lifestyle</a></li>
-                <li><a href="#">photoshop</a></li>
+                @foreach($kategoris as $kategori)
+                <li><a href="#">{{ $kategori->judul_kategori }}</a></li>
+                @endforeach
               </ul>
             </div>
           </div>

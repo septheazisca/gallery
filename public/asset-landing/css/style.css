@@ -2410,6 +2410,11 @@ ul.menu ul li:not(:last-child) {
   font-size: 15px;
   margin-top: 5px;
 }
+
+/* .b-category img{
+  width: 245px;
+  height: 245px;
+} */
 @media (min-width: 100px) and (max-width: 767px) {
   .b-category img {
     width: 100%;
