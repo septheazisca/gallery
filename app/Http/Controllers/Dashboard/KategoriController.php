@@ -89,4 +89,24 @@ class KategoriController extends Controller
       return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
     }
   }
+
+  public function destroy($id)
+  {
+    try {
+      // Cari kategori berdasarkan ID
+      $kategori = KategoriFoto::findOrFail($id);
+
+      // Hapus thumbnail dari storage
+      Storage::disk('public')->delete($kategori->thumbnail_kategori);
+
+      // Hapus kategori dari database
+      $kategori->delete();
+
+      return redirect('/dashboard-kategori')->with('success', 'Kategori berhasil dihapus!');
+    } catch (\Exception $e) {
+      // Logging error
+      Log::error('Error occurred while deleting category: ' . $e->getMessage());
+      return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
+    }
+  }
 }

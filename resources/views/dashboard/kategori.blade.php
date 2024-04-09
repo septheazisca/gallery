@@ -44,6 +44,29 @@
 @endif
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(event) {
+      if (event.target.classList.contains('delete-category')) {
+        const categoryId = event.target.dataset.id;
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          cancelButtonColor: "#3085d6",
+          confirmButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/kategori/delete/" + categoryId;
+          }
+        });
+      }
+    });
+  });
+</script>
+
 
 
 
@@ -97,7 +120,7 @@
                   <td>{{ $kategori->created_at->format('d/m/Y') }}</td>
                   <td>
                     <button class="btn btn-warning-1" data-bs-toggle="modal" data-bs-target="#editKategori{{$kategori->kategori_id}}" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
-                    <button class="btn btn-danger-1"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-danger-1 delete-category" data-id="{{ $kategori->kategori_id }}"><i class="bi bi-trash"></i></button>
                   </td>
                 </tr>
                 @endforeach

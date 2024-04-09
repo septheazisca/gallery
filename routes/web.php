@@ -37,7 +37,7 @@ Route::post('/dashboard/profile/update', [ProfilController::class, 'update'])->n
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
 Route::get('/dashboard-kategori', [KategoriController::class, 'index'])->name('index');
 Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->name('kategori.update');
-
+Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 // LANDING ------------------------------------------------------------
 Route::get('/gallery', function () {
