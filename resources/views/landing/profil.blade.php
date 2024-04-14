@@ -180,82 +180,28 @@
           <div class="cb-content videolist">
             <div class="row">
               <div class="content-container">
+                @if($fotos->isEmpty())
+                <p style="padding-left: 28px;">Tidak ada unggahan.</p>
+                @else
+                @foreach($fotos as $foto)
                 <div class="box-content">
-                  <img src="https://images.pexels.com/photos/18031828/pexels-photo-18031828/free-photo-of-composition-of-jewelry-dried-flowers-and-books.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                  <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}">
                   <div class="content-hover">
                     <div class="text-content">
-                      <h3 class="image-title">Judulllllllllllllllllllllllllllllllll</h3>
-                      <p class="image-date">tanggal</p>
-                    </div>
-                    <div class="like-icon-div">
-                      <label for="card-1-like" class="like-icon-div-child" style="margin-right: 15px;">
-                        <input type="checkbox" id="card-1-like" style="opacity: 0;">
-                        <i class="far fa-heart heart-empty" style="font-size: 25px;"></i>
-                        <i class="fas fa-heart heart-fill" style="font-size: 25px;"></i>
-                      </label>
+                      <h3 class="image-title">{{ $foto->judul_foto }}</h3>
+                      <p class="image-date">{{ $foto->tanggal_unggahan }}</p>
                     </div>
                   </div>
+                  <div class="like-icon-div">
+                    <!-- <label for="card-1-like" class="like-icon-div-child" style="margin-right: 15px;">
+                    <input type="checkbox" class="card-1-like" style="opacity: 0;">
+                    <i class="far fa-heart heart-empty" style="font-size: 25px;"></i>
+                    <i class="fas fa-heart heart-fill" style="font-size: 25px;"></i>
+                </label> -->
+                  </div>
                 </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/20240213/pexels-photo-20240213/free-photo-of-portrait-of-woman-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/19906220/pexels-photo-19906220/free-photo-of-a-tunnel-with-a-white-wall-and-a-door.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/11073147/pexels-photo-11073147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/20343073/pexels-photo-20343073/free-photo-of-blonde-girl-in-a-museum.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/17365903/pexels-photo-17365903/free-photo-of-sunlit-building-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/10479655/pexels-photo-10479655.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/18031828/pexels-photo-18031828/free-photo-of-composition-of-jewelry-dried-flowers-and-books.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/20240213/pexels-photo-20240213/free-photo-of-portrait-of-woman-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/19906220/pexels-photo-19906220/free-photo-of-a-tunnel-with-a-white-wall-and-a-door.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/11073147/pexels-photo-11073147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/20343073/pexels-photo-20343073/free-photo-of-blonde-girl-in-a-museum.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/17365903/pexels-photo-17365903/free-photo-of-sunlit-building-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/10479655/pexels-photo-10479655.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/18031828/pexels-photo-18031828/free-photo-of-composition-of-jewelry-dried-flowers-and-books.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/20240213/pexels-photo-20240213/free-photo-of-portrait-of-woman-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/19906220/pexels-photo-19906220/free-photo-of-a-tunnel-with-a-white-wall-and-a-door.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/11073147/pexels-photo-11073147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/20343073/pexels-photo-20343073/free-photo-of-blonde-girl-in-a-museum.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/17365903/pexels-photo-17365903/free-photo-of-sunlit-building-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
-                <div class="box-content">
-                  <img src="https://images.pexels.com/photos/10479655/pexels-photo-10479655.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-                </div>
+                @endforeach
+                @endif
               </div>
             </div>
           </div>
