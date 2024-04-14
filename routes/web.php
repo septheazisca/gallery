@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
 use App\Http\Controllers\landing\LandingController;
+use App\Http\Controllers\landing\ProfilController as LandingProfilController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -47,6 +48,7 @@ Route::get('/main', [LandingController::class, 'main'])->name('main');
 Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
 Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbum');
 Route::post('/add-foto', [LandingController::class, 'addFoto'])->name('addFoto');
-Route::get('/profil', function () {
-    return view('landing.profil');
-});
+Route::get('/profil', [LandingProfilController::class, 'profil'])->name('profil');
+// Route::get('/profil', function () {
+//     return view('landing.profil');
+// });

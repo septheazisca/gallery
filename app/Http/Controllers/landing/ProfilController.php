@@ -8,13 +8,13 @@ use App\Models\foto;
 use App\Models\KategoriFoto;
 use Illuminate\Http\Request;
 
-class kategoriController extends Controller
+class ProfilController extends Controller
 {
-    public function kategori()
+    public function profil()
     {
         $kategoris = KategoriFoto::all();
         $fotos = foto::all();
         $albums = Album::where('user_id', auth()->id())->get();
-        return view('landing.kategori', compact('kategoris', 'fotos', 'albums'));
+        return view('landing.profil', compact('kategoris', 'fotos', 'albums'));
     }
 }
