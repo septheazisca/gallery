@@ -17,8 +17,12 @@ return new class extends Migration
             $table->string('deskripsi_foto');
             $table->date('tanggal_unggahan');
             $table->string('lokasi_foto');
-            $table->integer('album_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('kategori_id');
+            $table->foreign('kategori_id')->references('kategori_id')->on('kategori_foto')->onDelete('cascade');
+            $table->unsignedBigInteger('album_id');
+            $table->foreign('album_id')->references('album_id')->on('album')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -165,7 +165,7 @@
   </div>
 
   <!-- MODAL POST -->
-  <form action="">
+  <form action="{{ route('addFoto') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="modalPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -174,17 +174,17 @@
             <h4>Tambah Unggahan</h4>
             <div class="form-group">
               <label for="Unggahan">Unggahan</label>
-              <input type="file" class="custom-file-input" id="inputGroupFile" accept=".png, .jpg, .jpeg" style="background-color: #f8f8f8; width: 100%; height: 100px; padding-top: 40px;">
+              <input type="file" name="lokasi_foto" class="custom-file-input" id="inputGroupFile" accept=".png, .jpg, .jpeg" style="background-color: #f8f8f8; width: 100%; height: 100px; padding-top: 40px;">
               <div id="preview" style="display: flex; align-items: center; justify-content: center;"></div>
             </div>
 
             <div class="form-group">
               <label for="judul">Judul</label>
-              <input class="form-control" type="text" id="judul" name="judul" placeholder="Masukan judul anda">
+              <input class="form-control" type="text" id="judul" name="judul_foto" placeholder="Masukan judul anda">
             </div>
             <div class="form-group">
               <label for="deskripsi">Deskripsi</label>
-              <textarea type="text" id="deskripsi" name="deskripsi" placeholder="Masukan deskripsi anda" cols="30" rows="3"></textarea>
+              <textarea type="text" id="deskripsi" name="deskripsi_foto" placeholder="Masukan deskripsi anda" cols="30" rows="3"></textarea>
             </div>
             <div class="form-group">
               <label for="kategori">Kategori</label>

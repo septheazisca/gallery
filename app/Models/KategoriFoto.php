@@ -11,4 +11,9 @@ class KategoriFoto extends Model
     protected $table = 'kategori_foto';
     protected $primaryKey = 'kategori_id';
     protected $guarded = [];
+
+    public function foto()
+    {
+        return $this->hasMany(Foto::class);
+    }
 }
