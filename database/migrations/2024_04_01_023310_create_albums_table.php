@@ -13,7 +13,8 @@ return new class extends Migration
             $table->string('nama_album');
             $table->text('deskripsi');
             $table->date('tanggal_dibuat');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

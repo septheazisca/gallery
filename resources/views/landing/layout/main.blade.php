@@ -20,7 +20,7 @@
   <link href="asset-landing/css/font-awesome.min.css" rel="stylesheet">
   <link href="asset-landing/css/font-circle-video.css" rel="stylesheet">
 
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- font-family: 'Hind', sans-serif; -->
   <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700|Hind+Guntur:300,400,500,700' rel='stylesheet' type='text/css'>
 
@@ -191,7 +191,7 @@
               <select name="kategori" class="form-control" style="padding: 0;">
                 <option disabled selected>Pilih kategori anda</option>
                 @foreach ($kategoris as $kategori)
-                <option  value="{{$kategori->kategori_id}}">{{ $kategori->judul_kategori }}</option>
+                <option value="{{$kategori->kategori_id}}">{{ $kategori->judul_kategori }}</option>
                 @endforeach
                 <!-- <option disabled>Kategori tidak tersedia.</option> -->
               </select>
@@ -205,7 +205,7 @@
   </form>
 
   <!-- MODAL ALBUM -->
-  <form action="">
+  <form action="{{ route('addAlbum') }}" method="POST">
     @csrf
     <div class="modal fade" id="modalAlbum" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -230,6 +230,34 @@
 
 
   @yield('content')
+
+  @if(session('success'))
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: '{{ session('
+      success ') }}',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  </script>
+  @endif
+
+  @if(session('error'))
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: '{{ session('
+      error ') }}',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  </script>
+  @endif
+
+
   <script>
     // menampilkan img
     document.getElementById('inputGroupFile').addEventListener('change', function(event) {
@@ -260,6 +288,34 @@
         document.getElementById('preview').appendChild(cancelButton);
       };
       reader.readAsDataURL(file);
+    });
+
+
+    // validasi input album
+    document.getElementById('addAlbumForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Mencegah form dari submit default
+
+      // Kirim data form menggunakan AJAX
+      axios.post(this.action, new FormData(this))
+        .then(response => {
+          // Tampilkan SweetAlert2 untuk pesan sukses
+          Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: response.data.message
+          });
+
+          // Clear form
+          this.reset();
+        })
+        .catch(error => {
+          // Tampilkan SweetAlert2 untuk pesan kesalahan
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Terjadi kesalahan. Silakan coba lagi.'
+          });
+        });
     });
   </script>
   <script src="asset-landing/js/jquery.min.js"></script>
