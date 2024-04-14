@@ -103,7 +103,7 @@
           <!-- BUTTON ADD -->
           @auth
           <div class="hidden-xs">
-            <a href="" data-toggle="modal" data-target="#modalAlbum">
+            <a href="" data-toggle="modal" data-target="#modalPost">
               <div class="upload-button">
                 <i class="cv cvicon-cv-upload-video"></i>
               </div>
@@ -193,9 +193,49 @@
                 @foreach ($kategoris as $kategori)
                 <option value="{{$kategori->kategori_id}}">{{ $kategori->judul_kategori }}</option>
                 @endforeach
-                <!-- <option disabled>Kategori tidak tersedia.</option> -->
+                @if (count($kategoris) == 0)
+                <option disabled>Kategori tidak tersedia.</option>
+                @endif
               </select>
             </div>
+            <div class="form-group icon-input">
+              <button type="button" class="btn btn-gray200" id="pilihAlbum" style="background-color: #F1F1F1; width: 49.4%">
+                <span class="bi bi-journal-album"></span> Pilih album
+              </button>
+              <!-- <button type="button" class="btn btn-gray200" id="buatAlbum" style="background-color: #F1F1F1; width: 49.4%">
+                <span class="bi bi-journal-album"></span> Buat album
+              </button> -->
+            </div>
+            <div id="albumSection" class="form-group icon-input" style="display: none;">
+              <label for="album" class="text-dark" style="font-weight: bold">Album</label>
+              <select name="album" class="form-control" style="padding: 0px;">
+                <option disabled selected>Pilih album anda</option>
+                @foreach ($albums as $album)
+                <option value="{{$album->album_id}}">{{ $album->nama_album }}</option>
+                @endforeach
+                @if (count($albums) == 0)
+                <option disabled>Kategori tidak tersedia.</option>
+                @endif
+              </select>
+            </div>
+            <!-- <div id="newAlbumSection" class="form-group icon-input" style="display: none;">
+              <label for="new_album" class="text-dark" style="font-weight: bold">Buat album</label>
+              <input type="text" name="new_album" class="form-control" placeholder="Buat album baru">
+            </div> -->
+
+            <script>
+              document.getElementById("pilihAlbum").addEventListener("click", function() {
+                document.getElementById("albumSection").style.display = "block";
+                document.getElementById("newAlbumSection").style.display = "none";
+                document.getElementsByName("new_album")[0].value = "";
+              });
+
+              // document.getElementById("buatAlbum").addEventListener("click", function() {
+              //   document.getElementById("albumSection").style.display = "none";
+              //   document.getElementById("newAlbumSection").style.display = "block";
+              //   document.querySelector("select[name='album']").selectedIndex = 0;
+              // });
+            </script>
             <button class="btn btn-primary-1" type="submit" style="width: 100%; background-color: #00044B; color: white;">Unggah</button>
             <div id="cancelButtonContainer"></div>
           </div>

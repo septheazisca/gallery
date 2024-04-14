@@ -14,7 +14,16 @@ class LandingController extends Controller
     public function index()
     {
         $kategoris = KategoriFoto::all();
-        return view('landing.index', compact('kategoris'));
+        $albums = Album::where('user_id', auth()->id())->get();
+
+        return view('landing.index', compact('kategoris','albums'));
+    }
+    public function main()
+    {
+        $kategoris = KategoriFoto::all();
+        $albums = Album::where('user_id', auth()->id())->get();
+
+        return view('landing.index', compact('kategoris','albums'));
     }
 
     public function addAlbum(Request $request)
