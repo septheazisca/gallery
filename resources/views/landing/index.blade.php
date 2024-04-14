@@ -72,66 +72,6 @@
                 </div>
               </div>
             </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/20240213/pexels-photo-20240213/free-photo-of-portrait-of-woman-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/19906220/pexels-photo-19906220/free-photo-of-a-tunnel-with-a-white-wall-and-a-door.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/11073147/pexels-photo-11073147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/20343073/pexels-photo-20343073/free-photo-of-blonde-girl-in-a-museum.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/17365903/pexels-photo-17365903/free-photo-of-sunlit-building-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/10479655/pexels-photo-10479655.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/18031828/pexels-photo-18031828/free-photo-of-composition-of-jewelry-dried-flowers-and-books.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/20240213/pexels-photo-20240213/free-photo-of-portrait-of-woman-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/19906220/pexels-photo-19906220/free-photo-of-a-tunnel-with-a-white-wall-and-a-door.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/11073147/pexels-photo-11073147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/20343073/pexels-photo-20343073/free-photo-of-blonde-girl-in-a-museum.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/17365903/pexels-photo-17365903/free-photo-of-sunlit-building-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/10479655/pexels-photo-10479655.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/18031828/pexels-photo-18031828/free-photo-of-composition-of-jewelry-dried-flowers-and-books.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/20240213/pexels-photo-20240213/free-photo-of-portrait-of-woman-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/19906220/pexels-photo-19906220/free-photo-of-a-tunnel-with-a-white-wall-and-a-door.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/11073147/pexels-photo-11073147.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/20343073/pexels-photo-20343073/free-photo-of-blonde-girl-in-a-museum.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/17365903/pexels-photo-17365903/free-photo-of-sunlit-building-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
-            <div class="box-content">
-              <img src="https://images.pexels.com/photos/10479655/pexels-photo-10479655.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-            </div>
           </div>
         </div>
         <!-- /Featured Videos -->

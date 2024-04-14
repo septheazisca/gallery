@@ -284,7 +284,7 @@ input[type="email"],
 input[type="number"],
 input[type="search"] {
   height: 40px;
-  padding-top: 4px;
+  /* padding-top: 4px; */
 }
 label.checkbox {
   position: relative;
@@ -1039,7 +1039,7 @@ ul.menu ul li:not(:last-child) {
   color: #00044B;
   text-decoration: none;
 }
-@media (min-width: 768px) and (max-width: 1365px) {
+@media (min-width: 768px) and (max-width: 1400px) {
   .navbar-container {
     height: auto;
     padding-bottom: 15px;
@@ -2674,10 +2674,11 @@ ul.menu ul li:not(:last-child) {
   color: white !important;
 }
 .channel .img .c-avatar {
-  position: absolute;
-  bottom: -80px;
+  position: relative;
+  /* bottom: -80px;
   left: 50%;
-  margin-left: -585px;
+  margin-left: -585px; */
+  width: 150px;
 }
 @media only screen and (max-width: 767px) {
   .channel .img .c-avatar {
@@ -5460,4 +5461,8 @@ i.cv:hover {
   -webkit-box-shadow: 2px 2px 10px 0px #00044b45;
   -moz-box-shadow: 2px 2px 10px 0px #00044b45;
   box-shadow: 2px 2px 10px 0px #00044b45;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
 }

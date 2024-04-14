@@ -20,6 +20,7 @@
   <link href="asset-landing/css/font-awesome.min.css" rel="stylesheet">
   <link href="asset-landing/css/font-circle-video.css" rel="stylesheet">
 
+
   <!-- font-family: 'Hind', sans-serif; -->
   <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700|Hind+Guntur:300,400,500,700' rel='stylesheet' type='text/css'>
 
@@ -97,11 +98,11 @@
               <button class="btn login-btn"><a href="/login">Login</a></button>
               @endauth
             </div>
-
-
           </div>
+
+          <!-- BUTTON ADD -->
           <div class="hidden-xs">
-            <a href="upload.html">
+            <a href="" data-toggle="modal" data-target="#modalPost">
               <div class="upload-button">
                 <i class="cv cvicon-cv-upload-video"></i>
               </div>
@@ -113,6 +114,7 @@
   </div>
   <!-- /logo -->
 
+  <!-- TAMPILAN MOBILE -->
   <div class="mobile-menu">
     <div class="mobile-menu-head">
       <a href="#" class="mobile-menu-close"></a>
@@ -160,9 +162,80 @@
     </div>
   </div>
 
+  <!-- MODAL POST -->
+  <form action="">
+    @csrf
+    <div class="modal fade" id="modalPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4>Tambah Unggahan</h4>
+            <div class="form-group">
+              <label for="Unggahan">Unggahan</label>
+              <input type="file" class="custom-file-input" id="inputGroupFile" accept=".png, .jpg, .jpeg" style="background-color: #f8f8f8; width: 100%; height: 100px; padding-top: 40px;">
+              <div id="preview" style="display: flex; align-items: center; justify-content: center;"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="judul">Judul</label>
+              <input class="form-control" type="text" id="judul" name="judul" placeholder="Masukan judul anda">
+            </div>
+            <div class="form-group">
+              <label for="deskripsi">Deskripsi</label>
+              <textarea type="text" id="deskripsi" name="deskripsi" placeholder="Masukan deskripsi anda" cols="30" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="kategori">Kategori</label>
+              <select name="kategori" class="form-control" style="padding: 0;">
+                <option disabled selected>Pilih kategori anda</option>
+                @foreach ($kategoris as $kategori)
+                <option  value="{{$kategori->kategori_id}}">{{ $kategori->judul_kategori }}</option>
+                @endforeach
+                <!-- <option disabled>Kategori tidak tersedia.</option> -->
+              </select>
+            </div>
+            <button class="btn btn-primary-1" type="submit" style="width: 100%; background-color: #00044B; color: white;">Unggah</button>
+            <div id="cancelButtonContainer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
   @yield('content')
+  <script>
+    // menampilkan img
+    document.getElementById('inputGroupFile').addEventListener('change', function(event) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.width = '100%';
+        img.setAttribute('id', 'previewImage');
+        document.getElementById('preview').innerHTML = '';
+        document.getElementById('preview').appendChild(img);
+        document.getElementById('preview').style.position = 'relative'; // Menambahkan posisi relatif untuk mengatur posisi tombol cancel
+        document.getElementById('inputGroupFile').style.display = 'none'; // Menyembunyikan input file setelah gambar dipilih
 
-
+        // Menambahkan tombol Cancel
+        var cancelButton = document.createElement('button');
+        cancelButton.textContent = 'Cancel';
+        cancelButton.classList.add('btn', 'btn-danger', 'mt-2');
+        cancelButton.style.position = 'absolute';
+        cancelButton.style.bottom = '10px';
+        cancelButton.style.right = '10px';
+        cancelButton.addEventListener('click', function() {
+          document.getElementById('preview').innerHTML = '';
+          document.getElementById('inputGroupFile').value = '';
+          document.getElementById('inputGroupFile').style.display = 'block';
+        });
+        document.getElementById('preview').appendChild(cancelButton);
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
   <script src="asset-landing/js/jquery.min.js"></script>
   <script src="asset-landing/bootstrap/js/bootstrap.min.js"></script>
   <script src="asset-landing/js/custom.js"></script>

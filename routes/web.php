@@ -43,6 +43,7 @@ Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->nam
 
 // LANDING ------------------------------------------------------------
 Route::get('/gallery', [LandingController::class, 'index'])->name('index');
+Route::get('/main', [LandingController::class, 'main'])->name('main');
 Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
 Route::get('/profil', function () {
     return view('landing.profil');
