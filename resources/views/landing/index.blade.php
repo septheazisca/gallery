@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="content-container">
-            <div class="box-content">
+            <!-- <div class="box-content">
               <img src="https://images.pexels.com/photos/18031828/pexels-photo-18031828/free-photo-of-composition-of-jewelry-dried-flowers-and-books.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
               <div class="content-hover">
                 <div class="text-content">
@@ -71,7 +71,26 @@
                   </label>
                 </div>
               </div>
+            </div> -->
+            @foreach($fotos as $foto)
+            <div class="box-content">
+              <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}">
+              <div class="content-hover">
+                <div class="text-content">
+                  <h3 class="image-title">{{ $foto->judul_foto }}</h3>
+                  <p class="image-date">{{ $foto->tanggal_unggahan }}</p>
+                </div>
+              </div>
+              <div class="like-icon-div">
+                <!-- <label for="card-1-like" class="like-icon-div-child" style="margin-right: 15px;">
+                  <input type="checkbox" class="card-1-like" style="opacity: 0;">
+                  <i class="far fa-heart heart-empty" style="font-size: 25px;"></i>
+                  <i class="fas fa-heart heart-fill" style="font-size: 25px;"></i>
+                </label> -->
+              </div>
             </div>
+            @endforeach
+
           </div>
         </div>
         <!-- /Featured Videos -->
