@@ -101,13 +101,15 @@
           </div>
 
           <!-- BUTTON ADD -->
+          @auth
           <div class="hidden-xs">
-            <a href="" data-toggle="modal" data-target="#modalPost">
+            <a href="" data-toggle="modal" data-target="#modalAlbum">
               <div class="upload-button">
                 <i class="cv cvicon-cv-upload-video"></i>
               </div>
             </a>
           </div>
+          @endauth
         </div>
       </div>
     </div>
@@ -193,6 +195,30 @@
                 @endforeach
                 <!-- <option disabled>Kategori tidak tersedia.</option> -->
               </select>
+            </div>
+            <button class="btn btn-primary-1" type="submit" style="width: 100%; background-color: #00044B; color: white;">Unggah</button>
+            <div id="cancelButtonContainer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- MODAL ALBUM -->
+  <form action="">
+    @csrf
+    <div class="modal fade" id="modalAlbum" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4>Buat Album</h4>
+            <div class="form-group">
+              <label for="nama_album">Nama album</label>
+              <input class="form-control" type="text" id="nama_album" name="nama_album" placeholder="Seperti 'Liburan Tahun Baru'">
+            </div>
+            <div class="form-group">
+              <label for="deskripsi">Deskripsi</label>
+              <textarea type="text" id="deskripsi" name="deskripsi" placeholder="Deskripsi tentang album" cols="30" rows="3"></textarea>
             </div>
             <button class="btn btn-primary-1" type="submit" style="width: 100%; background-color: #00044B; color: white;">Unggah</button>
             <div id="cancelButtonContainer"></div>
