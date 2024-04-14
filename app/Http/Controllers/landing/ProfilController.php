@@ -13,7 +13,7 @@ class ProfilController extends Controller
     public function profil()
     {
         $kategoris = KategoriFoto::all();
-        $fotos = Foto::where('user_id', auth()->id())->orderBy('tanggal_unggahan', 'desc')->take(12)->get();
+        $fotos = Foto::where('user_id', auth()->id())->orderBy('tanggal_unggahan', 'desc')->take(8)->get();
         $albums = Album::where('user_id', auth()->id())->get();
         return view('landing.profil', compact('kategoris', 'fotos', 'albums'));
     }
