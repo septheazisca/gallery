@@ -202,9 +202,9 @@
               <button type="button" class="btn btn-gray200" id="pilihAlbum" style="background-color: #F1F1F1; width: 49.4%">
                 <span class="bi bi-journal-album"></span> Pilih album
               </button>
-              <button type="button" class="btn btn-gray200" id="buatAlbum" style="background-color: #F1F1F1; width: 49.4%">
+              <!-- <button type="button" class="btn btn-gray200" id="buatAlbum" style="background-color: #F1F1F1; width: 49.4%">
                 <span class="bi bi-journal-album"></span> Buat album
-              </button>
+              </button> -->
             </div>
             <div id="albumSection" class="form-group icon-input" style="display: none;">
               <label for="album" class="text-dark" style="font-weight: bold">Album</label>
@@ -218,10 +218,10 @@
                 @endif
               </select>
             </div>
-            <div id="newAlbumSection" class="form-group icon-input" style="display: none;">
+            <!-- <div id="newAlbumSection" class="form-group icon-input" style="display: none;">
               <label for="new_album" class="text-dark" style="font-weight: bold">Buat album</label>
               <input type="text" name="new_album" class="form-control" placeholder="Buat album baru">
-            </div>
+            </div> -->
 
             <script>
               document.getElementById("pilihAlbum").addEventListener("click", function() {
@@ -230,11 +230,11 @@
                 document.getElementsByName("new_album")[0].value = "";
               });
 
-              document.getElementById("buatAlbum").addEventListener("click", function() {
-                document.getElementById("albumSection").style.display = "none";
-                document.getElementById("newAlbumSection").style.display = "block";
-                document.querySelector("select[name='album']").selectedIndex = 0;
-              });
+              // document.getElementById("buatAlbum").addEventListener("click", function() {
+              //   document.getElementById("albumSection").style.display = "none";
+              //   document.getElementById("newAlbumSection").style.display = "block";
+              //   document.querySelector("select[name='album']").selectedIndex = 0;
+              // });
             </script>
             <button class="btn btn-primary-1" type="submit" style="width: 100%; background-color: #00044B; color: white;">Unggah</button>
             <div id="cancelButtonContainer"></div>
