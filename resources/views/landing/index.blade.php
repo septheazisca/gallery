@@ -62,18 +62,25 @@
               <div class="content-hover">
                 <div class="text-content">
                   <h3 class="image-title">{{ $foto->judul_foto }}</h3>
-                  <p class="image-date">{{ $foto->tanggal_unggahan }}</p>
+                  @if ($foto->user)
+                  <p class="image-date">Unggahan oleh: {{ $foto->user->username }}</p>
+                  @else
+                  <p class="image-date">Unggahan oleh: Pengguna tidak ditemukan</p>
+                  @endif
                 </div>
               </div>
               <div class="like-icon-div">
                 <!-- <label for="card-1-like" class="like-icon-div-child" style="margin-right: 15px;">
-                  <input type="checkbox" class="card-1-like" style="opacity: 0;">
-                  <i class="far fa-heart heart-empty" style="font-size: 25px;"></i>
-                  <i class="fas fa-heart heart-fill" style="font-size: 25px;"></i>
-                </label> -->
+            <input type="checkbox" class="card-1-like" style="opacity: 0;">
+            <i class="far fa-heart heart-empty" style="font-size: 25px;"></i>
+            <i class="fas fa-heart heart-fill" style="font-size: 25px;"></i>
+        </label> -->
               </div>
             </div>
             @endforeach
+
+
+
 
           </div>
         </div>

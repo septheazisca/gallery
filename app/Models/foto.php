@@ -9,7 +9,7 @@ class foto extends Model
 {
     use HasFactory;
 
-    
+
     protected $table = 'foto';
     protected $primaryKey = 'foto_id';
     protected $guarded = [];
@@ -24,8 +24,13 @@ class foto extends Model
         return $this->belongsTo(Album::class);
     }
 
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
