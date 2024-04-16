@@ -121,19 +121,24 @@
     <div class="category-section">
       <p class="fs-5 fw-medium">Unggahan Terbaru</p>
       <div class="content-container m-0">
-        <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto">
-          <img src="https://i.pinimg.com/564x/7a/db/19/7adb19dff307adf3ba361c1425c0190a.jpg" alt="">
+        @foreach ($fotos as $foto)
+        <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}">
+          <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}">
           <div class="content-hover">
             <div class="profil me-2">
               <img src="https://i.pinimg.com/564x/b9/fc/2e/b9fc2ec6934f3e89ee33a6aa7efb4e4a.jpg" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
             </div>
             <div class="text-content">
-              <h3 class="image-title">asasaa</h3>
-              <p class="image-date">Unggahan oleh: </p>
+              <h3 class="image-title">{{ $foto->judul_foto }}</h3>
+              @if ($foto->user)
+              <p class="image-date">Unggahan oleh: {{ $foto->user->username }}</p>
+              @else
+              <p class="image-date">Unggahan oleh: Pengguna tidak ditemukan</p>
+              @endif
             </div>
           </div>
         </div>
-
+        @endforeach
       </div>
     </div>
   </div>
@@ -151,23 +156,25 @@
   <!------------------------------------------------------- MODAL ---------------------------------------------------->
 
   <!----------------------------- MODAL SHOW FOTO -------------------------->
-  <div class="modal fade" id="showFoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  @foreach ($fotos as $foto)
+  <div class="modal fade" id="showFoto{{ $foto->foto_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
-
         <div class="row">
           <div class="col-lg-12">
             <div class="row">
               <div class="col-lg-6">
-                <img src="https://i.pinimg.com/564x/7a/db/19/7adb19dff307adf3ba361c1425c0190a.jpg" alt="" style="width: 100%;">
+                <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}" style="width: 100%;">
               </div>
               <div class="col-lg-6">
                 <div class="p-3">
                   <div class="container-head pb-3 d-flex align-items-center justify-content-between border-bottom border-light-subtle">
                     <div class="user-section d-flex align-items-center">
                       <img src="https://i.pinimg.com/564x/76/fe/07/76fe079c5c818d73dc0b7bf94df8b8bd.jpg" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
-                      <p class="fs-6 fw-medium ms-2 mb-0">Username</p>
+                      @if ($foto->user)
+                      <p class="fs-6 fw-medium ms-2 mb-0">{{ $foto->user->username }}</p>
+                      @endif
                     </div>
                     <div class="more-action d-flex align-items-center">
                       <i class="fa-solid fa-ellipsis-vertical" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -178,8 +185,8 @@
 
                   </div>
                   <div class="container-detail py-3" style="height: 295px; overflow-y: auto;">
-                    <h4>Lorem, ipsum.</h4>
-                    <p class="fs-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo omnis saepe reiciendis quas, temporibus ducimus!</p>
+                    <h4>{{ $foto->judul_foto }}</h4>
+                    <p class="fs-6">{{ $foto->deskripsi_foto }}<span class="ms-2" style="font-size: 12px;">{{ $foto->tanggal_unggahan }}</span></p>
                     <div class="commentar-section mt-1">
                       <div class="commentars d-flex">
                         <div class="profile-user">
@@ -252,7 +259,7 @@
     </div>
 
   </div>
-  </div>
+  @endforeach
   <!----------------------------- MODAL SHOW FOTO END -------------------------->
 
 
