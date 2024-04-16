@@ -8,6 +8,7 @@ use App\Models\foto;
 use App\Models\KategoriFoto;
 // use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class LandingController extends Controller
@@ -62,24 +63,29 @@ class LandingController extends Controller
             'album' => 'required|exists:album,album_id',
         ]);
 
-        // Menyimpan gambar ke dalam direktori storage
-        $imageName = $request->lokasi_foto->store('public/images');
+        try {
+            // Menyimpan gambar ke dalam direktori storage
+            $imageName = $request->lokasi_foto->store('public/images');
 
-        // Mendapatkan URL gambar yang tepat
-        $lokasi_foto = url(str_replace('public/', 'storage/', $imageName));
+            // Mendapatkan URL gambar yang tepat
+            $lokasi_foto = url(Storage::url($imageName));
 
-        // Menyimpan data foto ke dalam database dengan user_id yang sedang login
-        Foto::create([
-            'judul_foto' => $request->judul_foto,
-            'deskripsi_foto' => $request->deskripsi_foto,
-            'lokasi_foto' => $lokasi_foto, // Menggunakan URL gambar yang telah dibuat
-            'tanggal_unggahan' => now(),
-            'kategori_id' => $request->kategori,
-            'album_id' => $request->album,
-            'user_id' => auth()->id(), // Mengambil user_id pengguna yang sedang login
-        ]);
+            // Menyimpan data foto ke dalam database dengan user_id yang sedang login
+            Foto::create([
+                'judul_foto' => $request->judul_foto,
+                'deskripsi_foto' => $request->deskripsi_foto,
+                'lokasi_foto' => $lokasi_foto, // Menggunakan URL gambar yang telah dibuat
+                'tanggal_unggahan' => now(),
+                'kategori_id' => $request->kategori,
+                'album_id' => $request->album,
+                'user_id' => auth()->id(), // Mengambil user_id pengguna yang sedang login
+            ]);
 
-        // Redirect atau response sesuai kebutuhan
-        return redirect()->back()->with('success', 'Foto berhasil diunggah.');
+            // Redirect atau response sesuai kebutuhan
+            return redirect()->back()->with('success', 'Foto berhasil diunggah.');
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, redirect dengan pesan error
+            return redirect()->back()->with('error', 'Gagal mengunggah foto. Silakan coba lagi.');
+        }
     }
 }

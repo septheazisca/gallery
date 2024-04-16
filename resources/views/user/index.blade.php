@@ -301,7 +301,7 @@
   <!----------------------------- MODAL UNGGAH FOTO -------------------------->
   <div class="modal fade" id="addFoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <form action="">
+      <form action="{{ route('addFoto') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal-content">
           <div class="modal-header">
@@ -317,16 +317,22 @@
             </div>
             <div class="mb-3">
               <label for="judul" class="form-label">Judul</label>
-              <input type="text" class="form-control" id="judul">
+              <input type="text" class="form-control" id="judul" name="judul_foto">
             </div>
             <div class="mb-3">
               <label for="deskripsi_foto" class="form-label">Deskripsi</label>
-              <textarea class="rounded border-light-subtle form-control" name="deskripsi _foto" id="deskripsi_foto" cols="30" rows="2" style="width: 100%;"></textarea>
+              <textarea class="rounded border-light-subtle form-control" name="deskripsi_foto" id="deskripsi_foto" cols="30" rows="2" style="width: 100%;"></textarea>
             </div>
             <div class="mb-3">
               <label for="kategori" class="form-label">Kategori</label>
-              <select class="form-select" aria-label="Default select example">
+              <select class="form-select" aria-label="Default select example" name="kategori">
                 <option selected>Pilih kategori</option>
+                @foreach ($kategoris as $kategori)
+                <option value="{{$kategori->kategori_id}}">{{ $kategori->judul_kategori }}</option>
+                @endforeach
+                @if (count($kategoris) == 0)
+                <option disabled>Kategori tidak tersedia.</option>
+                @endif
               </select>
             </div>
             <div class="form-group icon-input mb-3">
@@ -340,18 +346,23 @@
             <div id="albumSection" class="form-group icon-input" style="display: none;">
               <div class="mb-4">
                 <label for="album" class="form-label">Pilih album</label>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" name="album">
                   <option selected>Pilih album</option>
+                  @foreach ($albums as $album)
+                  <option value="{{$album->album_id}}">{{ $album->nama_album }}</option>
+                  @endforeach
+                  @if (count($albums) == 0)
+                  <option disabled>Kategori tidak tersedia.</option>
+                  @endif
                 </select>
               </div>
             </div>
             <div id="newAlbumSection" class="form-group icon-input" style="display: none;">
               <div class="mb-4">
                 <label for="buat_album" class="form-label">Buat Album</label>
-                <input type="text" class="form-control" id="buat_album">
+                <input type="text" class="form-control" id="buat_album" name="new_album">
               </div>
             </div>
-
             <script>
               document.getElementById("pilihAlbum").addEventListener("click", function() {
                 document.getElementById("albumSection").style.display = "block";
@@ -465,30 +476,31 @@
   <!------------------------------------------------------- MODAL END ---------------------------------------------------->
 
   @if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Ada kesalahan dalam input Anda. Silakan periksa kembali! Pastikan input di isi semua.',
-            // timer: 2000, 
-            timerProgressBar: false,
-            showConfirmButton: true 
-        });
-    </script>
-@endif
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Ada kesalahan dalam input Anda. Silakan periksa kembali! Pastikan input di isi semua.',
+      // timer: 2000, 
+      timerProgressBar: false,
+      showConfirmButton: true
+    });
+  </script>
+  @endif
 
-@if(session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Sukses!',
-            text: '{{ session('success') }}',
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: false
-        });
-    </script>
-@endif
+  @if(session('success'))
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Sukses!',
+      text: '{{ session('
+      success ') }}',
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: false
+    });
+  </script>
+  @endif
 
   <script>
     // Script untuk form login
