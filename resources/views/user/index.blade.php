@@ -378,33 +378,36 @@
   <div class="modal fade" id="loginRegisterModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modalLogin" id="modalLogin">
-          <div class="modal-header">
-            <img src="gllery.png" alt="" style="width: 40px;">
-            <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Login</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Silahkan masukkan username dan kata sandi anda untuk menjelajahi Gllery.</p>
-            <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="">
+        <form method="POST" action="{{ route('login') }}">
+          @csrf
+          <div class="modalLogin" id="modalLogin">
+            <div class="modal-header">
+              <img src="gllery.png" alt="" style="width: 40px;">
+              <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Login</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mb-4">
-              <label for="password" class="form-label">Password</label>
-              <div class="input-group">
-                <input type="password" class="form-control" id="password">
-                <button class="btn btn-outline-secondary-gllery rounded-end" type="button" id="togglePassword">
-                  <i class="fa-solid fa-eye"></i>
-                </button>
+            <div class="modal-body">
+              <p>Silahkan masukkan username dan kata sandi anda untuk menjelajahi Gllery.</p>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="" name="username">
+              </div>
+              <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="password" name="password">
+                  <button class="btn btn-outline-secondary-gllery rounded-end" type="button" id="togglePassword">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <button class="btn btn-gllery mb-4" style="width: 100%;" type="submit">Login</button>
+              <div class="link-register">
+                <p class="text-center">Belum memiliki akun? <span><a href="#" id="showRegister">Buat akun di sini.</a></span></p>
               </div>
             </div>
-            <button class="btn btn-gllery mb-4" style="width: 100%;" type="submit">Login</button>
-            <div class="link-register">
-              <p class="text-center">Belum memiliki akun? <span><a href="#" id="showRegister">Buat akun di sini.</a></span></p>
-            </div>
           </div>
-        </div>
+        </form>
 
         <form method="POST" action="{{ route('register') }}">
           @csrf
