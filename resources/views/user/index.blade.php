@@ -183,7 +183,13 @@
                     <div class="more-action d-flex align-items-center">
                       <i class="fa-solid fa-ellipsis-vertical" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if($foto->user->user_id == auth()->id()) <!-- Jika pengguna sedang melihat unggahan mereka sendiri -->
+                        <li><a class="dropdown-item text-danger" href="{{ route('hapusFoto', ['id' => $foto->foto_id]) }}">Hapus</a></li>
+                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                        @else
+                        <!-- Jika pengguna sedang melihat unggahan orang lain -->
                         <li><a class="dropdown-item" href="#">Report</a></li>
+                        @endif
                       </ul>
                     </div>
 
@@ -538,6 +544,7 @@
       document.getElementById("modalLogin").style.display = "block";
       document.getElementById("modalRegister").style.display = "none";
     });
+    
 
     // KIRIM KOMENTAR
     $('#submit-komentar').click(function() {
@@ -576,4 +583,5 @@
     });
   </script>
 </body>
+
 </html>

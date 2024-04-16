@@ -48,6 +48,7 @@ Route::get('/main', [LandingController::class, 'main'])->name('main');
 Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
 Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbum');
 Route::post('/add-foto', [LandingController::class, 'addFoto'])->name('addFoto');
+Route::get('/hapus-foto/{id}', [LandingController::class, 'hapusFoto'])->name('hapusFoto');
 Route::post('/simpan-komentar', [LandingController::class, 'simpanKomentar'])->name('simpanKomentar');
 Route::get('/profil', [LandingProfilController::class, 'profil'])->name('profil');
 // Route::get('/profil', function () {

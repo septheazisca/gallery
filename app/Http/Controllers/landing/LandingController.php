@@ -90,6 +90,24 @@ class LandingController extends Controller
         }
     }
 
+    public function hapusFoto($id)
+    {
+        try {
+            // Temukan foto berdasarkan ID
+            $foto = Foto::findOrFail($id);
+            
+            // Hapus foto dari penyimpanan
+            Storage::delete($foto->lokasi_foto);
+            
+            // Hapus foto dari database
+            $foto->delete();
+    
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus foto. Silakan coba lagi.');
+        }
+    }
+
     public function simpanKomentar(Request $request)
     {
         // Validasi data
