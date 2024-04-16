@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'username', 'nama_lengkap', 'alamat', 'email', 'password',
     ];
 
     /**
@@ -42,4 +40,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $primaryKey = 'user_id';
+
+    public function album()
+    {
+        return $this->hasMany(Album::class);
+    }
+
 }
