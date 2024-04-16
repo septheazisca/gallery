@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\foto;
 use App\Models\KategoriFoto;
+use App\Models\KomentarFoto;
 // use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -87,5 +88,25 @@ class LandingController extends Controller
             // Jika terjadi kesalahan, redirect dengan pesan error
             return redirect()->back()->with('error', 'Gagal mengunggah foto. Silakan coba lagi.');
         }
+    }
+
+    public function simpanKomentar(Request $request)
+    {
+        // Validasi data
+        $request->validate([
+            'isi_komentar' => 'required|string',
+            'foto_id' => 'required|exists:foto,foto_id', // Pastikan foto_id ada dalam tabel foto
+        ]);
+
+        // Simpan komentar ke database
+        $komentar = new KomentarFoto();
+        $komentar->isi_komentar = $request->isi_komentar;
+        $komentar->user_id = auth()->id();
+        $komentar->foto_id = $request->foto_id;
+        $komentar->tanggal_komentar = now(); // Menetapkan nilai tanggal saat ini
+        $komentar->save();
+
+        // Kirim tanggapan kembali sebagai konfirmasi
+        return response()->json(['message' => 'Komentar berhasil disimpan.']);
     }
 }

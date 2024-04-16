@@ -192,7 +192,7 @@
                     <h4>{{ $foto->judul_foto }}</h4>
                     <p class="fs-6">{{ $foto->deskripsi_foto }}<span class="ms-2" style="font-size: 12px;">{{ $foto->tanggal_unggahan }}</span></p>
                     <div class="commentar-section mt-1">
-                      <div class="commentars d-flex">
+                      <!-- <div class="commentars d-flex">
                         <div class="profile-user">
                           <img src="https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg" alt="" style="width: 35px; height: 35px; border-radius: 50%;">
                         </div>
@@ -207,24 +207,7 @@
                           </div>
                           <p class="ps-2" style="font-size: 15px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iste?</p>
                         </div>
-                      </div>
-
-                      <div class="commentars d-flex">
-                        <div class="profile-user">
-                          <img src="https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg" alt="" style="width: 35px; height: 35px; border-radius: 50%;">
-                        </div>
-                        <div class="detail-commentars">
-                          <div class="username-date d-flex align-items-center justify-content-between">
-                            <div class="username">
-                              <h5 class="image-date ps-2 mb-1" style="font-size: 16px;">username</h5>
-                            </div>
-                            <div class="date">
-                              <h5 class="mb-1" style="font-size: 12px;">10m</h5>
-                            </div>
-                          </div>
-                          <p class="ps-2" style="font-size: 15px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iste?</p>
-                        </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="container-action pt-3 border-top border-light-subtle">
@@ -249,10 +232,14 @@
                         });
                       </script>
                     </div>
-                    <div class="comment d-flex mt-2">
-                      <textarea class="rounded-start border-light-subtle" name="" id="" cols="30" rows="2" style="width: 100%;"></textarea>
-                      <button class="rounded-end border-0" type="submit" style="background-color: #00044B; color: #fff;"><i class="fa-solid fa-paper-plane"></i></button>
-                    </div>
+                    <form id="submit-komentar">
+                      @csrf
+                      <div class="comment d-flex mt-2">
+                        <textarea class="rounded-start border-light-subtle" name="isi_komentar" id="isi_komentar" cols="30" rows="2" style="width: 100%;"></textarea>
+                        <input type="hidden" name="foto_id" id="foto_id" value="{{ $foto->foto_id }}">
+                        <button class="rounded-end border-0" type="button" id="submit-komentar" style="background-color: #00044B; color: #fff;"><i class="fa-solid fa-paper-plane"></i></button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -476,6 +463,39 @@
   <!----------------------------- MODAL LOGIN REGISTER END -------------------------->
 
   <!------------------------------------------------------- MODAL END ---------------------------------------------------->
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $('#submit-komentar').click(function() {
+      var komentar = $('#isi_komentar').val();
+      var foto_id = $('#foto_id').val(); // Mengambil foto_id dari elemen input yang sesuai
+
+      // Kirim AJAX hanya jika isi komentar tidak kosong
+      if (komentar.trim() !== '') {
+        $.ajax({
+          url: '{{ route("simpanKomentar") }}',
+          type: 'POST',
+          data: {
+            _token: $('input[name="_token"]').val(),
+            isi_komentar: komentar,
+            foto_id: foto_id // Sertakan foto_id di sini
+          },
+          success: function(response) {
+            // Tambahkan logika di sini jika perlu
+            console.log(response);
+            // Bersihkan textarea setelah berhasil mengirim komentar
+            $('#isi_komentar').val('');
+          },
+          error: function(xhr, status, error) {
+            // Tambahkan logika penanganan kesalahan di sini jika perlu
+            console.error(xhr.responseText);
+          }
+        });
+      }
+    });
+  </script>
+
 
   @if ($errors->any())
   <script>

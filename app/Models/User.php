@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Foto::class);
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(KomentarFoto::class);
+    }
 }
