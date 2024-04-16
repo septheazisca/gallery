@@ -18,16 +18,16 @@ class LandingController extends Controller
         $fotos = Foto::with('user')->get(); // Memuat data foto beserta data pengguna (user) yang mengunggahnya
         $albums = Album::where('user_id', auth()->id())->get();
 
-        return view('landing.index', compact('kategoris', 'albums', 'fotos'));
+        return view('user.index', compact('kategoris', 'albums', 'fotos'));
     }
 
-    public function main()
-    {
-        $kategoris = KategoriFoto::all();
-        $albums = Album::where('user_id', auth()->id())->get();
+    // public function main()
+    // {
+    //     $kategoris = KategoriFoto::all();
+    //     $albums = Album::where('user_id', auth()->id())->get();
 
-        return view('landing.index', compact('kategoris', 'albums'));
-    }
+    //     return view('landing.index', compact('kategoris', 'albums'));
+    // }
 
     public function addAlbum(Request $request)
     {
