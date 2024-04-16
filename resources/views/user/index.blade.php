@@ -276,17 +276,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Silakan buat album baru dengan memberikan judul dan deskripsi.</p>
-          <div class="mb-3">
-            <label for="nama_album" class="form-label">Nama Album</label>
-            <input type="text" class="form-control" id="nama_album">
-          </div>
-          <div class="mb-4">
-            <label for="deskripsi" class="form-label">Deskripso</label>
-            <textarea class="rounded border-light-subtle form-control" name="deskripsi" id="deskripsi" cols="30" rows="2" style="width: 100%;"></textarea>
-          </div>
-          <button class="btn btn-gllery" style="width: 100%;" type="submit">Buat</button>
-
+          <form action="{{ route('addAlbum') }}" method="POST">
+            @csrf
+            <p>Silakan buat album baru dengan memberikan judul dan deskripsi.</p>
+            <div class="mb-3">
+              <label for="nama_album" class="form-label">Nama Album</label>
+              <input type="text" class="form-control" id="nama_album" name="nama_album">
+            </div>
+            <div class="mb-4">
+              <label for="deskripsi" class="form-label">Deskripso</label>
+              <textarea class="rounded border-light-subtle form-control" name="deskripsi" id="deskripsi" cols="30" rows="2" style="width: 100%;"></textarea>
+            </div>
+            <button class="btn btn-gllery" style="width: 100%;" type="submit">Buat</button>
+          </form>
         </div>
       </div>
 
@@ -462,6 +464,31 @@
 
   <!------------------------------------------------------- MODAL END ---------------------------------------------------->
 
+  @if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ada kesalahan dalam input Anda. Silakan periksa kembali! Pastikan input di isi semua.',
+            // timer: 2000, 
+            timerProgressBar: false,
+            showConfirmButton: true 
+        });
+    </script>
+@endif
+
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: '{{ session('success') }}',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+        });
+    </script>
+@endif
 
   <script>
     // Script untuk form login
