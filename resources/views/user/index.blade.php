@@ -466,36 +466,17 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script>
-    $('#submit-komentar').click(function() {
-      var komentar = $('#isi_komentar').val();
-      var foto_id = $('#foto_id').val(); // Mengambil foto_id dari elemen input yang sesuai
-
-      // Kirim AJAX hanya jika isi komentar tidak kosong
-      if (komentar.trim() !== '') {
-        $.ajax({
-          url: '{{ route("simpanKomentar") }}',
-          type: 'POST',
-          data: {
-            _token: $('input[name="_token"]').val(),
-            isi_komentar: komentar,
-            foto_id: foto_id // Sertakan foto_id di sini
-          },
-          success: function(response) {
-            // Tambahkan logika di sini jika perlu
-            console.log(response);
-            // Bersihkan textarea setelah berhasil mengirim komentar
-            $('#isi_komentar').val('');
-          },
-          error: function(xhr, status, error) {
-            // Tambahkan logika penanganan kesalahan di sini jika perlu
-            console.error(xhr.responseText);
-          }
-        });
-      }
-    });
-  </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
+  <script src="assets/extensions/filepond/filepond.js"></script>
+  <script src="assets/extensions/toastify-js/src/toastify.js"></script>
+  <script src="assets/static/js/pages/filepond.js"></script>
 
   @if ($errors->any())
   <script>
@@ -557,18 +538,42 @@
       document.getElementById("modalLogin").style.display = "block";
       document.getElementById("modalRegister").style.display = "none";
     });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
-  <script src="assets/extensions/filepond/filepond.js"></script>
-  <script src="assets/extensions/toastify-js/src/toastify.js"></script>
-  <script src="assets/static/js/pages/filepond.js"></script>
-</body>
 
+    // KIRIM KOMENTAR
+    $('#submit-komentar').click(function() {
+      var komentar = $('#isi_komentar').val();
+      var foto_id = $('#foto_id').val();
+
+      if (komentar.trim() !== '') {
+        $.ajax({
+          url: '{{ route("simpanKomentar") }}',
+          type: 'POST',
+          data: {
+            _token: $('input[name="_token"]').val(),
+            isi_komentar: komentar,
+            foto_id: foto_id
+          },
+          success: function(response) {
+            // Tampilkan pesan sukses menggunakan Swal.fire
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Komentar berhasil terkirim.",
+              showConfirmButton: false,
+              timer: 2000,
+              customClass: {
+                popup: 'swal-small', // Menggunakan kelas CSS kustom 'swal-small'
+              }
+            });
+            // Mengosongkan input komentar setelah berhasil terkirim
+            $('#isi_komentar').val('');
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      }
+    });
+  </script>
+</body>
 </html>

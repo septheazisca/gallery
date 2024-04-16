@@ -266,3 +266,10 @@
   background-position: right;
   }
   }
+
+
+/* style sweet alert */
+.swal-small {
+  width: 400px;
+  font-size: 10px;
+}
