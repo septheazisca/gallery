@@ -26,6 +26,10 @@
 
   <link rel="stylesheet" href="asset-user/css/style.css">
 
+  <link rel="stylesheet" href="assets/extensions/filepond/filepond.css">
+  <link rel="stylesheet" href="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css">
+  <link rel="stylesheet" href="assets/extensions/toastify-js/src/toastify.css">
+
 </head>
 
 <body>
@@ -305,69 +309,74 @@
   <!----------------------------- MODAL UNGGAH FOTO -------------------------->
   <div class="modal fade" id="addFoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <img src="gllery.png" alt="" style="width: 40px;">
-          <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Unggah Foto</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Tambahkan sentuhan Anda dengan mengunggah foto favorit Anda ke Gllery!</p>
-          <div class="mb-3">
-            <label for="judul" class="form-label">Judul</label>
-            <input type="text" class="form-control" id="judul">
+      <form action="">
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <img src="gllery.png" alt="" style="width: 40px;">
+            <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Unggah Foto</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="mb-3">
-            <label for="deskripsi_foto" class="form-label">Deskripsi</label>
-            <textarea class="rounded border-light-subtle form-control" name="deskripsi _foto" id="deskripsi_foto" cols="30" rows="2" style="width: 100%;"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="kategori" class="form-label">Kategori</label>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Pilih kategori</option>
-            </select>
-          </div>
-          <div class="form-group icon-input mb-3">
-            <button type="button" class="btn btn-gray200" id="pilihAlbum" style="background-color: #F1F1F1; width: 49.4%">
-              <span class="bi bi-journal-album"></span> Pilih album
-            </button>
-            <button type="button" class="btn btn-gray200" id="buatAlbum" style="background-color: #F1F1F1; width: 49.4%">
-              <span class="bi bi-journal-album"></span> Buat album
-            </button>
-          </div>
-          <div id="albumSection" class="form-group icon-input" style="display: none;">
-            <div class="mb-4">
-              <label for="album" class="form-label">Pilih album</label>
+          <div class="modal-body">
+            <p>Tambahkan sentuhan Anda dengan mengunggah foto favorit Anda ke Gllery!</p>
+            <div class="mb-3">
+              <label for="lokasi_foto" class="form-label">Foto</label>
+              <input type="file" name="lokasi_foto" class="image-preview-filepond">
+            </div>
+            <div class="mb-3">
+              <label for="judul" class="form-label">Judul</label>
+              <input type="text" class="form-control" id="judul">
+            </div>
+            <div class="mb-3">
+              <label for="deskripsi_foto" class="form-label">Deskripsi</label>
+              <textarea class="rounded border-light-subtle form-control" name="deskripsi _foto" id="deskripsi_foto" cols="30" rows="2" style="width: 100%;"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="kategori" class="form-label">Kategori</label>
               <select class="form-select" aria-label="Default select example">
-                <option selected>Pilih album</option>
+                <option selected>Pilih kategori</option>
               </select>
             </div>
-          </div>
-          <div id="newAlbumSection" class="form-group icon-input" style="display: none;">
-            <div class="mb-4">
-              <label for="buat_album" class="form-label">Buat Album</label>
-              <input type="text" class="form-control" id="buat_album">
+            <div class="form-group icon-input mb-3">
+              <button type="button" class="btn btn-gray200" id="pilihAlbum" style="background-color: #F1F1F1; width: 49.4%">
+                <span class="bi bi-journal-album"></span> Pilih album
+              </button>
+              <button type="button" class="btn btn-gray200" id="buatAlbum" style="background-color: #F1F1F1; width: 49.4%">
+                <span class="bi bi-journal-album"></span> Buat album
+              </button>
             </div>
+            <div id="albumSection" class="form-group icon-input" style="display: none;">
+              <div class="mb-4">
+                <label for="album" class="form-label">Pilih album</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Pilih album</option>
+                </select>
+              </div>
+            </div>
+            <div id="newAlbumSection" class="form-group icon-input" style="display: none;">
+              <div class="mb-4">
+                <label for="buat_album" class="form-label">Buat Album</label>
+                <input type="text" class="form-control" id="buat_album">
+              </div>
+            </div>
+
+            <script>
+              document.getElementById("pilihAlbum").addEventListener("click", function() {
+                document.getElementById("albumSection").style.display = "block";
+                document.getElementById("newAlbumSection").style.display = "none";
+                document.getElementsByName("new_album")[0].value = "";
+              });
+
+              document.getElementById("buatAlbum").addEventListener("click", function() {
+                document.getElementById("albumSection").style.display = "none";
+                document.getElementById("newAlbumSection").style.display = "block";
+                document.querySelector("select[name='album']").selectedIndex = 0;
+              });
+            </script>
+            <button class="btn btn-gllery" style="width: 100%;" type="submit">Unggah</button>
           </div>
-
-          <script>
-            document.getElementById("pilihAlbum").addEventListener("click", function() {
-              document.getElementById("albumSection").style.display = "block";
-              document.getElementById("newAlbumSection").style.display = "none";
-              document.getElementsByName("new_album")[0].value = "";
-            });
-
-            document.getElementById("buatAlbum").addEventListener("click", function() {
-              document.getElementById("albumSection").style.display = "none";
-              document.getElementById("newAlbumSection").style.display = "block";
-              document.querySelector("select[name='album']").selectedIndex = 0;
-            });
-          </script>
-          <button class="btn btn-gllery" style="width: 100%;" type="submit">Unggah</button>
-
         </div>
-      </div>
-
+      </form>
     </div>
   </div>
   <!----------------------------- MODAL UNGGAH FOTO END -------------------------->
@@ -397,7 +406,7 @@
                 <div class="input-group">
                   <input type="password" class="form-control" id="password" name="password">
                   <button class="btn btn-outline-secondary-gllery rounded-end" type="button" id="togglePassword">
-                    <i class="fa-solid fa-eye"></i> 
+                    <i class="fa-solid fa-eye"></i>
                   </button>
                 </div>
               </div>
@@ -435,7 +444,7 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email">
               </div>
-              <div class="mb-4">
+              <div class="mb-3">
                 <label for="register_password" class="form-label">Password</label>
                 <div class="input-group">
                   <input type="password" class="form-control" id="register_password" name="password" autocomplete="current-password">
@@ -497,6 +506,16 @@
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
+  <script src="assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
+  <script src="assets/extensions/filepond/filepond.js"></script>
+  <script src="assets/extensions/toastify-js/src/toastify.js"></script>
+  <script src="assets/static/js/pages/filepond.js"></script>
 </body>
 
 </html>

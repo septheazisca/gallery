@@ -218,7 +218,7 @@
 
   .heart {
   position: absolute;
-  background: url("heart.png") no-repeat;
+  background: url("../../heart.png") no-repeat;
   background-position: left;
   background-size: 2900%;
   height: 80px;
