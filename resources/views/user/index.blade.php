@@ -62,7 +62,7 @@
         <div class="dropdown">
           <button class="mt-2 mt-lg-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background-color: transparent;">
             @if(Auth::check() && Auth::user()->profile_image)
-            <img src="{{ asset(Auth::user()->profile_image) }}" style="width: 40px; height: 40px; border-radius: 50%;" class="me-2" alt="Avatar">
+            <img src="{{ Storage::url(Auth::user()->profile_image) }}" style="width: 40px; height: 40px; border-radius: 50%;" class="me-2" alt="Avatar">
             @endif
             <i class="bi bi-chevron-down"></i>
           </button>
@@ -282,7 +282,7 @@
             <input type="text" class="form-control" id="nama_album">
           </div>
           <div class="mb-4">
-            <label for="deskripsi" class="form-label">Alamat</label>
+            <label for="deskripsi" class="form-label">Deskripso</label>
             <textarea class="rounded border-light-subtle form-control" name="deskripsi" id="deskripsi" cols="30" rows="2" style="width: 100%;"></textarea>
           </div>
           <button class="btn btn-gllery" style="width: 100%;" type="submit">Buat</button>
@@ -408,7 +408,7 @@
           </div>
         </form>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
           @csrf
           <div class="modalRegister" id="modalRegister" style="display: none;">
             <div class="modal-header">
@@ -442,6 +442,10 @@
                     <i class="fa-solid fa-eye"></i>
                   </button>
                 </div>
+              </div>
+              <div class="mb-4">
+                <label for="profile_image" class="form-label">Foto Profil</label>
+                <input class="form-control" type="file" id="profile_image" accept=".png, .jpg, .jpeg" name="profile_image">
               </div>
               <button class="btn btn-gllery mb-4" style="width: 100%;" type="submit">Register</button>
               <div class="link-register">

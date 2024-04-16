@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -15,27 +16,35 @@ class RegisterController extends Controller
     // }
 
     public function register(Request $request)
-    {
-        $request->validate([
-            'username' => 'required|unique:users',
-            'password' => 'required',
-            'email' => 'required|email|unique:users',
-            'nama_lengkap' => 'required',
-            'alamat' => 'required',
-        ]);
-        $defaultImagePath = 'storage/profile/user.jpg'; // Ganti dengan path gambar default Anda
+{
+    $request->validate([
+        'username' => 'required|unique:users',
+        'password' => 'required',
+        'email' => 'required|email|unique:users',
+        'nama_lengkap' => 'required',
+        'alamat' => 'required',
+        'profile_image' => 'required' // tambahkan validasi untuk gambar
+    ]);
+
+    try {
+        $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
+
         $user = User::create([
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'email' => $request->email,
             'nama_lengkap' => $request->nama_lengkap,
             'alamat' => $request->alamat,
-            'profile_image' => $defaultImagePath, // Tambahkan path gambar default
+            'profile_image' => $profileImagePath,
         ]);
 
-        // Autentikasi pengguna setelah berhasil mendaftar
         Auth::login($user);
 
         return redirect('/gallery');
+    } catch (\Exception $e) {
+        Log::error('Error occurred while registering user: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
     }
+}
+
 }
