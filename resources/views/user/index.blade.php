@@ -397,7 +397,7 @@
                 <div class="input-group">
                   <input type="password" class="form-control" id="password" name="password">
                   <button class="btn btn-outline-secondary-gllery rounded-end" type="button" id="togglePassword">
-                    <i class="fa-solid fa-eye"></i>
+                    <i class="fa-solid fa-eye"></i> 
                   </button>
                 </div>
               </div>
