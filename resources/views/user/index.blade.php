@@ -107,9 +107,7 @@
   <div class="container py-5 border-bottom">
     <div class="category-section">
       <p class="fs-5 fw-medium">Kategori</p>
-      @foreach ($kategoris as $kategori)
-      <button class="btn btn-kategori py-2 px-4 mb-2 me-1">{{ $kategori->judul_kategori }}</button>
-      @endforeach
+      
     </div>
   </div>
   <!----------------------------- KATEGORI END -------------------------->
