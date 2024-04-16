@@ -61,7 +61,9 @@
         <!-- Pengguna sudah login -->
         <div class="dropdown">
           <button class="mt-2 mt-lg-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background-color: transparent;">
-            <img src="https://i.pinimg.com/564x/25/2e/5d/252e5d6ae3a59c5e00b7733b416f1e50.jpg" style="width: 40px; height: 40px; border-radius: 50%;" class="me-2" alt="Avatar">
+            @if(Auth::check() && Auth::user()->profile_image)
+            <img src="{{ asset(Auth::user()->profile_image) }}" style="width: 40px; height: 40px; border-radius: 50%;" class="me-2" alt="Avatar">
+            @endif
             <i class="bi bi-chevron-down"></i>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

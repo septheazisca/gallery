@@ -23,13 +23,14 @@ class RegisterController extends Controller
             'nama_lengkap' => 'required',
             'alamat' => 'required',
         ]);
-
+        $defaultImagePath = 'storage/profile/user.jpg'; // Ganti dengan path gambar default Anda
         $user = User::create([
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'email' => $request->email,
             'nama_lengkap' => $request->nama_lengkap,
             'alamat' => $request->alamat,
+            'profile_image' => $defaultImagePath, // Tambahkan path gambar default
         ]);
 
         // Autentikasi pengguna setelah berhasil mendaftar

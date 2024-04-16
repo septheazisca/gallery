@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nama_lengkap');
             $table->text('alamat');
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }
