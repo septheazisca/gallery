@@ -236,7 +236,7 @@
                           <span class="numb"></span>
                         </div>
                       </div>
-                      <a class="m-0" style="font-size: 15px;"><u>Download</u></a>
+                      <a href="{{ $foto->lokasi_foto }}" download class="m-0" style="font-size: 15px;"><u style="cursor: pointer;">Download</u></a>
 
                       <script>
                         $(document).ready(function() {
