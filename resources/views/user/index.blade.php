@@ -128,7 +128,9 @@
           <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}">
           <div class="content-hover">
             <div class="profil me-2">
-              <img src="https://i.pinimg.com/564x/b9/fc/2e/b9fc2ec6934f3e89ee33a6aa7efb4e4a.jpg" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
+              @if ($foto->user)
+              <img src=" {{ asset('storage/' . $foto->user->profile_image) }}" alt="Profil Pengguna" style="width: 40px; height: 40px; border-radius: 50%;">
+              @endif
             </div>
             <div class="text-content">
               <h3 class="image-title">{{ $foto->judul_foto }}</h3>
@@ -173,8 +175,8 @@
                 <div class="p-3">
                   <div class="container-head pb-3 d-flex align-items-center justify-content-between border-bottom border-light-subtle">
                     <div class="user-section d-flex align-items-center">
-                      <img src="https://i.pinimg.com/564x/76/fe/07/76fe079c5c818d73dc0b7bf94df8b8bd.jpg" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
                       @if ($foto->user)
+                      <img src=" {{ asset('storage/' . $foto->user->profile_image) }}" alt="Profil Pengguna" style="width: 40px; height: 40px; border-radius: 50%;">
                       <p class="fs-6 fw-medium ms-2 mb-0">{{ $foto->user->username }}</p>
                       @endif
                     </div>
