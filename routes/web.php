@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
+use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\landing\ProfilController as LandingProfilController;
@@ -48,6 +49,6 @@ Route::get('/search', [LandingController::class, 'search'])->name('search');
 
 
 Route::get('/profil', [LandingProfilController::class, 'profil'])->name('profil');
-// Route::get('/profil', function () {
-//     return view('landing.profil');
-// });
+Route::get('/show-album/{album_id}', [AlbumController::class, 'showAlbum'])->name('showAlbum');
+
+

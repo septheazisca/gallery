@@ -53,6 +53,18 @@
   color: #FFFF;
   }
 
+  .btn-profil {
+    background-color: #00044B;
+    color: #FFFF;
+    cursor: default;
+  }
+
+  .btn-profil:hover {
+    background-color: #00044B;
+    color: #FFFF;
+    cursor: default;
+  }
+
   .navbar {
     position: fixed;
     top: 0;
@@ -287,4 +299,12 @@
 .swal-small {
   width: 400px;
   font-size: 10px;
+}
+
+/* style profil */
+.album-titel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
 }

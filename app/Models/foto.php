@@ -21,7 +21,8 @@ class foto extends Model
 
     public function album()
     {
-        return $this->belongsTo(Album::class);
+        // Sesuaikan nama kolom kunci asing dengan nama yang benar
+        return $this->belongsTo(Album::class, 'album_id');
     }
 
     // public function user()
