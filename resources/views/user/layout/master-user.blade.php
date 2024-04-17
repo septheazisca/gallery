@@ -70,7 +70,7 @@
             <i class="bi bi-chevron-down"></i>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="z-index: 1000;">
-            <li><a class="dropdown-item" href="/profil">Profil</a></li>
+            <li><a class="dropdown-item" href="/profil/{{ Auth::user()->user_id }}">Profil</a></li>
             <li>
               <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -133,7 +133,7 @@
                     <div class="user-section d-flex align-items-center">
                       @if ($foto->user)
                       <img src=" {{ asset('storage/' . $foto->user->profile_image) }}" alt="Profil Pengguna" style="width: 40px; height: 40px; border-radius: 50%;">
-                      <p class="fs-6 fw-medium ms-2 mb-0">{{ $foto->user->username }}</p>
+                      <p class="fs-6 fw-medium ms-2 mb-0"><a href="/profil/{{ $foto->user->user_id }}" class="text-decoration-none text-dark">{{ $foto->user->username }}</a></p>
                       @endif
                     </div>
                     <div class="more-action d-flex align-items-center">
@@ -506,9 +506,9 @@
             // var commentContent = '<a href="#" style="margin-right: 10px"><img src="' + fotoProfile + '"  alt="" class="img-circle" style="border-radius: 50px; width: 50px; height: 50px"></a><div class="media-body mr-2"><span class="text-muted pull-right"><small class="text-muted">' + formatTimeAgo(comment.created_at) + '</small></span><a href=""><strong class="text-dark">' + comment.user.username + '</strong></a><p>' + comment.isi_komentar + '</p></div>';
 
             var commentItem = $('<div class="commentars d-flex"></div>');
-            var fotoProfile = comment.user.foto_profile ? 'storage/' + comment.user.foto_profile : 'https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg';
+            var fotoProfile = comment.user.profile_image ? 'storage/' + comment.user.profile_image : 'https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg';
 
-            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center justify-content-between"><div class="username"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;">' + comment.user.username + '</h5></div><div class="date"><h5 class="mb-1" style="font-size: 12px;">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
+            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center justify-content-between"><div class="username"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;"><a href="/profil/'+comment.user.user_id +'" class="text-decoration-none" style="color: #000;">' + comment.user.username + '</a></h5></div><div class="date"><h5 class="mb-1" style="font-size: 12px;">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
 
             commentItem.append(commentContent);
             commentList.append(commentItem);

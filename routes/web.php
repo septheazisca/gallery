@@ -54,7 +54,7 @@ Route::get('/get-like-status', [LikeController::class, 'getLikeStatus'])->name('
 Route::get('/search', [LandingController::class, 'search'])->name('search');
 
 
-Route::get('/profil', [LandingProfilController::class, 'profil'])->name('profil');
+Route::get('/profil/{id}', [LandingProfilController::class, 'profil'])->name('profil');
 Route::get('/show-album/{album_id}', [AlbumController::class, 'showAlbum'])->name('showAlbum');
 
 

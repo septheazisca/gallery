@@ -7,11 +7,11 @@
       <img src="{{ Storage::url(Auth::user()->profile_image) }}" alt="" style="width: 150px; border-radius: 100px;">
     </div>
     <div class="detail-profil">
-      <h2>{{ Auth::user()->nama_lengkap }}</h2>
-      <p>{{ Auth::user()->username }} | {{ Auth::user()->email }}</p>
+      <h2>{{ $user->nama_lengkap }}</h2>
+      <p>{{ $user->username }} | {{ $user->email }}</p>
       <div class="btn-detail-profil">
-        <button class="btn btn-profil">9 Like</button>
-        <button class="btn btn-profil">9 Like</button>
+        <button class="btn btn-profil">{{ $totalPost }} Unggahan</button>
+        <button class="btn btn-profil">{{ $totalAlbum }} Album</button>
       </div>
     </div>
   </div>
@@ -32,8 +32,8 @@
 <div class="container pt-3 pb-5 border-bottom">
   <div class="category-section">
     <div class="header-title">
-      <p class="fs-5 fw-medium">Album {{ Auth::user()->username }}</p>
-      <p class="text-body-tertiary">tersedia</p>
+      <p class="fs-5 fw-medium">Album {{ $user->nama_lengkap }}</p>
+      <p class="text-body-tertiary">{{ $totalAlbum }} tersedia</p>
     </div>
     <div class="container-profil m-0">
       <div class="row">
@@ -69,7 +69,7 @@
 <!----------------------------- UNGGAHAN -------------------------->
 <div class="container py-5">
   <div class="category-section">
-    <p class="fs-5 fw-medium">Unggahan Terbaru {{ Auth::user()->username }}</p>
+    <p class="fs-5 fw-medium">Unggahan Terbaru  {{ $user->nama_lengkap }}</p>
     <div class="content-container m-0">
       @foreach ($fotos as $foto)
       <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}">
