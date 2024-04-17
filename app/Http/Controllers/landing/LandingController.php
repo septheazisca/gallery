@@ -16,7 +16,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $kategoris = KategoriFoto::all();
+        $kategoris = KategoriFoto::orderBy('judul_kategori', 'asc')->get();
         $fotos = Foto::with('user')->get(); // Memuat data foto beserta data pengguna (user) yang mengunggahnya
         $albums = Album::where('user_id', auth()->id())->get();
 

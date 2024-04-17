@@ -38,6 +38,7 @@ Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->nam
 Route::get('/', [LandingController::class, 'index'])->name('index');
 Route::get('/main', [LandingController::class, 'main'])->name('main');
 Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
+Route::get('/show-kategori/{kategori_id}', [LandingKategoriController::class, 'showKategori'])->name('showKategori');
 Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbum');
 Route::post('/add-foto', [LandingController::class, 'addFoto'])->name('addFoto');
 Route::post('/edit-foto/{id}', [LandingController::class, 'editFoto'])->name('editFoto');

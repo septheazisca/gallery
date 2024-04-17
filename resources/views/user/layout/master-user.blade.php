@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GLERRY</title>
-  <link rel="icon" href="gllery.png">
+  <link rel="icon" href="{{ asset('gllery.png') }}">
 
   <!-- BOOTSTRAP -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -24,11 +24,11 @@
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-  <link rel="stylesheet" href="asset-user/css/style.css">
+  <link rel="stylesheet" href="{{ asset('asset-user/css/style.css') }}">
 
-  <link rel="stylesheet" href="assets/extensions/filepond/filepond.css">
-  <link rel="stylesheet" href="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css">
-  <link rel="stylesheet" href="assets/extensions/toastify-js/src/toastify.css">
+  <link rel="stylesheet" href="{{ asset('assets/extensions/filepond/filepond.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/extensions/toastify-js/src/toastify.css') }}">
 
 </head>
 
@@ -38,7 +38,7 @@
   <nav class="navbar navbar-expand-lg py-4" style="box-shadow: rgba(99, 99, 99, 0.08) 0px 2px 8px 0px;">
     <div class="container">
       <a class="navbar-brand" href="/">
-        <img src="gllery.png" alt="Project name" class="logo" width="30px" />
+        <img src="{{ asset('gllery.png') }}" alt="Project name" class="logo" width="30px" />
         <span>Gllery</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Kategori</a>
+            <a class="nav-link" href="/kategori">Kategori</a>
           </li>
         </ul>
         <form action="{{ route('search') }}" method="GET" class="d-flex me-2" role="search" style="flex-grow: 1;">
@@ -89,6 +89,7 @@
 
 
   <!----------------------------- FAB ADD -------------------------->
+  @if(Auth::check())
   <div class="fab-container" style="position: absolute; left: 90%; top: 10%;">
     <!-- Floating Action Button -->
     <div class="dropdown d-inline">
@@ -101,6 +102,8 @@
       </ul>
     </div>
   </div>
+  @endif
+
   <!----------------------------- FAB ADD END -------------------------->
 
 
@@ -216,7 +219,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <img src="gllery.png" alt="" style="width: 40px;">
+          <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
           <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Buat Album</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -250,7 +253,7 @@
         @csrf
         <div class="modal-content">
           <div class="modal-header">
-            <img src="gllery.png" alt="" style="width: 40px;">
+            <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
             <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Unggah Foto</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -401,7 +404,7 @@
           @csrf
           <div class="modalLogin" id="modalLogin">
             <div class="modal-header">
-              <img src="gllery.png" alt="" style="width: 40px;">
+              <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
               <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Login</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -432,7 +435,7 @@
           @csrf
           <div class="modalRegister" id="modalRegister" style="display: none;">
             <div class="modal-header">
-              <img src="gllery.png" alt="" style="width: 40px;">
+              <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
               <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Register</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -485,16 +488,16 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
-  <script src="assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
-  <script src="assets/extensions/filepond/filepond.js"></script>
-  <script src="assets/extensions/toastify-js/src/toastify.js"></script>
-  <script src="assets/static/js/pages/filepond.js"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js') }}"></script>
+  <script src="{{ asset('assets/extensions/filepond/filepond.js') }}"></script>
+  <script src="{{ asset('assets/extensions/toastify-js/src/toastify.js') }}"></script>
+  <script src="{{ asset('assets/static/js/pages/filepond.js') }}"></script>
 
   @if ($errors->any())
   <script>
