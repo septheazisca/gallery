@@ -154,10 +154,17 @@ class LandingController extends Controller
 
     public function search(Request $request)
     {
+        // $query = $request->input('query');
+        // // $results = Foto::where('judul_foto', 'like', '%' . $query . '%')->get();
+        // $results = foto::whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
+        //     ->get();
+        // return view('user.search', compact('results', 'query'));
+
         $query = $request->input('query');
-        // $results = Foto::where('judul_foto', 'like', '%' . $query . '%')->get();
-        $results = foto::whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
+        $results = Foto::with('user') // Memuat data pengguna (user) yang mengunggah foto
+            ->whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
             ->get();
+
         return view('user.search', compact('results', 'query'));
     }
 }
