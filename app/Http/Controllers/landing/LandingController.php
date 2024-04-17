@@ -9,6 +9,7 @@ use App\Models\KategoriFoto;
 use App\Models\KomentarFoto;
 // use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,15 +28,15 @@ class LandingController extends Controller
     public function addAlbum(Request $request)
     {
         // Validasi input
-        $validator = Validator::make($request->all(), [
-            'nama_album' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'nama_album' => 'required|string|max:255',
+        //     'deskripsi' => 'required|string',
+        // ]);
 
         // Jika validasi gagal
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         // Jika validasi berhasil
         $album = new Album();
@@ -55,33 +56,95 @@ class LandingController extends Controller
 
     public function addFoto(Request $request)
     {
+        // // Validasi request
+        // $request->validate([
+        //     'lokasi_foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        //     'judul_foto' => 'required|string|max:255',
+        //     'deskripsi_foto' => 'required|string',
+        //     'kategori' => 'required|exists:kategori_foto,kategori_id',
+        //     'album' => 'required|exists:album,album_id',
+        // ]);
+
+        // try {
+        //     // Menyimpan gambar ke dalam direktori storage
+        //     $imageName = $request->lokasi_foto->store('public/images');
+
+        //     // Mendapatkan URL gambar yang tepat
+        //     $lokasi_foto = url(Storage::url($imageName));
+
+        //     // Menyimpan data foto ke dalam database dengan user_id yang sedang login
+        //     Foto::create([
+        //         'judul_foto' => $request->judul_foto,
+        //         'deskripsi_foto' => $request->deskripsi_foto,
+        //         'lokasi_foto' => $lokasi_foto, // Menggunakan URL gambar yang telah dibuat
+        //         'tanggal_unggahan' => now(),
+        //         'kategori_id' => $request->kategori,
+        //         'album_id' => $request->album,
+        //         'user_id' => auth()->id(), // Mengambil user_id pengguna yang sedang login
+        //     ]);
+
+        //     // Redirect atau response sesuai kebutuhan
+        //     return redirect()->back()->with('success', 'Foto berhasil diunggah.');
+        // } catch (\Exception $e) {
+        //     // Jika terjadi kesalahan, redirect dengan pesan error
+        //     return redirect()->back()->with('error', 'Gagal mengunggah foto. Silakan coba lagi.');
+        // }
+
+        // Validasi data yang dikirimkan
         // Validasi request
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'lokasi_foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'judul_foto' => 'required|string|max:255',
-            'deskripsi_foto' => 'required|string',
-            'kategori' => 'required|exists:kategori_foto,kategori_id',
-            'album' => 'required|exists:album,album_id',
+            'deskripsi_foto' => 'nullable|string',
+            'kategori' => 'nullable|exists:kategori_foto,kategori_id',
+            'album' => 'nullable|exists:album,album_id',
+            'new_album' => 'nullable|string|max:255', // Menambahkan validasi untuk album baru
         ]);
-
+    
+        // Jika validasi gagal
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
         try {
             // Menyimpan gambar ke dalam direktori storage
             $imageName = $request->lokasi_foto->store('public/images');
-
+    
             // Mendapatkan URL gambar yang tepat
             $lokasi_foto = url(Storage::url($imageName));
-
-            // Menyimpan data foto ke dalam database dengan user_id yang sedang login
-            Foto::create([
-                'judul_foto' => $request->judul_foto,
-                'deskripsi_foto' => $request->deskripsi_foto,
-                'lokasi_foto' => $lokasi_foto, // Menggunakan URL gambar yang telah dibuat
-                'tanggal_unggahan' => now(),
-                'kategori_id' => $request->kategori,
-                'album_id' => $request->album,
-                'user_id' => auth()->id(), // Mengambil user_id pengguna yang sedang login
-            ]);
-
+    
+            // Membuat instance objek Foto
+            $photo = new Foto();
+            $photo->judul_foto = $request->judul_foto;
+            $photo->lokasi_foto = $lokasi_foto; // Menggunakan URL gambar yang telah dibuat
+            $photo->tanggal_unggahan = now();
+            $photo->user_id = auth()->id(); // Mengambil user_id pengguna yang sedang login
+            // Menetapkan deskripsi foto, jika tidak null
+            $photo->deskripsi_foto = $request->filled('deskripsi_foto') ? $request->deskripsi_foto : null;
+    
+            // Menetapkan nilai kategori_id, jika tidak null
+            $photo->kategori_id = $request->filled('kategori') ? $request->kategori : null;
+    
+            // Menetapkan nilai album_id
+            if ($request->filled('new_album')) {
+                // Jika album baru dipilih, simpan informasi album baru
+                $album = new Album();
+                $album->nama_album = $request->new_album;
+                $album->user_id = auth()->id();
+                $album->save();
+    
+                $photo->album_id = $album->id;
+            } elseif ($request->filled('album')) {
+                // Jika album yang ada dipilih
+                $photo->album_id = $request->album;
+            } else {
+                // Jika tidak ada album yang dipilih
+                $photo->album_id = null;
+            }
+    
+            // Menyimpan data foto ke dalam database
+            $photo->save();
+    
             // Redirect atau response sesuai kebutuhan
             return redirect()->back()->with('success', 'Foto berhasil diunggah.');
         } catch (\Exception $e) {

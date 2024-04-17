@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('album', function (Blueprint $table) {
             $table->id('album_id');
             $table->string('nama_album');
-            $table->text('deskripsi');
-            $table->date('tanggal_dibuat');
+            $table->text('deskripsi')->nullable();
+            $table->date('tanggal_dibuat')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();

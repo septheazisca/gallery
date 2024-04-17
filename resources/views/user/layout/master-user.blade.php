@@ -256,7 +256,7 @@
             <div class="mb-3">
               <label for="kategori" class="form-label">Kategori</label>
               <select class="form-select" aria-label="Default select example" name="kategori">
-                <option selected>Pilih kategori</option>
+                <option selected disabled>Pilih kategori</option>
                 @foreach ($kategoris as $kategori)
                 <option value="{{$kategori->kategori_id}}">{{ $kategori->judul_kategori }}</option>
                 @endforeach
@@ -277,7 +277,7 @@
               <div class="mb-4">
                 <label for="album" class="form-label">Pilih album</label>
                 <select class="form-select" aria-label="Default select example" name="album">
-                  <option selected>Pilih album</option>
+                  <option selected disabled>Pilih album</option>
                   @foreach ($albums as $album)
                   <option value="{{$album->album_id}}">{{ $album->nama_album }}</option>
                   @endforeach
@@ -293,17 +293,18 @@
                 <input type="text" class="form-control" id="buat_album" name="new_album">
               </div>
             </div>
+
             <script>
               document.getElementById("pilihAlbum").addEventListener("click", function() {
                 document.getElementById("albumSection").style.display = "block";
                 document.getElementById("newAlbumSection").style.display = "none";
-                document.getElementsByName("new_album")[0].value = "";
+                document.querySelector("select[name='album']").selectedIndex = 0;
               });
 
               document.getElementById("buatAlbum").addEventListener("click", function() {
                 document.getElementById("albumSection").style.display = "none";
                 document.getElementById("newAlbumSection").style.display = "block";
-                document.querySelector("select[name='album']").selectedIndex = 0;
+                document.querySelector("select[name='album']").selectedIndex = -1;
               });
             </script>
             <button class="btn btn-gllery" style="width: 100%;" type="submit">Unggah</button>
@@ -450,7 +451,7 @@
               </div>
               <div class="mb-4">
                 <label for="profile_image" class="form-label">Foto Profil</label>
-                <input class="form-control" type="file" id="profile_image" accept=".png, .jpg, .jpeg" name="profile_image">
+                <input class="image-crop-filepond" image-crop-aspect-ratio="1:1" type="file" id="profile_image" name="profile_image">
               </div>
               <button class="btn btn-gllery mb-4" style="width: 100%;" type="submit">Register</button>
               <div class="link-register">
@@ -508,7 +509,7 @@
             var commentItem = $('<div class="commentars d-flex"></div>');
             var fotoProfile = comment.user.profile_image ? 'storage/' + comment.user.profile_image : 'https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg';
 
-            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center justify-content-between"><div class="username"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;"><a href="/profil/'+comment.user.user_id +'" class="text-decoration-none" style="color: #000;">' + comment.user.username + '</a></h5></div><div class="date"><h5 class="mb-1" style="font-size: 12px;">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
+            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center justify-content-between"><div class="username"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;"><a href="/profil/' + comment.user.user_id + '" class="text-decoration-none" style="color: #000;">' + comment.user.username + '</a></h5></div><div class="date"><h5 class="mb-1" style="font-size: 12px;">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
 
             commentItem.append(commentContent);
             commentList.append(commentItem);
