@@ -32,6 +32,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
+
 </head>
 
 <body>
@@ -151,56 +152,27 @@
                   </div>
                   <div class="container-detail py-3" style="height: 295px; overflow-y: auto;">
                     <h4>{{ $foto->judul_foto }}</h4>
-                    <p class="fs-6">{{ $foto->deskripsi_foto }}<span class="ms-2" style="font-size: 12px;">{{ $foto->tanggal_unggahan }}</span></p>
+                    <p class="fs-6">{{ $foto->deskripsi_foto }}
+                      <span class="ms-2" style="font-size: 12px;">
+                        @if(\Carbon\Carbon::parse($foto->created_at)->diffInDays() > 7)
+                        {{ \Carbon\Carbon::parse($foto->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
+                        @else
+                        {{ \Carbon\Carbon::parse($foto->created_at)->locale('id')->diffForHumans() }}
+                        @endif
+                      </span>
+
+                    </p>
                     <div class="commentar-section mt-1" id="commentList_{{ $foto->foto_id }}">
-                      <!-- <div class="commentars d-flex">
-                        <div class="profile-user">
-                          <img src="https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg" alt="" style="width: 35px; height: 35px; border-radius: 50%;">
-                        </div>
-                        <div class="detail-commentars">
-                          <div class="username-date d-flex align-items-center justify-content-between">
-                            <div class="username">
-                              <h5 class="image-date ps-2 mb-1" style="font-size: 16px;">username</h5>
-                            </div>
-                            <div class="date">
-                              <h5 class="mb-1" style="font-size: 12px;">10m</h5>
-                            </div>
-                          </div>
-                          <p class="ps-2" style="font-size: 15px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iste?</p>
-                        </div>
-                      </div> -->
                     </div>
                   </div>
                   <div class="container-action pt-3 border-top border-light-subtle">
                     <div class="icons-action d-flex align-items-center justify-content-between">
-                      <div class="heart-btn">
-                        <div class="content">
-                          <span class="heart"></span>
-                          <span class="text">Like</span>
-                          <span class="numb"></span>
-                        </div>
-                      </div>
+                      <button type="button" class="btn btn-like btn-gray200" style="background-color: #445985;color: white" id="likeButton_{{ $foto->foto_id }}" data-photoid="{{ $foto->foto_id }}">
+                        <i class="fa-solid fa-heart"></i>
+                        <span id="likeCount_{{ $foto->foto_id }}">{{ $foto->likes_count }} likes</span>
+                      </button>
                       <a href="{{ $foto->lokasi_foto }}" download class="m-0" style="font-size: 15px;"><u style="cursor: pointer;">Download</u></a>
-
-                      <script>
-                        $(document).ready(function() {
-                          $('.content').click(function() {
-                            $('.content').toggleClass("heart-active")
-                            $('.text').toggleClass("heart-active")
-                            $('.numb').toggleClass("heart-active")
-                            $('.heart').toggleClass("heart-active")
-                          });
-                        });
-                      </script>
                     </div>
-                    <!-- <form id="submit-komentar">
-                      @csrf
-                      <div class="comment d-flex mt-2">
-                        <textarea class="rounded-start border-light-subtle" name="isi_komentar" id="isi_komentar" cols="30" rows="2" style="width: 100%;"></textarea>
-                        <input type="hidden" name="foto_id" id="foto_id" value="{{ $foto->foto_id }}">
-                        <button class="rounded-end border-0" type="button" id="submit-komentar" style="background-color: #00044B; color: #fff;"><i class="fa-solid fa-paper-plane"></i></button>
-                      </div>
-                    </form> -->
                     <form action="{{ route('comments.photo') }}" method="POST" class="commentForm">
                       @csrf
                       <div class="comment d-flex mt-2">
@@ -513,7 +485,7 @@
   <script>
     function openModal(photoId) {
       loadComments(photoId);
-      // loadLikeStatus(photoId);
+      loadLikeStatus(photoId);
     }
     // GET KOMENTAR BY FOTO_ID
     function loadComments(photoId) {
@@ -608,28 +580,142 @@
       });
     });
 
+    // GET LIKE BY FOTO_ID
+    function loadLikeStatus(photoId) {
+      $.ajax({
+        url: "{{ route('get-like-status') }}",
+        type: 'GET',
+        data: {
+          foto_id: photoId
+        },
+        dataType: 'json',
+        success: function(response) {
+          // Handle response here
+          console.log(response);
+
+          $('#likeCount_' + photoId).text(response.like_count + ' likes');
+          // Toggle button text and class based on user's like status
+          if (response.user_liked) {
+            $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike');
+            $('#likeButton_' + photoId).html('<i style="color: #ff0000;" class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+          } else {
+            $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like');
+            $('#likeButton_' + photoId).html('<i class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error(xhr.responseText);
+        }
+      });
+    }
+
+    // KIRIM LIKE 
+    function toggleLike(photoId) {
+      $.ajax({
+        url: "{{ route('toggle-like') }}",
+        type: 'POST',
+        data: {
+          foto_id: photoId,
+          _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(response) {
+          // Handle response here
+          console.log(response);
+          // Update like count
+          $('#likeCount_' + photoId).text(response.like_count + ' likes');
+          // Toggle button text and class based on user's like status
+          if (response.action === 'liked') {
+            $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike');
+            $('#likeButton_' + photoId).html('<i style="color: #ff0000;" class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+            toastr.success('Photo liked successfully', 'Success', {
+              "progressBar": false,
+              "positionClass": "toast-top-right",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "1500",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "closeButton": true,
+              "toastClass": "toast-green-solid"
+            });
+
+          } else {
+            $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like');
+            $('#likeButton_' + photoId).html('<i class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+            toastr.success('Photo unliked successfully', 'Success', {
+              "progressBar": false,
+              "positionClass": "toast-top-right",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "1500",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "closeButton": true,
+              "toastClass": "toast-green-solid"
+            });
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error(xhr.responseText);
+          toastr.error('An error occurred while processing your like action', 'Error', {
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "1500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "closeButton": true,
+            "toastClass": "toast-red-solid"
+          });
+        }
+      });
+    }
+
+    // TOMBOL UNTUK MENJALANKAN AJAX LIKE
+    $(document).on('click', '.btn-like', function() {
+      var photoId = $(this).data('photoid');
+      toggleLike(photoId);
+    });
+
+    // TOMBOL UNTUK MENJALANKAN AJAX UNLIKE
+    $(document).on('click', '.btn-unlike', function() {
+      var photoId = $(this).data('photoid');
+      toggleLike(photoId);
+    });
+
     // FORMAT WAKTU CREATE_AT
     function formatTimeAgo(timestamp) {
       const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
 
       if (seconds < 60) {
-        return `${Math.floor(seconds)}s ago`;
+        return `${Math.floor(seconds)} detik`;
       }
       let interval = Math.floor(seconds / 31536000);
       if (interval > 1) {
-        return `${interval} years`;
+        return `${interval} tahun`;
       }
       interval = Math.floor(seconds / 2592000);
       if (interval > 1) {
-        return `${interval} months`;
+        return `${interval} bulan`;
       }
       interval = Math.floor(seconds / 86400);
       if (interval > 1) {
-        return `${interval}d`;
+        return `${interval} hari`;
       }
       interval = Math.floor(seconds / 3600);
       if (interval > 1) {
-        return `${interval}h`;
+        return `${interval} jam`;
       }
       interval = Math.floor(seconds / 60);
       if (interval > 1) {

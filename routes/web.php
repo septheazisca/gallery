@@ -8,6 +8,7 @@ use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
 use App\Http\Controllers\landing\KomentarController;
 use App\Http\Controllers\landing\LandingController;
+use App\Http\Controllers\landing\LikeController;
 use App\Http\Controllers\landing\ProfilController as LandingProfilController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,8 @@ Route::get('/hapus-foto/{id}', [LandingController::class, 'hapusFoto'])->name('h
 // Route::post('/simpan-komentar', [LandingController::class, 'simpanKomentar'])->name('simpanKomentar');
 Route::post('/store/comment', [KomentarController::class, 'store'])->name('comments.photo');
 Route::get('/get/comment/{id}', [KomentarController::class, 'getComment'])->name('get.comments.photo');
+Route::post('/toggle-like', [LikeController::class, 'toggleLike'])->name('toggle-like');
+Route::get('/get-like-status', [LikeController::class, 'getLikeStatus'])->name('get-like-status');
 Route::get('/search', [LandingController::class, 'search'])->name('search');
 
 
