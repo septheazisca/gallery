@@ -1,6 +1,5 @@
 @extends('user.layout.master-user')
 @section('content')
-
 <div class="container py-5">
   <div class="category-section">
     <p class="fs-5 fw-medium">Kategori {{ $showKategori->judul_kategori }}</p>
@@ -33,5 +32,4 @@
     </div>
   </div>
 </div>
-
 @endsection
