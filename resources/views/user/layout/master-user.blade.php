@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="{{ asset('assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/extensions/toastify-js/src/toastify.css') }}">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 </head>
 
 <body>
@@ -150,7 +152,7 @@
                   <div class="container-detail py-3" style="height: 295px; overflow-y: auto;">
                     <h4>{{ $foto->judul_foto }}</h4>
                     <p class="fs-6">{{ $foto->deskripsi_foto }}<span class="ms-2" style="font-size: 12px;">{{ $foto->tanggal_unggahan }}</span></p>
-                    <div class="commentar-section mt-1">
+                    <div class="commentar-section mt-1" id="commentList_{{ $foto->foto_id }}">
                       <!-- <div class="commentars d-flex">
                         <div class="profile-user">
                           <img src="https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg" alt="" style="width: 35px; height: 35px; border-radius: 50%;">
@@ -191,12 +193,20 @@
                         });
                       </script>
                     </div>
-                    <form id="submit-komentar">
+                    <!-- <form id="submit-komentar">
                       @csrf
                       <div class="comment d-flex mt-2">
                         <textarea class="rounded-start border-light-subtle" name="isi_komentar" id="isi_komentar" cols="30" rows="2" style="width: 100%;"></textarea>
                         <input type="hidden" name="foto_id" id="foto_id" value="{{ $foto->foto_id }}">
                         <button class="rounded-end border-0" type="button" id="submit-komentar" style="background-color: #00044B; color: #fff;"><i class="fa-solid fa-paper-plane"></i></button>
+                      </div>
+                    </form> -->
+                    <form action="{{ route('comments.photo') }}" method="POST" class="commentForm">
+                      @csrf
+                      <div class="comment d-flex mt-2">
+                        <textarea class="rounded-start border-light-subtle" name="isi_komentar" id="isi_komentar" cols="30" rows="2" style="width: 100%;"></textarea>
+                        <input type="hidden" name="foto_id" value="{{ $foto->foto_id }}">
+                        <button class="rounded-end border-0" type="submit" id="submit-komentar" style="background-color: #00044B; color: #fff;"><i class="fa-solid fa-paper-plane"></i></button>
                       </div>
                     </form>
                   </div>
@@ -498,6 +508,136 @@
   <script src="{{ asset('assets/extensions/filepond/filepond.js') }}"></script>
   <script src="{{ asset('assets/extensions/toastify-js/src/toastify.js') }}"></script>
   <script src="{{ asset('assets/static/js/pages/filepond.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+  <script>
+    function openModal(photoId) {
+      loadComments(photoId);
+      // loadLikeStatus(photoId);
+    }
+    // GET KOMENTAR BY FOTO_ID
+    function loadComments(photoId) {
+      $.ajax({
+        url: "/get/comment/" + photoId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+          console.log(response);
+          var commentList = $('#commentList_' + photoId);
+          commentList.empty(); // Bersihkan daftar komentar sebelum menambahkan yang baru
+
+          // Tampilkan setiap komentar dalam daftar
+          response.comments.forEach(function(comment) {
+            // var commentItem = $('<li class="media"></li>');
+            // var fotoProfile = comment.user.foto_profile ? 'storage/' + comment.user.foto_profile : 'assetsUser/img/av.png';
+
+            // var commentContent = '<a href="#" style="margin-right: 10px"><img src="' + fotoProfile + '"  alt="" class="img-circle" style="border-radius: 50px; width: 50px; height: 50px"></a><div class="media-body mr-2"><span class="text-muted pull-right"><small class="text-muted">' + formatTimeAgo(comment.created_at) + '</small></span><a href=""><strong class="text-dark">' + comment.user.username + '</strong></a><p>' + comment.isi_komentar + '</p></div>';
+
+            var commentItem = $('<div class="commentars d-flex"></div>');
+            var fotoProfile = comment.user.foto_profile ? 'storage/' + comment.user.foto_profile : 'https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg';
+
+            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center justify-content-between"><div class="username"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;">' + comment.user.username + '</h5></div><div class="date"><h5 class="mb-1" style="font-size: 12px;">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
+
+            commentItem.append(commentContent);
+            commentList.append(commentItem);
+          });
+
+          // Tampilkan jumlah komentar
+          $('#commentCount_' + photoId).text(response.comments.length);
+        },
+        error: function(xhr, status, error) {
+          console.error(xhr.responseText);
+        }
+      });
+    }
+
+    // AJAX KIRIM KOMENTAR
+    $(document).ready(function() {
+      $('form.commentForm').submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+          url: "{{ route('comments.photo') }}",
+          type: 'POST',
+          data: formData,
+          dataType: 'json',
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            loadComments(response.foto_id);
+            // Handle respons dari server di sini
+            console.log(response);
+            $('textarea[name="isi_komentar"]').val('');
+            toastr.success('Comment sent successfully', 'Success', {
+              "progressBar": false,
+              "positionClass": "toast-top-right",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "1500",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "closeButton": true,
+              "toastClass": "toast-green-solid"
+            });
+            loadComments(response.foto_id);
+          },
+          error: function(xhr, status, error) {
+            // Handle error di sini
+            console.error(xhr.responseText);
+            // Tampilkan notifikasi error dengan toastr.js
+            toastr.error('An error occurred while posting a comment', 'Error', {
+              "progressBar": false,
+              "positionClass": "toast-top-right",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "1500",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "closeButton": true,
+              "toastClass": "toast-red-solid"
+            });
+          }
+        });
+      });
+    });
+
+    // FORMAT WAKTU CREATE_AT
+    function formatTimeAgo(timestamp) {
+      const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
+
+      if (seconds < 60) {
+        return `${Math.floor(seconds)}s ago`;
+      }
+      let interval = Math.floor(seconds / 31536000);
+      if (interval > 1) {
+        return `${interval} years`;
+      }
+      interval = Math.floor(seconds / 2592000);
+      if (interval > 1) {
+        return `${interval} months`;
+      }
+      interval = Math.floor(seconds / 86400);
+      if (interval > 1) {
+        return `${interval}d`;
+      }
+      interval = Math.floor(seconds / 3600);
+      if (interval > 1) {
+        return `${interval}h`;
+      }
+      interval = Math.floor(seconds / 60);
+      if (interval > 1) {
+        return `${interval}m`;
+      }
+      return formatTimeAgo(new Date(timestamp).getTime() + 1000);
+    }
+  </script>
 
   @if ($errors->any())
   <script>
@@ -558,43 +698,6 @@
     document.getElementById("showLogin").addEventListener("click", function() {
       document.getElementById("modalLogin").style.display = "block";
       document.getElementById("modalRegister").style.display = "none";
-    });
-
-
-    // KIRIM KOMENTAR
-    $('#submit-komentar').click(function() {
-      var komentar = $('#isi_komentar').val();
-      var foto_id = $('#foto_id').val();
-
-      if (komentar.trim() !== '') {
-        $.ajax({
-          url: '{{ route("simpanKomentar") }}',
-          type: 'POST',
-          data: {
-            _token: $('input[name="_token"]').val(),
-            isi_komentar: komentar,
-            foto_id: foto_id
-          },
-          success: function(response) {
-            // Tampilkan pesan sukses menggunakan Swal.fire
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Komentar berhasil terkirim.",
-              showConfirmButton: false,
-              timer: 2000,
-              customClass: {
-                popup: 'swal-small', // Menggunakan kelas CSS kustom 'swal-small'
-              }
-            });
-            // Mengosongkan input komentar setelah berhasil terkirim
-            $('#isi_komentar').val('');
-          },
-          error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-          }
-        });
-      }
     });
   </script>
 </body>

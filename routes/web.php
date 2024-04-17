@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
+use App\Http\Controllers\landing\KomentarController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\landing\ProfilController as LandingProfilController;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +45,9 @@ Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbu
 Route::post('/add-foto', [LandingController::class, 'addFoto'])->name('addFoto');
 Route::post('/edit-foto/{id}', [LandingController::class, 'editFoto'])->name('editFoto');
 Route::get('/hapus-foto/{id}', [LandingController::class, 'hapusFoto'])->name('hapusFoto');
-Route::post('/simpan-komentar', [LandingController::class, 'simpanKomentar'])->name('simpanKomentar');
+// Route::post('/simpan-komentar', [LandingController::class, 'simpanKomentar'])->name('simpanKomentar');
+Route::post('/store/comment', [KomentarController::class, 'store'])->name('comments.photo');
+Route::get('/get/comment/{id}', [KomentarController::class, 'getComment'])->name('get.comments.photo');
 Route::get('/search', [LandingController::class, 'search'])->name('search');
 
 
