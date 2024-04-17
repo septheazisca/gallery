@@ -185,7 +185,7 @@
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @if($foto->user->user_id == auth()->id()) <!-- Jika pengguna sedang melihat unggahan mereka sendiri -->
                         <li><a class="dropdown-item text-danger" href="{{ route('hapusFoto', ['id' => $foto->foto_id]) }}">Hapus</a></li>
-                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFoto{{ $foto->foto_id }}">Edit</a></li>
                         @else
                         <!-- Jika pengguna sedang melihat unggahan orang lain -->
                         <li><a class="dropdown-item" href="#">Report</a></li>
@@ -381,6 +381,68 @@
 
 
 
+  <!----------------------------- MODAL EDIT FOTO -------------------------->
+  @foreach ($fotos as $foto)
+  <div class="modal fade" id="editFoto{{ $foto->foto_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6">
+                <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}" style="width: 100%;">
+              </div>
+              <div class="col-lg-6">
+                <div class="p-3">
+                  <div class="container-head pb-3 d-flex align-items-center justify-content-between border-bottom border-light-subtle">
+                    <div class="user-section d-flex align-items-center">
+                      @if ($foto->user)
+                      <img src=" {{ asset('storage/' . $foto->user->profile_image) }}" alt="Profil Pengguna" style="width: 40px; height: 40px; border-radius: 50%;">
+                      <p class="fs-6 fw-medium ms-2 mb-0">{{ $foto->user->username }}</p>
+                      @endif
+                    </div>
+                  </div>
+                  <div class="container-detail py-3" style="height: 100%; overflow-y: auto;">
+                    <form action="{{ route('editFoto', ['id' => $foto->foto_id]) }}" method="POST">
+                      @csrf
+                      <div class="mb-3">
+                        <label for="judul" class="form-label">Judul</label>
+                        <input type="text" class="form-control" name="judul_foto" value="{{ $foto->judul_foto }}">
+                      </div>
+                      <div class="mb-3">
+                        <label for="deskripsi_foto" class="form-label">Deskripsi</label>
+                        <textarea class="rounded border-light-subtle form-control" name="deskripsi_foto" cols="30" rows="2" style="width: 100%;">{{ $foto->deskripsi_foto }}</textarea>
+                      </div>
+                      <div class="mb-4">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <select class="form-select" aria-label="Default select example" name="kategori">
+                          <option disabled>Pilih kategori</option>
+                          @foreach ($kategoris as $kategori)
+                          <option value="{{ $kategori->kategori_id }}" @if ($kategori->kategori_id == $foto->kategori_id) selected @endif>{{ $kategori->judul_kategori }}</option>
+                          @endforeach
+                          @if (count($kategoris) == 0)
+                          <option disabled>Kategori tidak tersedia.</option>
+                          @endif
+                        </select>
+                      </div>
+                      <button class="btn btn-gllery" style="width: 100%;" type="submit">Perbarui Unggah</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  @endforeach
+  <!----------------------------- MODAL EDIT FOTO END -------------------------->
+
+
+
   <!----------------------------- MODAL LOGIN REGISTER -------------------------->
   <div class="modal fade" id="loginRegisterModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -544,7 +606,7 @@
       document.getElementById("modalLogin").style.display = "block";
       document.getElementById("modalRegister").style.display = "none";
     });
-    
+
 
     // KIRIM KOMENTAR
     $('#submit-komentar').click(function() {

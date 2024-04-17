@@ -90,18 +90,41 @@ class LandingController extends Controller
         }
     }
 
+    public function editFoto(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'judul_foto' => 'required',
+            'deskripsi_foto' => 'required',
+            'kategori' => 'required',
+        ]);
+    
+        // Temukan foto yang akan diedit
+        $foto = Foto::findOrFail($id);
+    
+        // Update data foto
+        $foto->judul_foto = $request->judul_foto;
+        $foto->deskripsi_foto = $request->deskripsi_foto;
+        $foto->kategori_id = $request->kategori;
+        $foto->save();
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->back()->with('success', 'Foto berhasil diperbarui.');
+    }
+    
+
     public function hapusFoto($id)
     {
         try {
             // Temukan foto berdasarkan ID
             $foto = Foto::findOrFail($id);
-            
+
             // Hapus foto dari penyimpanan
             Storage::delete($foto->lokasi_foto);
-            
+
             // Hapus foto dari database
             $foto->delete();
-    
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menghapus foto. Silakan coba lagi.');
