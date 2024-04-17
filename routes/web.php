@@ -51,6 +51,9 @@ Route::post('/add-foto', [LandingController::class, 'addFoto'])->name('addFoto')
 Route::post('/edit-foto/{id}', [LandingController::class, 'editFoto'])->name('editFoto');
 Route::get('/hapus-foto/{id}', [LandingController::class, 'hapusFoto'])->name('hapusFoto');
 Route::post('/simpan-komentar', [LandingController::class, 'simpanKomentar'])->name('simpanKomentar');
+Route::get('/search', [LandingController::class, 'search'])->name('search');
+
+
 Route::get('/profil', [LandingProfilController::class, 'profil'])->name('profil');
 // Route::get('/profil', function () {
 //     return view('landing.profil');

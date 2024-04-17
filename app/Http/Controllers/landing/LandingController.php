@@ -98,20 +98,20 @@ class LandingController extends Controller
             'deskripsi_foto' => 'required',
             'kategori' => 'required',
         ]);
-    
+
         // Temukan foto yang akan diedit
         $foto = Foto::findOrFail($id);
-    
+
         // Update data foto
         $foto->judul_foto = $request->judul_foto;
         $foto->deskripsi_foto = $request->deskripsi_foto;
         $foto->kategori_id = $request->kategori;
         $foto->save();
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->back()->with('success', 'Foto berhasil diperbarui.');
     }
-    
+
 
     public function hapusFoto($id)
     {
@@ -149,5 +149,15 @@ class LandingController extends Controller
 
         // Kirim tanggapan kembali sebagai konfirmasi
         return response()->json(['message' => 'Komentar berhasil disimpan.']);
+    }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        // $results = Foto::where('judul_foto', 'like', '%' . $query . '%')->get();
+        $results = foto::whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
+            ->get();
+        return view('user.search', compact('results', 'query'));
     }
 }

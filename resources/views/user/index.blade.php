@@ -53,8 +53,8 @@
             <a class="nav-link" href="#">Kategori</a>
           </li>
         </ul>
-        <form class="d-flex me-2" role="search" style="flex-grow: 1;">
-          <input class="form-control me-2 bg-body-tertiary border-0" type="search" placeholder="Search" aria-label="Search">
+        <form action="{{ route('search') }}" method="GET" class="d-flex me-2" role="search" style="flex-grow: 1;">
+          <input class="form-control me-2 bg-body-tertiary border-0" type="search" placeholder="Search" aria-label="Search" name="query">
           <button class="btn btn-outline-gllery" type="submit">Search</button>
         </form>
         @if(Auth::check())
