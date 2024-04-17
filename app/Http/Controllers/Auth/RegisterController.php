@@ -40,7 +40,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect('/gallery');
+        return redirect('/');
     } catch (\Exception $e) {
         Log::error('Error occurred while registering user: ' . $e->getMessage());
         return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');

@@ -21,16 +21,16 @@ class LoginController extends Controller
             if ($request->username === 'admingallery1975@gmail.com') {
                 return redirect('/dashboard-index'); 
             } else {
-                return redirect('/gallery');
+                return redirect('/');
             }
         }
     
-        return redirect('/login')->with('error', 'Username atau password salah');
+        return redirect('/')->with('error', 'Username atau password salah');
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/gallery');
+        return redirect('/');
     }
 }

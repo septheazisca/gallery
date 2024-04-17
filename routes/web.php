@@ -9,10 +9,6 @@ use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\landing\ProfilController as LandingProfilController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // AUTH ------------------------------------------------------------
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
@@ -20,21 +16,17 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
-
 // DASHBOARD ------------------------------------------------------------
 Route::get('/dashboard-index', function () {
     return view('dashboard.index');
 });
-// Route::get('/dashboard-kategori', function () {
-//     return view('dashboard.kategori');
-// });
 Route::get('/dashboard-postingan', function () {
     return view('dashboard.postingan');
 });
 Route::get('/dashboard-pengguna', function () {
     return view('dashboard.pengguna');
 });
+
 Route::get('/dashboard-profil', [ProfilController::class, 'profil'])->name('profil');
 Route::post('/dashboard/profile/update', [ProfilController::class, 'update'])->name('update');
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
@@ -43,7 +35,7 @@ Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->nam
 Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 // LANDING ------------------------------------------------------------
-Route::get('/gallery', [LandingController::class, 'index'])->name('index');
+Route::get('/', [LandingController::class, 'index'])->name('index');
 Route::get('/main', [LandingController::class, 'main'])->name('main');
 Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
 Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbum');

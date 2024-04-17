@@ -37,7 +37,7 @@
   <!----------------------------- NAVBAR -------------------------->
   <nav class="navbar navbar-expand-lg py-4" style="box-shadow: rgba(99, 99, 99, 0.08) 0px 2px 8px 0px;">
     <div class="container">
-      <a class="navbar-brand" href="/gallery">
+      <a class="navbar-brand" href="/">
         <img src="gllery.png" alt="Project name" class="logo" width="30px" />
         <span>Gllery</span>
       </a>
@@ -47,7 +47,7 @@
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Kategori</a>
