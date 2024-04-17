@@ -53,6 +53,21 @@
   color: #FFFF;
   }
 
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10; 
+    background-color: #fff;
+  }
+  
+  .fab-container {
+    position: fixed;
+    top: 60px; 
+    right: 90px; 
+    z-index: 10;
+  }
+  
 
   /* bagian login */
   .btn-outline-secondary-gllery {

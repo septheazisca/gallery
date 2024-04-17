@@ -66,7 +66,7 @@
             @endif
             <i class="bi bi-chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="z-index: 1000;">
             <li><a class="dropdown-item" href="#">Profil</a></li>
             <li>
               <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -90,7 +90,7 @@
 
   <!----------------------------- FAB ADD -------------------------->
   @if(Auth::check())
-  <div class="fab-container" style="position: absolute; left: 90%; top: 10%;">
+  <div class="fab-container">
     <!-- Floating Action Button -->
     <div class="dropdown d-inline">
       <button class="btn rounded-circle shadow-lg p-3 btn-fab" style="background-color: #00044B; color: white;" type="button" id="fabDropdown" data-bs-toggle="dropdown" aria-expanded="false">

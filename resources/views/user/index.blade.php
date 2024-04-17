@@ -1,7 +1,8 @@
 @extends('user.layout.master-user')
 @section('content')
 <!----------------------------- KATEGORI -------------------------->
-<div class="container py-5 border-bottom">
+
+<div class="container py-5 border-bottom" style="margin-top: 5.5rem;">
   <div class="category-section">
     <p class="fs-5 fw-medium">Kategori</p>
     @for ($i = 0; $i < 20 && $i < count($kategoris); $i++) <button class="btn btn-kategori py-2 px-4 mb-2 me-1">{{ $kategoris[$i]->judul_kategori }}</button>

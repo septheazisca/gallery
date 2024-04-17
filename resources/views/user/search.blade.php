@@ -1,6 +1,6 @@
 @extends('user.layout.master-user')
 @section('content')
-<div class="container py-5">
+<div class="container py-5" style="margin-top: 5.5rem;">
   <div class="category-section">
     <p class="fs-5 fw-medium">Hasil Pencarian untuk: "{{ $query }}"</p>
     <div class="content-container m-0">
