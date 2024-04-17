@@ -154,17 +154,16 @@ class LandingController extends Controller
 
     public function search(Request $request)
     {
-        // $query = $request->input('query');
-        // // $results = Foto::where('judul_foto', 'like', '%' . $query . '%')->get();
-        // $results = foto::whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
-        //     ->get();
-        // return view('user.search', compact('results', 'query'));
+
+        $kategoris = KategoriFoto::all();
+        $fotos = Foto::with('user')->get(); // Memuat data foto beserta data pengguna (user) yang mengunggahnya
+        $albums = Album::where('user_id', auth()->id())->get();
 
         $query = $request->input('query');
         $results = Foto::with('user') // Memuat data pengguna (user) yang mengunggah foto
             ->whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
             ->get();
 
-        return view('user.search', compact('results', 'query'));
+        return view('user.search', compact('results', 'query', 'kategoris', 'albums', 'fotos'));
     }
 }
