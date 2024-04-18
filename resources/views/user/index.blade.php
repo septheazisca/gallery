@@ -5,8 +5,11 @@
 <div class="container py-5 border-bottom" style="margin-top: 5.5rem;">
   <div class="category-section">
     <p class="fs-5 fw-medium">Kategori</p>
-    @for ($i = 0; $i < 20 && $i < count($kategoris); $i++) <button class="btn btn-kategori py-2 px-4 mb-2 me-1">{{ $kategoris[$i]->judul_kategori }}</button>
-      @endfor
+    @foreach($showKategoris as $showKategori)
+    <button class="btn btn-kategori py-2 px-4 mb-2 me-1">
+      <a href="{{ route('showKategori', ['kategori_id' => $showKategori->kategori_id]) }}" class="text-decoration-none">{{ $showKategori->judul_kategori }}</a>
+    </button>
+    @endforeach
   </div>
 </div>
 <!----------------------------- KATEGORI END -------------------------->
@@ -16,7 +19,7 @@
 <!----------------------------- UNGGAHAN -------------------------->
 <div class="container py-5">
   <div class="category-section">
-    <p class="fs-5 fw-medium">Unggahan Terbaru</p>
+    <p class="fs-5 fw-medium">Unggahan Untuk Anda</p>
     <div class="content-container m-0">
       @foreach ($fotos as $foto)
       <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}" onclick="openModal({{ $foto->foto_id }})">

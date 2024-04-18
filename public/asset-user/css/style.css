@@ -48,8 +48,16 @@
   color: #00044B;
   }
 
+  .btn-kategori a {
+  color: #00044B;
+  }
+
   .btn-kategori:hover {
   background-color: #00044B;
+  color: #FFFF;
+  }
+
+  .btn-kategori a:hover {
   color: #FFFF;
   }
 
@@ -97,10 +105,22 @@
   }
 
   .content-container {
-  width: 1300px;
+  width: 100%;
   margin: 20px auto;
   columns: 4;
   column-gap: 15px;
+  }
+
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    .content-container {
+      columns: 2;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .content-container {
+      columns: 1;
+    }
   }
 
   .content-container .box-content {

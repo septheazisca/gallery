@@ -20,8 +20,9 @@ class LandingController extends Controller
         $kategoris = KategoriFoto::orderBy('judul_kategori', 'asc')->get();
         $fotos = Foto::with('user')->get(); // Memuat data foto beserta data pengguna (user) yang mengunggahnya
         $albums = Album::where('user_id', auth()->id())->get();
+        $showKategoris = KategoriFoto::orderBy('judul_kategori', 'asc')->take(20)->get();
 
-        return view('user.index', compact('kategoris', 'albums', 'fotos'));
+        return view('user.index', compact('kategoris', 'albums', 'fotos', 'showKategoris'));
     }
 
 
