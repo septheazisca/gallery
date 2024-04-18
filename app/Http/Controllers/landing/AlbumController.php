@@ -7,6 +7,7 @@ use App\Models\Album;
 use App\Models\foto;
 use App\Models\KategoriFoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
 {
@@ -22,6 +23,8 @@ class AlbumController extends Controller
     public function showAlbum($album_id)
     {
 
+        $user = Auth::user();
+
         $albums = Album::where('user_id', auth()->id())->get();
 
         // Ambil album yang dipilih
@@ -36,6 +39,6 @@ class AlbumController extends Controller
         $fotos = Foto::where('album_id', $album_id)->with('user')->get();
 
         // Kembalikan tampilan dengan data yang diperlukan
-        return view('user.show-album', compact('albums', 'album', 'kategoris', 'fotos'));
+        return view('user.show-album', compact('albums', 'album', 'kategoris', 'fotos', 'user'));
     }
 }

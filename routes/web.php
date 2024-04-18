@@ -34,7 +34,6 @@ Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->nam
 Route::get('/dashboard-foto', [DashboardFotoController::class, 'foto'])->name('foto');
 Route::get('/dashboard-user', [UserController::class, 'user'])->name('user');
 
-
 // LANDING ------------------------------------------------------------
 Route::get('/', [LandingController::class, 'index'])->name('index');
 Route::get('/main', [LandingController::class, 'main'])->name('main');
@@ -44,15 +43,15 @@ Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbu
 Route::post('/add-foto', [FotoController::class, 'addFoto'])->name('addFoto');
 Route::post('/edit-foto/{id}', [FotoController::class, 'editFoto'])->name('editFoto');
 Route::get('/hapus-foto/{id}', [FotoController::class, 'hapusFoto'])->name('hapusFoto');
-// Route::post('/simpan-komentar', [LandingController::class, 'simpanKomentar'])->name('simpanKomentar');
 Route::post('/store/comment', [KomentarController::class, 'store'])->name('comments.photo');
 Route::get('/get/comment/{id}', [KomentarController::class, 'getComment'])->name('get.comments.photo');
 Route::post('/toggle-like', [LikeController::class, 'toggleLike'])->name('toggle-like');
 Route::get('/get-like-status', [LikeController::class, 'getLikeStatus'])->name('get-like-status');
-Route::get('/search', [LandingController::class, 'search'])->name('search');
-
-
-Route::get('/profil/{id}', [LandingProfilController::class, 'profil'])->name('profil');
 Route::get('/show-album/{album_id}', [AlbumController::class, 'showAlbum'])->name('showAlbum');
+Route::get('/search', [LandingController::class, 'search'])->name('search');
+Route::get('/profil/{id}', [LandingProfilController::class, 'profil'])->name('profil');
+Route::get('/profil/edit', [LandingController::class, 'masterUser'])->name('masterUser');
+Route::post('/profil/update', [LandingProfilController::class, 'updateProfile'])->name('updateProfile');
+
 
 

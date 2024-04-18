@@ -70,9 +70,10 @@
             <i class="bi bi-chevron-down"></i>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="/profil/{{ Auth::user()->user_id }}">Profil</a></li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            <li class="border-bottom py-1"><a class="dropdown-item" href="/profil/{{ Auth::user()->user_id }}">Profil</a></li>
+            <li class="border-bottom py-2"><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#editProfil">Edit Profil</a></li>
+            <li class="py-1">
+              <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
               </form>
@@ -414,7 +415,6 @@
             </div>
           </div>
         </form>
-
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
           @csrf
           <div class="modalRegister" id="modalRegister" style="display: none;">
@@ -466,6 +466,51 @@
     </div>
   </div>
   <!----------------------------- MODAL LOGIN REGISTER END -------------------------->
+
+
+
+  <!----------------------------- MODAL EDIT PROFIL -------------------------->
+  <div class="modal fade" id="editProfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
+          <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Edit Profil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('updateProfile') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <p>Lakukan edit data baru seputar profil anda.</p>
+            <div class="mb-3">
+              <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-control" name="nama_lengkap" value="{{ $user->nama_lengkap }}">
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" value="{{ $user->username}}">
+            </div>
+            <div class="mb-3">
+              <label for="alamat" class="form-label">Alamat</label>
+              <textarea class="rounded border-light-subtle form-control" name="alamat" cols="30" rows="2" style="width: 100%;">{{ $user->alamat}}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" value="{{ $user->email}}">
+            </div>
+            <div class="mb-4">
+              <label for="foto_profil" class="form-label">Foto Profil</label>
+              <input type="file" class="form-control" name="profile_image" accept=".png, .jpg, .jpeg">
+            </div>
+            <button class="btn btn-gllery" style="width: 100%;" type="submit">Edit</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!----------------------------- MODAL EDIT PROFIL END -------------------------->
+
 
   <!------------------------------------------------------- MODAL END ---------------------------------------------------->
 
