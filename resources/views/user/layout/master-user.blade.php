@@ -353,12 +353,13 @@
                       <div class="mb-4">
                         <label for="kategori" class="form-label">Kategori</label>
                         <select class="form-select" aria-label="Default select example" name="kategori">
-                          <option disabled>Pilih kategori</option>
+                          @if(count($kategoris) == 0)
+                          <option disabled selected>Kategori tidak tersedia</option>
+                          @else
+                          <option value="" disabled selected>Pilih kategori</option>
                           @foreach ($kategoris as $kategori)
                           <option value="{{ $kategori->kategori_id }}" @if ($kategori->kategori_id == $foto->kategori_id) selected @endif>{{ $kategori->judul_kategori }}</option>
                           @endforeach
-                          @if (count($kategoris) == 0)
-                          <option disabled>Kategori tidak tersedia.</option>
                           @endif
                         </select>
                       </div>

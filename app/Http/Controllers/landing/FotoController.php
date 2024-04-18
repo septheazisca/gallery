@@ -21,7 +21,7 @@ class FotoController extends Controller
             'deskripsi_foto' => 'nullable|string',
             'kategori' => 'nullable|exists:kategori_foto,kategori_id',
             'album' => 'nullable|exists:album,album_id',
-            'new_album' => 'nullable|string|max:255', 
+            'new_album' => 'nullable|string|max:255',
         ]);
 
         // Jika validasi gagal
@@ -30,15 +30,16 @@ class FotoController extends Controller
         }
 
         try {
+            // Simpan gambar
             $imageName = $request->lokasi_foto->store('public/images');
             $lokasi_foto = url(Storage::url($imageName));
 
-            $photo = new foto();
+            // Buat objek foto baru
+            $photo = new Foto();
             $photo->judul_foto = $request->judul_foto;
             $photo->lokasi_foto = $lokasi_foto;
             $photo->tanggal_unggahan = now();
             $photo->user_id = auth()->id();
-            // Menetapkan deskripsi foto, jika tidak null
             $photo->deskripsi_foto = $request->filled('deskripsi_foto') ? $request->deskripsi_foto : null;
 
             // Menetapkan nilai kategori_id, jika tidak null
@@ -52,7 +53,8 @@ class FotoController extends Controller
                 $album->user_id = auth()->id();
                 $album->save();
 
-                $photo->album_id = $album->id;
+                // Setel album_id foto ke album baru yang dibuat
+                $photo->album_id = $album->album_id;
             } elseif ($request->filled('album')) {
                 // Jika album yang ada dipilih
                 $photo->album_id = $request->album;
@@ -68,6 +70,8 @@ class FotoController extends Controller
             return redirect()->back()->with('error', 'Gagal mengunggah foto. Silakan coba lagi.');
         }
     }
+
+
 
     public function editFoto(Request $request, $id)
     {
