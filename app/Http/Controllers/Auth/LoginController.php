@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             if ($request->username === 'admingallery1975@gmail.com') {
-                return redirect('/dashboard-index'); 
+                return redirect('/dashboard'); 
             } else {
                 return redirect('/');
             }

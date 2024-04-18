@@ -69,7 +69,7 @@
             @endif
             <i class="bi bi-chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="z-index: 1000;">
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li><a class="dropdown-item" href="/profil/{{ Auth::user()->user_id }}">Profil</a></li>
             <li>
               <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -503,7 +503,7 @@
           // Tampilkan setiap komentar dalam daftar
           response.comments.forEach(function(comment) {
             var commentItem = $('<div class="commentars d-flex"></div>');
-            var fotoProfile = comment.user.profile_image ? 'storage/' + comment.user.profile_image : 'https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg';
+            var fotoProfile = comment.user.profile_image ? "{{ asset('storage') }}/" + comment.user.profile_image : "{{ asset('assetsUser/img/av.png') }}";
 
             var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center "><div class="username d-flex align-items-center"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;"><a href="/profil/' + comment.user.user_id + '" class="text-decoration-none" style="color: #000;">' + comment.user.username + '</a></h5></div><div class="date text-body-tertiary d-flex align-items-center"><h5 style="font-size: 12px; margin-top: 6px; margin-left: 5px">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
 
@@ -720,6 +720,22 @@
       }
       return formatTimeAgo(new Date(timestamp).getTime() + 1000);
     }
+
+    // FAB
+    document.addEventListener("DOMContentLoaded", function() {
+      var dropdownMenuButton = document.getElementById("dropdownMenuButton");
+      var dropdownItems = document.querySelectorAll('.dropdown-item');
+
+      dropdownMenuButton.addEventListener("click", function() {
+        document.querySelector('.fab-container').style.display = 'none';
+      });
+
+      dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+          document.querySelector('.fab-container').style.display = 'block';
+        });
+      });
+    });
   </script>
 
   @if ($errors->any())
