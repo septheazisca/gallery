@@ -4,7 +4,7 @@
 <div class="container py-5" style="margin-top: 5.5rem;">
   <div class="profil-section">
     <div class="img-profil">
-      <img src="{{ Storage::url(Auth::user()->profile_image) }}" alt="" style="width: 150px; border-radius: 100px;">
+      <img src="{{ asset('storage/' . $user->profile_image) }}" alt="" style="width: 150px; border-radius: 100px;">
     </div>
     <div class="detail-profil">
       <h2>{{ $user->nama_lengkap }}</h2>
