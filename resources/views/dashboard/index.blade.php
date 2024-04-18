@@ -32,11 +32,11 @@
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
+                    <i class="bi bi-bookmarks"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>145</h6>
-                    <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    <h6>{{ $totalKategoris }}</h6>
+                    <span class="text-muted small pt-2 ps-1">Kategori Tersedia</span>
 
                   </div>
                 </div>
@@ -53,12 +53,11 @@
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
+                    <i class="bi bi-images"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>$3,264</h6>
-                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                    <h6>{{ $totalFotos }}</h6>
+                    <span class="text-muted small pt-2 ps-1">Unggahan User</span>
                   </div>
                 </div>
               </div>
@@ -78,9 +77,8 @@
                     <i class="bi bi-people"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>1244</h6>
-                    <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
+                    <h6>{{ $totalUsers }}</h6>
+                    <span class="text-muted small pt-2 ps-1">User Gllery</span>
                   </div>
                 </div>
 
@@ -89,163 +87,125 @@
 
           </div><!-- End Customers Card -->
 
-          <!-- Reports -->
-          <div class="col-12">
-            <div class="card">
-
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                <!-- Line Chart -->
-                <div id="reportsChart"></div>
-
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new ApexCharts(document.querySelector("#reportsChart"), {
-                      series: [{
-                        name: 'Sales',
-                        data: [31, 40, 28, 51, 42, 82, 56],
-                      }, {
-                        name: 'Revenue',
-                        data: [11, 32, 45, 32, 34, 52, 41]
-                      }, {
-                        name: 'Customers',
-                        data: [15, 11, 32, 18, 9, 24, 11]
-                      }],
-                      chart: {
-                        height: 350,
-                        type: 'area',
-                        toolbar: {
-                          show: false
-                        },
-                      },
-                      markers: {
-                        size: 4
-                      },
-                      colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                      fill: {
-                        type: "gradient",
-                        gradient: {
-                          shadeIntensity: 1,
-                          opacityFrom: 0.3,
-                          opacityTo: 0.4,
-                          stops: [0, 90, 100]
-                        }
-                      },
-                      dataLabels: {
-                        enabled: false
-                      },
-                      stroke: {
-                        curve: 'smooth',
-                        width: 2
-                      },
-                      xaxis: {
-                        type: 'datetime',
-                        categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                      },
-                      tooltip: {
-                        x: {
-                          format: 'dd/MM/yy HH:mm'
-                        },
-                      }
-                    }).render();
-                  });
-                </script>
-                <!-- End Line Chart -->
-
-              </div>
-
-            </div>
-          </div><!-- End Reports -->
-
-          <!-- Recent Sales -->
-          <!-- <div class="col-12">
-            <div class="card recent-sales overflow-auto">
-
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                <table class="table table-borderless datatable">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Data Unggahan Terbaru</h5>
+              <div class="table-responsive">
+                <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Customer</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Status</th>
-                    </tr>
+                      <th>
+                        <b>#</b>
+                      </th>
+                      <th style="width: 130px;">
+                        Unggahan
+                      </th>
+                      <th style="width: 250px;">Username Pengunggah</th>
+                      <th style="width: 250px;">Judul Unggahan</th>
+                      <th>Detail Unggahan</th>
+                      <th data-type="date" data-format="YYYY/DD/MM">Waktu Input</th>
                   </thead>
                   <tbody>
+                    @php $number = 1 @endphp
+                    @foreach($latestFotos as $latestFoto)
                     <tr>
-                      <th scope="row"><a href="#">#2457</a></th>
-                      <td>Brandon Jacob</td>
-                      <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                      <td>$64</td>
-                      <td><span class="badge bg-success">Approved</span></td>
+                      <td>{{$number++}}</td>
+                      <td>
+                        <img src="{{ $latestFoto->lokasi_foto }}" alt="{{ $latestFoto->judul_foto }}" style="width: 30px;">
+                      </td>
+                      <td>{{ $latestFoto->user->username }}</td>
+                      <td>{{ $latestFoto->judul_foto }}</td>
+                      <td>{{ $latestFoto->deskripsi_foto }}</td>
+                      <td>{{ $latestFoto->created_at->format('d/m/Y') }}</td>
                     </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2147</a></th>
-                      <td>Bridie Kessler</td>
-                      <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                      <td>$47</td>
-                      <td><span class="badge bg-warning">Pending</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2049</a></th>
-                      <td>Ashleigh Langosh</td>
-                      <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                      <td>$147</td>
-                      <td><span class="badge bg-success">Approved</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2644</a></th>
-                      <td>Angus Grady</td>
-                      <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                      <td>$67</td>
-                      <td><span class="badge bg-danger">Rejected</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2644</a></th>
-                      <td>Raheem Lehner</td>
-                      <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                      <td>$165</td>
-                      <td><span class="badge bg-success">Approved</span></td>
-                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
-
               </div>
+              <!-- End Table with stripped rows -->
 
             </div>
-          </div> -->
-          <!-- End Recent Sales -->
+          </div>
 
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Data Pengguna Terbaru</h5>
+              <!-- Table with stripped rows -->
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th><b>#</b></th>
+                    <th>
+                      Profil
+                    </th>
+                    <th>Username</th>
+                    <th>Nama Lengkap</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php $number = 1 @endphp
+                  @foreach($latestUsers as $latestUser)
+                  <tr>
+                    <td>
+                      {{ $number++ }}
+                    </td>
+                    <td>
+                      <img src="{{ asset('storage/' . $latestUser->profile_image) }}" alt="{{ $latestUser->username}}" style="width: 30px;">
+                    </td>
+                    <td>{{ $latestUser->username }}</td>
+                    <td>{{ $latestUser->nama_lengkap }}</td>
+                    <td>{{ $latestUser->email }}</td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Data Kategori Terbaru</h5>
+
+              <!-- Table with stripped rows -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      <b>#</b>
+                    </th>
+                    <th style="width: 220px;">
+                      Thumbnail Kategori
+                    </th>
+                    <th>Judul Kategori</th>
+                    <th>Detail Kategori</th>
+                    <th data-type="date" data-format="YYYY/DD/MM">Waktu Input</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php $number = 1 @endphp
+                  @foreach($latestkategoris as $latestkategori)
+                  <tr>
+                    <td>
+                      {{$number++}}
+                    </td>
+                    <td>
+                      <img src="{{ asset('storage/' . $latestkategori->thumbnail_kategori) }}" alt="{{ $latestkategori->judul_kategori }}" style="width: 30px;">
+                    </td>
+                    <td>{{ $latestkategori->judul_kategori }}</td>
+                    <td>{{ $latestkategori->deskripsi_kategori }}</td>
+                    <td>{{ $latestkategori->created_at->format('d/m/Y') }}</td>
+                  </tr>
+                  @endforeach
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
         </div>
       </div><!-- End Left side columns -->
     </div>

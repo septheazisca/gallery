@@ -100,18 +100,25 @@
             <table class="table datatable">
               <thead>
                 <tr>
+                  <th>
+                    <b>#</b>
+                  </th>
                   <th style="width: 220px;">
                     Thumbnail Kategori
                   </th>
                   <th>Judul Kategori</th>
                   <th>Detail Kategori</th>
-                  <th data-type="date" data-format="YYYY/DD/MM">Waktu Input</th>
+                  <th data-type="date" data-format="MM/DD/YYYY">Waktu Input</th>
                   <th style="width: 120px;">Aksi</th>
                 </tr>
               </thead>
               <tbody>
+                @php $number = 1 @endphp
                 @foreach($kategoris as $kategori)
                 <tr>
+                  <td>
+                    {{$number++}}
+                  </td>
                   <td>
                     <img src="{{ asset('storage/' . $kategori->thumbnail_kategori) }}" alt="{{ $kategori->judul_kategori }}" style="width: 30px;">
                   </td>

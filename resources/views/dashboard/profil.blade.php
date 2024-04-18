@@ -23,7 +23,7 @@
 
         <div class="card pb-5 pt-5">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <img src="user.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="Profile" class="rounded-circle">
             <h2>GlleryAdmin</h2>
             <h3>Super Admin</h3>
           </div>
@@ -50,7 +50,9 @@
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 <h5 class="card-title">Tentang</h5>
-                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+                <p class="small fst-italic">Super admin Gllery memiliki peran penting dalam mengelola Gllery. Mereka bertanggung jawab atas pengaturan, pengawasan, dan pengelolaan konten serta fungsionalitas Gllery secara keseluruhan. 
+                  
+                </p>
 
                 <h5 class="card-title">Detail Profil</h5>
                 @foreach($data as $dataprofil)

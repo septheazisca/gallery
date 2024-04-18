@@ -51,7 +51,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="user.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="Profile" class="rounded-circle">
             @auth
             <span class="d-none d-md-block dropdown-toggle ps-2">GlleryAdmin</span>
             @endauth
@@ -103,7 +103,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>GlleryAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>

@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\FotoController as DashboardFotoController;
 use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\FotoController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
@@ -21,22 +24,16 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // DASHBOARD ------------------------------------------------------------
-Route::get('/dashboard-index', function () {
-    return view('dashboard.index');
-});
-Route::get('/dashboard-postingan', function () {
-    return view('dashboard.postingan');
-});
-Route::get('/dashboard-pengguna', function () {
-    return view('dashboard.pengguna');
-});
-
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('/dashboard-profil', [ProfilController::class, 'profil'])->name('profil');
 Route::post('/dashboard/profile/update', [ProfilController::class, 'update'])->name('update');
-Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
 Route::get('/dashboard-kategori', [KategoriController::class, 'index'])->name('index');
+Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
 Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->name('kategori.update');
 Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+Route::get('/dashboard-foto', [DashboardFotoController::class, 'foto'])->name('foto');
+Route::get('/dashboard-user', [UserController::class, 'user'])->name('user');
+
 
 // LANDING ------------------------------------------------------------
 Route::get('/', [LandingController::class, 'index'])->name('index');

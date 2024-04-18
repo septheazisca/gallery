@@ -4,7 +4,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="/dashboard-index">
+      <a class="nav-link collapsed" href="/dashboard">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -22,7 +22,7 @@
     <li class="nav-heading">Unggahan</li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="/dashboard-postingan">
+      <a class="nav-link collapsed" href="/dashboard-foto">
         <i class="bi bi-layout-text-window-reverse"></i>
         <span>Postingan</span>
       </a>
@@ -31,7 +31,7 @@
     <li class="nav-heading">User</li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="/dashboard-pengguna">
+      <a class="nav-link collapsed" href="/dashboard-user">
         <i class="bi bi-person"></i>
         <span>Pengguna</span>
       </a>
