@@ -2,7 +2,7 @@
 @section('content')
 <!----------------------------- USER INFORMASI -------------------------->
 <div class="container py-5" style="margin-top: 5.5rem;">
-  <div class="profil-section d-flex">
+  <div class="profil-section">
     <div class="img-profil">
       <img src="{{ Storage::url(Auth::user()->profile_image) }}" alt="" style="width: 150px; border-radius: 100px;">
     </div>
@@ -16,16 +16,6 @@
     </div>
   </div>
 </div>
-<style>
-  .profil-section {
-    display: flex;
-    align-items: center;
-  }
-
-  .detail-profil {
-    margin-left: 20px;
-  }
-</style>
 <!----------------------------- USER INFORMASI END -------------------------->
 
 <!----------------------------- ALBUM -------------------------->

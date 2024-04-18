@@ -328,3 +328,23 @@
   text-overflow: ellipsis;
   font-size: 18px;
 }
+
+@media screen and (max-width: 410px) {
+  .profil-section {
+    display: block;
+  }
+
+  .img-profil {
+    display: flex;
+    justify-content: center;
+  }
+
+  .detail-profil {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .btn-detail-profil button{
+    margin-bottom: 10px;
+  }
+}
