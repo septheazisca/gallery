@@ -8,7 +8,7 @@
       <p class="fs-6">Gambar tidak ditemukan.</p>
       @else
       @foreach ($results as $result)
-      <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $result->foto_id }}">
+      <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $result->foto_id }}" onclick="openModal({{ $result->foto_id }})">
         <img src="{{ $result->lokasi_foto }}" alt="{{ $result->judul_foto }}">
         <div class="content-hover">
           <div class="profil me-2">

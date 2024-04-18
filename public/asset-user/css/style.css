@@ -329,6 +329,15 @@
   font-size: 18px;
 }
 
+.profil-section {
+  display: flex;
+  align-items: center;
+}
+
+.detail-profil {
+  margin-left: 20px;
+}
+
 @media screen and (max-width: 410px) {
   .profil-section {
     display: block;

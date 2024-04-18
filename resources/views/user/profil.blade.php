@@ -59,10 +59,10 @@
 <!----------------------------- UNGGAHAN -------------------------->
 <div class="container py-5">
   <div class="category-section">
-    <p class="fs-5 fw-medium">Unggahan Terbaru  {{ $user->nama_lengkap }}</p>
+    <p class="fs-5 fw-medium">Unggahan {{ $user->nama_lengkap }}</p>
     <div class="content-container m-0">
       @foreach ($fotos as $foto)
-      <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}">
+      <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}" onclick="openModal({{ $foto->foto_id }})">
         <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}">
         <div class="content-hover">
           <div class="profil me-2">

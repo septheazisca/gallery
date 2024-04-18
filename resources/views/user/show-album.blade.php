@@ -7,7 +7,7 @@
   <p>Jumlah Foto: {{ $fotos->count() }}</p> <!-- Tampilkan jumlah foto -->
     <div class="content-container m-0">
       @foreach ($fotos as $foto)
-      <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}">
+      <div class="box-content" data-bs-toggle="modal" data-bs-target="#showFoto{{ $foto->foto_id }}" onclick="openModal({{ $foto->foto_id }})">
         <img src="{{ $foto->lokasi_foto }}" alt="{{ $foto->judul_foto }}">
         <div class="content-hover">
           <div class="profil me-2">
