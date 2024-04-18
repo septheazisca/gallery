@@ -167,11 +167,11 @@
                   </div>
                   <div class="container-action pt-3 border-top border-light-subtle">
                     <div class="icons-action d-flex align-items-center justify-content-between">
-                      <button type="button" class="btn btn-like btn-gray200" style="background-color: #445985;color: white" id="likeButton_{{ $foto->foto_id }}" data-photoid="{{ $foto->foto_id }}">
-                        <i class="fa-solid fa-heart"></i>
-                        <span id="likeCount_{{ $foto->foto_id }}">{{ $foto->likes_count }} likes</span>
+                      <button type="button" class="btn btn-like btn-gray200 d-flex align-items-center" style="background-color: none; color: #00044B;" id="likeButton_{{ $foto->foto_id }}" data-photoid="{{ $foto->foto_id }}">
+                        <i class="fa-regular fa-heart me-1" style="font-size: 25px;"></i>
+                        <span id="likeCount_{{ $foto->foto_id }}">{{ $foto->likes_count }} like</span>
                       </button>
-                      <a href="{{ $foto->lokasi_foto }}" download class="m-0" style="font-size: 15px;"><u style="cursor: pointer;">Download</u></a>
+                      <a href="{{ $foto->lokasi_foto }}" download class="m-0" style="font-size: 15px;"><u style="cursor: pointer;"><i class="fa-solid fa-download" style="font-size: 20px; color: #00044B;"></i></u></a>
                     </div>
                     <form action="{{ route('comments.photo') }}" method="POST" class="commentForm">
                       @csrf
@@ -501,15 +501,10 @@
 
           // Tampilkan setiap komentar dalam daftar
           response.comments.forEach(function(comment) {
-            // var commentItem = $('<li class="media"></li>');
-            // var fotoProfile = comment.user.foto_profile ? 'storage/' + comment.user.foto_profile : 'assetsUser/img/av.png';
-
-            // var commentContent = '<a href="#" style="margin-right: 10px"><img src="' + fotoProfile + '"  alt="" class="img-circle" style="border-radius: 50px; width: 50px; height: 50px"></a><div class="media-body mr-2"><span class="text-muted pull-right"><small class="text-muted">' + formatTimeAgo(comment.created_at) + '</small></span><a href=""><strong class="text-dark">' + comment.user.username + '</strong></a><p>' + comment.isi_komentar + '</p></div>';
-
             var commentItem = $('<div class="commentars d-flex"></div>');
             var fotoProfile = comment.user.profile_image ? 'storage/' + comment.user.profile_image : 'https://i.pinimg.com/564x/4c/a9/61/4ca9611d71516a62db77c1bb2f39864e.jpg';
 
-            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center justify-content-between"><div class="username"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;"><a href="/profil/' + comment.user.user_id + '" class="text-decoration-none" style="color: #000;">' + comment.user.username + '</a></h5></div><div class="date"><h5 class="mb-1" style="font-size: 12px;">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
+            var commentContent = '<div class="profile-user"><img src="' + fotoProfile + '" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div><div class="detail-commentars"><div class="username-date d-flex align-items-center "><div class="username d-flex align-items-center"><h5 class="image-date ps-2 mb-1" style="font-size: 16px;"><a href="/profil/' + comment.user.user_id + '" class="text-decoration-none" style="color: #000;">' + comment.user.username + '</a></h5></div><div class="date text-body-tertiary d-flex align-items-center"><h5 style="font-size: 12px; margin-top: 6px; margin-left: 5px">' + formatTimeAgo(comment.created_at) + '</h5></div></div><p class="ps-2" style="font-size: 15px;">' + comment.isi_komentar + '</p></div>';
 
             commentItem.append(commentContent);
             commentList.append(commentItem);
@@ -597,11 +592,11 @@
           $('#likeCount_' + photoId).text(response.like_count + ' likes');
           // Toggle button text and class based on user's like status
           if (response.user_liked) {
-            $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike');
-            $('#likeButton_' + photoId).html('<i style="color: #ff0000;" class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+            $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike d-flex align-items-center');
+            $('#likeButton_' + photoId).html('<i style="color: #ff0000; font-size: 25px;" class="fa-solid fa-heart me-1"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' like</span>');
           } else {
-            $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like');
-            $('#likeButton_' + photoId).html('<i class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+            $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like d-flex align-items-center');
+            $('#likeButton_' + photoId).html('<i class="fa-regular fa-heart me-1" style="font-size: 25px;"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' like</span>');
           }
         },
         error: function(xhr, status, error) {
@@ -627,8 +622,8 @@
           $('#likeCount_' + photoId).text(response.like_count + ' likes');
           // Toggle button text and class based on user's like status
           if (response.action === 'liked') {
-            $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike');
-            $('#likeButton_' + photoId).html('<i style="color: #ff0000;" class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+            $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike d-flex align-items-center');
+            $('#likeButton_' + photoId).html('<i style="color: #ff0000; font-size: 25px;" class="fa-solid fa-heart me-1"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' like</span>');
             toastr.success('Photo liked successfully', 'Success', {
               "progressBar": false,
               "positionClass": "toast-top-right",
@@ -645,8 +640,8 @@
             });
 
           } else {
-            $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like');
-            $('#likeButton_' + photoId).html('<i class="fa-solid fa-heart"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' likes</span>');
+            $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like d-flex align-items-center');
+            $('#likeButton_' + photoId).html('<i class="fa-regular fa-heart me-1" style="font-size: 25px;"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' like</span>');
             toastr.success('Photo unliked successfully', 'Success', {
               "progressBar": false,
               "positionClass": "toast-top-right",
