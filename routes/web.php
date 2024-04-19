@@ -40,6 +40,8 @@ Route::get('/main', [LandingController::class, 'main'])->name('main');
 Route::get('/kategori', [LandingKategoriController::class, 'kategori'])->name('kategori');
 Route::get('/show-kategori/{kategori_id}', [LandingKategoriController::class, 'showKategori'])->name('showKategori');
 Route::post('/add-album', [LandingController::class, 'addAlbum'])->name('addAlbum');
+Route::post('/edit-album/{id}', [AlbumController::class, 'editAlbum'])->name('editAlbum');
+Route::get('/delete-album/{id}', [AlbumController::class, 'deleteAlbum'])->name('deleteAlbum');
 Route::post('/add-foto', [FotoController::class, 'addFoto'])->name('addFoto');
 Route::post('/edit-foto/{id}', [FotoController::class, 'editFoto'])->name('editFoto');
 Route::get('/hapus-foto/{id}', [FotoController::class, 'hapusFoto'])->name('hapusFoto');
