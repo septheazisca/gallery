@@ -585,7 +585,7 @@
             // Handle respons dari server di sini
             console.log(response);
             $('textarea[name="isi_komentar"]').val('');
-            toastr.success('Comment sent successfully', 'Success', {
+            toastr.success('Komentar berhasil dikirim', 'Success', {
               "progressBar": false,
               "positionClass": "toast-top-right",
               "showDuration": "300",
@@ -605,7 +605,7 @@
             // Handle error di sini
             console.error(xhr.responseText);
             // Tampilkan notifikasi error dengan toastr.js
-            toastr.error('An error occurred while posting a comment', 'Error', {
+            toastr.error('Anda harus login atau register terlebih dahulu', 'Error', {
               "progressBar": false,
               "positionClass": "toast-top-right",
               "showDuration": "300",
@@ -672,7 +672,7 @@
           if (response.action === 'liked') {
             $('#likeButton_' + photoId).removeClass('btn-like').addClass('btn-unlike d-flex align-items-center');
             $('#likeButton_' + photoId).html('<i style="color: #ff0000; font-size: 25px;" class="fa-solid fa-heart me-1"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' like</span>');
-            toastr.success('Photo liked successfully', 'Success', {
+            toastr.success('Foto berhasil disukai', 'Success', {
               "progressBar": false,
               "positionClass": "toast-top-right",
               "showDuration": "300",
@@ -690,7 +690,7 @@
           } else {
             $('#likeButton_' + photoId).removeClass('btn-unlike').addClass('btn-like d-flex align-items-center');
             $('#likeButton_' + photoId).html('<i class="fa-regular fa-heart me-1" style="font-size: 25px;"></i> <span id="likeCount_' + photoId + '">' + response.like_count + ' like</span>');
-            toastr.success('Photo unliked successfully', 'Success', {
+            toastr.success('Foto berhasil tidak disukai', 'Success', {
               "progressBar": false,
               "positionClass": "toast-top-right",
               "showDuration": "300",
@@ -708,7 +708,7 @@
         },
         error: function(xhr, status, error) {
           console.error(xhr.responseText);
-          toastr.error('An error occurred while processing your like action', 'Error', {
+          toastr.error('Anda harus login atau register terlebih dahulu', 'Error', {
             "progressBar": false,
             "positionClass": "toast-top-right",
             "showDuration": "300",
