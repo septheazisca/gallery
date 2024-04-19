@@ -35,7 +35,9 @@ class ProfilController extends Controller
         if ($request->hasFile('profile_image')) {
             // Proses penyimpanan foto profil
             $profileImagePath = $request->file('profile_image')->store('public/profile_images');
-            $user->profile_image = $profileImagePath;
+            $photo_profile = str_replace('public/', '', $profileImagePath);
+
+            $user->profile_image = $photo_profile;
         }
 
         $user->save();

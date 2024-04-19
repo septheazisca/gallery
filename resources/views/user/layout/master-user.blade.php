@@ -470,6 +470,7 @@
 
 
   <!----------------------------- MODAL EDIT PROFIL -------------------------->
+  @if(auth()->check() && auth()->id() === $user->user_id)
   <div class="modal fade" id="editProfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -509,6 +510,7 @@
 
     </div>
   </div>
+  @endif
   <!----------------------------- MODAL EDIT PROFIL END -------------------------->
 
 
