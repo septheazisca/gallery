@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\AktivitasUser;
 use App\Models\Album;
 use App\Models\foto;
 use App\Models\KategoriFoto;
@@ -41,6 +42,14 @@ class ProfilController extends Controller
         }
 
         $user->save();
+
+        $aktivitas = 'Mengupdate profil';
+
+        // Simpan aktivitas ke tabel aktivitas_user
+        AktivitasUser::create([
+            'user_id' => $user->user_id,
+            'aktivitas' => $aktivitas,
+        ]);
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
     }

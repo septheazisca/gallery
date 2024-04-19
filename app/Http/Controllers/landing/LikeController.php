@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\AktivitasUser;
+use App\Models\foto;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +38,18 @@ class LikeController extends Controller
 
         // You can also return the updated like count if needed
         $likeCount = Like::where('foto_id', $photoId)->count();
+
+        $foto = foto::findOrFail($photoId);
+
+        // Buat pesan aktivitas berdasarkan tindakan yang dilakukan
+        $aktivitas = ($action === 'liked' ? 'Menyukai' : 'Me-unlike') . ' salah satu postingan ' . $foto->user->username;
+
+        // Simpan aktivitas ke tabel aktivitas_user
+        AktivitasUser::create([
+            'user_id' => $userId,
+            'aktivitas' => $aktivitas,
+            'foto' => 'storage/'.$foto->lokasi_foto,
+        ]);
 
         return response()->json([
             'message' => $message,

@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\FotoController as DashboardFotoController;
 use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\FotoController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
@@ -55,5 +56,7 @@ Route::get('/profil/{id}', [LandingProfilController::class, 'profil'])->name('pr
 Route::get('/profil/edit', [LandingController::class, 'masterUser'])->name('masterUser');
 Route::post('/profil/update', [LandingProfilController::class, 'updateProfile'])->name('updateProfile');
 
+// EXPORT PDF
+Route::get('/export-pdf', [ExportController::class, 'exportPDF'])->name('export.pdf');
 
 

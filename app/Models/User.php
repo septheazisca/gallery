@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(KomentarFoto::class);
     }
+
+    public function aktifitas_user()
+    {
+        return $this->hasMany(AktivitasUser::class);
+    }
 }

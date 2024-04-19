@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\AktivitasUser;
 use App\Models\Album;
 use App\Models\foto;
 use App\Models\KategoriFoto;
@@ -67,12 +68,26 @@ class LandingController extends Controller
         $kategoris = KategoriFoto::all();
         $fotos = Foto::with('user')->get(); // Memuat data foto beserta data pengguna (user) yang mengunggahnya
         $albums = Album::where('user_id', auth()->id())->get();
+        $user = Auth::user();
 
         $query = $request->input('query');
         $results = Foto::with('user') // Memuat data pengguna (user) yang mengunggah foto
             ->whereRaw("judul_foto @@ plainto_tsquery('english', ?)", [$query])
             ->get();
 
-        return view('user.search', compact('results', 'query', 'kategoris', 'albums', 'fotos'));
+
+        if (Auth::check()) {
+            // Buat pesan aktivitas
+            $aktivitas = 'Melakukan pencarian dengan kata kunci "' . $query. '"';
+
+            // Simpan aktivitas ke tabel aktivitas_user
+            AktivitasUser::create([
+                'user_id' => auth()->id(),
+                'aktivitas' => $aktivitas,
+                // Anda mungkin ingin menyertakan informasi tambahan seperti jenis pencarian yang dilakukan
+            ]);
+        }
+
+        return view('user.search', compact('results', 'query', 'kategoris', 'albums', 'fotos', 'user'));
     }
 }

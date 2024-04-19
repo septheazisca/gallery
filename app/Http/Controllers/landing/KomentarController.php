@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\AktivitasUser;
+use App\Models\foto;
 use App\Models\KomentarFoto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,7 +22,23 @@ class KomentarController extends Controller
             $comment->foto_id = $request->foto_id;
             $comment->tanggal_komentar = Carbon::now();
             $comment->save();
-    
+
+            $foto = foto::findOrFail($request->foto_id);
+
+            // Ambil username pemilik foto
+            $ownerUsername = $foto->user->username;
+            $ownerFoto = $foto->lokasi_foto;
+
+            // Buat aktivitas pengguna dengan menyertakan username pemilik foto
+            $aktivitas = "Mengirim komentar pada salah satu postingan milik @" . $ownerUsername;
+
+            // Simpan aktivitas ke tabel aktivitas_user
+            AktivitasUser::create([
+                'user_id' => auth()->id(),
+                'aktivitas' => $aktivitas,
+                'foto' => $ownerFoto
+            ]);
+
             // Redirect atau tampilkan respons sesuai kebutuhan aplikasi Anda
             return response()->json(['message' => 'Komentar berhasil ditambahkan!', 'foto_id' => $request->foto_id]);
         } else {
@@ -29,7 +47,8 @@ class KomentarController extends Controller
         }
     }
 
-    public function getComment($id) {
+    public function getComment($id)
+    {
         // $comments = Komentar::where('foto_id', $id)->orderBy('created_at', 'desc')->get();
         $comments = KomentarFoto::where('foto_id', $id)->with('user')->orderBy('created_at', 'desc')->get();
         return response()->json(['comments' => $comments]);
