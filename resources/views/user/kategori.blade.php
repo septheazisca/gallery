@@ -3,7 +3,7 @@
 <div class="container py-5" style="margin-top: 5.5rem;">
   <div class="category-section">
     <div class="header-title">
-      <p class="fs-5 fw-medium">Unggahan Terbaru</p>
+      <p class="fs-5 fw-medium">Kategori</p>
       <p class="text-body-tertiary">tersedia {{ $kategoris->count() }} kategori</p>
     </div>
     <div class="container-kategori m-0 mt-5">
