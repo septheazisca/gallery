@@ -73,7 +73,8 @@ class FotoController extends Controller
             AktivitasUser::create([
                 'user_id' => Auth::id(),
                 'aktivitas' => $aktivitas,
-                'foto' => $lokasi_foto,
+                // 'foto' => $lokasi_foto,
+                'foto' =>  str_replace('http://127.0.0.1:8000/storage/', '','public/'.$photo->lokasi_foto)
             ]);
 
             return redirect()->back()->with('success', 'Foto berhasil diunggah.');
@@ -109,7 +110,9 @@ class FotoController extends Controller
         AktivitasUser::create([
             'user_id' => auth()->id(),
             'aktivitas' => $aktivitas,
-            'foto' => 'public/'.$fotoSebelumnya['lokasi_file']
+            // 'foto' => 'public/'.$fotoSebelumnya['lokasi_file']
+            'foto' =>  str_replace('http://127.0.0.1:8000/storage/', '','public/'.$foto->lokasi_foto)
+
         ]);
 
         return redirect()->back()->with('success', 'Foto berhasil diperbarui.');
@@ -129,7 +132,9 @@ class FotoController extends Controller
             AktivitasUser::create([
                 'user_id' => Auth::id(),
                 'aktivitas' => $aktivitas,
-                'foto' => $foto['lokasi_foto']
+                // 'foto' => $foto['lokasi_foto']
+                'foto' =>  str_replace('http://127.0.0.1:8000/storage/', '','public/'.$foto->lokasi_foto)
+
             ]);
 
             $foto->delete();

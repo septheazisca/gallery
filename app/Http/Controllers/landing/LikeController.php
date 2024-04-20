@@ -48,7 +48,9 @@ class LikeController extends Controller
         AktivitasUser::create([
             'user_id' => $userId,
             'aktivitas' => $aktivitas,
-            'foto' => 'storage/'.$foto->lokasi_foto,
+            'foto' =>  str_replace('http://127.0.0.1:8000/storage/', '','public/'.$foto->lokasi_foto)
+            // str_replace('public/storage/', '', $foto->lokasi_foto)
+            
         ]);
 
         return response()->json([

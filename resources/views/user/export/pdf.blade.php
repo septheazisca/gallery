@@ -9,7 +9,7 @@
 
 <body>
   <h1>Aktivitas User</h1>
-  <table border="1" cellspacing="0" cellpadding="10" style="width: 500px;">
+  <table border="1" cellspacing="0" cellpadding="10">
     <thead>
       <tr>
         <th>No</th>

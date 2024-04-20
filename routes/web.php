@@ -57,6 +57,6 @@ Route::get('/profil/edit', [LandingController::class, 'masterUser'])->name('mast
 Route::post('/profil/update', [LandingProfilController::class, 'updateProfile'])->name('updateProfile');
 
 // EXPORT PDF
-Route::get('/export-pdf', [ExportController::class, 'exportPDF'])->name('export.pdf');
+Route::get('/export-pdf', [ExportController::class, 'exportPDF'])->name('exportPDF');
 
 

@@ -36,7 +36,9 @@ class KomentarController extends Controller
             AktivitasUser::create([
                 'user_id' => auth()->id(),
                 'aktivitas' => $aktivitas,
-                'foto' => $ownerFoto
+                // 'foto' => $ownerFoto
+                'foto' =>  str_replace('http://127.0.0.1:8000/storage/', '','public/'.$ownerFoto->lokasi_foto)
+
             ]);
 
             // Redirect atau tampilkan respons sesuai kebutuhan aplikasi Anda
