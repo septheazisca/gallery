@@ -91,6 +91,8 @@
   <!----------------------------- NAVBAR END -------------------------->
 
 
+  <a href="{{ url()->previous() }}" class="btn btn-secondary py-3 px-4" style="background-color: #fff; color: #00044B; position: fixed; top: 6%; left: 3%; border-radius: 40px; border: none; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; z-index: 1000;"><i class="fa-solid fa-angle-left"></i></a>
+
 
   <!----------------------------- FAB ADD -------------------------->
   @if(Auth::check())
