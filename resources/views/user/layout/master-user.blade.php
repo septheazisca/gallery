@@ -138,16 +138,13 @@
                       @endif
                     </div>
                     <div class="more-action d-flex align-items-center">
+                      @if($foto->user->user_id == auth()->id()) <!-- Jika pengguna sedang melihat unggahan mereka sendiri -->
                       <i class="fa-solid fa-ellipsis-vertical" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @if($foto->user->user_id == auth()->id()) <!-- Jika pengguna sedang melihat unggahan mereka sendiri -->
                         <li><a class="dropdown-item text-danger" href="{{ route('hapusFoto', ['id' => $foto->foto_id]) }}">Hapus</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFoto{{ $foto->foto_id }}">Edit</a></li>
-                        @else
-                        <!-- Jika pengguna sedang melihat unggahan orang lain -->
-                        <li><a class="dropdown-item" href="#">Report</a></li>
-                        @endif
                       </ul>
+                      @endif
                     </div>
 
                   </div>
