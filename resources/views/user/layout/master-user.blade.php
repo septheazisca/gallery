@@ -348,7 +348,7 @@
                         <label for="deskripsi_foto" class="form-label">Deskripsi</label>
                         <textarea class="rounded border-light-subtle form-control" name="deskripsi_foto" cols="30" rows="2" style="width: 100%;">{{ $foto->deskripsi_foto }}</textarea>
                       </div>
-                      <div class="mb-4">
+                      <div class="mb-3">
                         <label for="kategori" class="form-label">Kategori</label>
                         <select class="form-select" aria-label="Default select example" name="kategori">
                           @if(count($kategoris) == 0)
@@ -360,6 +360,22 @@
                           @endforeach
                           @endif
                         </select>
+                      </div>
+                      <div id="albumSection" class="form-group icon-input">
+                        <div class="mb-4">
+                          <label for="album" class="form-label">Pilih album</label>
+                          <select class="form-select" aria-label="Default select example" name="album">
+                            <option selected disabled>Pilih album</option>
+                            @if(count($albums) == 0)
+                            <option disabled selected>Album tidak tersedia</option>
+                            @else
+                            <option value="" disabled selected>Pilih Album</option>
+                            @foreach ($albums as $album)
+                            <option value="{{ $album->album_id }}" @if ($album->album_id == $foto->album_id) selected @endif>{{ $album->nama_album }}</option>
+                            @endforeach
+                            @endif
+                          </select>
+                        </div>
                       </div>
                       <button class="btn btn-gllery" style="width: 100%;" type="submit">Perbarui Unggah</button>
                     </form>

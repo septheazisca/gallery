@@ -99,6 +99,7 @@ class FotoController extends Controller
         $foto->judul_foto = $request->judul_foto;
         $foto->deskripsi_foto = $request->deskripsi_foto;
         $foto->kategori_id = $request->kategori;
+        $foto->album_id = $request->album;
         $foto->save();
 
         // Simpan informasi foto sebelum diperbarui
