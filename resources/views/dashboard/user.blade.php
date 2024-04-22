@@ -83,7 +83,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Pengguna</h1>
+        <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
+        <h1 class="modal-title fs-5 ms-2 fw-semibold" id="staticBackdropLabel">Gllery - Detail Pengguna</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -115,10 +116,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
       </div>
     </div>
