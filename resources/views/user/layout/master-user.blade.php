@@ -412,19 +412,20 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" method="POST">
+          <form action="{{ route('reportFoto') }}" method="POST">
             @csrf
-            <p>Maaf atas ketidak nyamanan anda, anda dapat melaporkan unggahan ini di sini.</p>
+            <p>Maaf atas ketidaknyamanan Anda, Anda dapat melaporkan unggahan ini di sini.</p>
             @foreach ($jenisLaporans as $jenisLaporan)
             <div class="form-check d-flex">
               <input class="form-check-input" type="radio" name="jenis_laporan" value="{{ $jenisLaporan->jenislaporan_id }}" style="width: 30px; height: 30px;" id="jenis_{{ $jenisLaporan->jenislaporan_id }}">
               <label class="form-check-label ms-2" for="jenis_{{ $jenisLaporan->jenislaporan_id }}">
-                <p class="mb-1 fw-medium">{{ $jenisLaporan->jenis_laporan }}</p> <!-- Nama jenis laporan -->
-                <p style="font-size: 12px;">{{ $jenisLaporan->deskripsi }}</p> <!-- Deskripsi -->
+                <p class="mb-1 fw-medium">{{ $jenisLaporan->jenis_laporan }}</p>
+                <p style="font-size: 12px;">{{ $jenisLaporan->deskripsi }}</p>
               </label>
             </div>
             @endforeach
-            <button class="btn btn-gllery" style="width: 100%;" type="submit">Report</button>
+            <input type="hidden" name="foto_id" value="{{ $foto->foto_id }}"> <!-- Foto yang dilaporkan -->
+            <button class="btn btn-gllery" style="width: 100%;" type="submit">Laporkan</button>
           </form>
         </div>
       </div>

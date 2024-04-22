@@ -17,6 +17,7 @@ use App\Http\Controllers\landing\KomentarController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\landing\LikeController;
 use App\Http\Controllers\landing\ProfilController as LandingProfilController;
+use App\Http\Controllers\landing\ReportController;
 use Illuminate\Support\Facades\Route;
 
 // AUTH ------------------------------------------------------------
@@ -62,6 +63,7 @@ Route::get('/search', [LandingController::class, 'search'])->name('search');
 Route::get('/profil/{id}', [LandingProfilController::class, 'profil'])->name('profil');
 Route::get('/profil/edit', [LandingController::class, 'masterUser'])->name('masterUser');
 Route::post('/profil/update', [LandingProfilController::class, 'updateProfile'])->name('updateProfile');
+Route::post('/report', [ReportController::class, 'reportFoto'])->name('reportFoto');
 
 // EXPORT PDF
 Route::get('/export-pdf', [ExportController::class, 'exportPDF'])->name('exportPDF');
