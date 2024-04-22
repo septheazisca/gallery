@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AktivitasUser;
 use App\Models\Album;
 use App\Models\foto;
+use App\Models\JenisLaporan;
 use App\Models\KategoriFoto;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class ProfilController extends Controller
         $user = Auth::user();
         $totalPost = $fotos->count();
         $totalAlbum = $albums->count();
-        return view('user.profil', compact('kategoris', 'albums', 'fotos', 'user', 'totalPost', 'totalAlbum', 'userss'));
+        $jenisLaporans = JenisLaporan::all();
+        return view('user.profil', compact('kategoris', 'albums', 'fotos', 'user', 'totalPost', 'totalAlbum', 'userss', 'jenisLaporans'));
     }
 
     public function updateProfile(Request $request)

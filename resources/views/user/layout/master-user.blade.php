@@ -140,16 +140,19 @@
                       @endif
                     </div>
                     <div class="more-action d-flex align-items-center">
+                      @if(auth()->check()) <!-- Memastikan pengguna sudah login -->
                       <i class="fa-solid fa-ellipsis-vertical" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @if($foto->user->user_id == auth()->id()) <!-- Jika pengguna sedang melihat unggahan mereka sendiri -->
                         <li><a class="dropdown-item text-danger" href="{{ route('hapusFoto', ['id' => $foto->foto_id]) }}">Hapus</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFoto{{ $foto->foto_id }}">Edit</a></li>
-                        @else
+                        @else <!-- Jika pengguna melihat unggahan orang lain -->
                         <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#reportUngghan">Report</a></li>
                         @endif
                       </ul>
+                      @endif
                     </div>
+
 
                   </div>
                   <div class="container-detail py-3" style="height: 295px; overflow-y: auto;">
@@ -412,13 +415,15 @@
           <form action="" method="POST">
             @csrf
             <p>Maaf atas ketidak nyamanan anda, anda dapat melaporkan unggahan ini di sini.</p>
+            @foreach ($jenisLaporans as $jenisLaporan)
             <div class="form-check d-flex">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" style="width: 30px; height: 30px;">
-              <label class="form-check-label ms-2" for="flexRadioDefault1">
-                <p class="mb-1 fw-medium">Default radio</p>
-                <p style="font-size: 12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus iusto numquam tempore tenetur distinctio ad corrupti temporibus vitae eveniet!</p>
+              <input class="form-check-input" type="radio" name="jenis_laporan" value="{{ $jenisLaporan->jenislaporan_id }}" style="width: 30px; height: 30px;" id="jenis_{{ $jenisLaporan->jenislaporan_id }}">
+              <label class="form-check-label ms-2" for="jenis_{{ $jenisLaporan->jenislaporan_id }}">
+                <p class="mb-1 fw-medium">{{ $jenisLaporan->jenis_laporan }}</p> <!-- Nama jenis laporan -->
+                <p style="font-size: 12px;">{{ $jenisLaporan->deskripsi }}</p> <!-- Deskripsi -->
               </label>
             </div>
+            @endforeach
             <button class="btn btn-gllery" style="width: 100%;" type="submit">Report</button>
           </form>
         </div>

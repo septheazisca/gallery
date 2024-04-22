@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AktivitasUser;
 use App\Models\Album;
 use App\Models\foto;
+use App\Models\JenisLaporan;
 use App\Models\KategoriFoto;
 use App\Models\KomentarFoto;
 // use Dotenv\Validator;
@@ -23,8 +24,9 @@ class LandingController extends Controller
         $fotos = Foto::with('user')->get(); // Memuat data foto beserta data pengguna (user) yang mengunggahnya
         $albums = Album::where('user_id', auth()->id())->get();
         $showKategoris = KategoriFoto::orderBy('judul_kategori', 'asc')->take(20)->get();
+        $jenisLaporans = JenisLaporan::all();
 
-        return view('user.index', compact('kategoris', 'albums', 'fotos', 'showKategoris', 'user'));
+        return view('user.index', compact('kategoris', 'albums', 'fotos', 'showKategoris', 'user', 'jenisLaporans'));
     }
 
     public function masterUser()
