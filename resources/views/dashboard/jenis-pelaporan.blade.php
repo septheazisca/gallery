@@ -74,7 +74,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Jenis Pelaporan</h1>
+        <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
+        <h1 class="modal-title fs-5 ms-2 fw-semibold" id="staticBackdropLabel">Gllery - Tambah Jenis Pelaporan</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -84,14 +85,11 @@
             <label for="jenisPelaoran" class="col-form-label">Jenis Pelaporan:</label>
             <input type="text" name="jenis_pelaoran" class="form-control" id="jenisPelaoran">
           </div>
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="detail" class="col-form-label">Detail:</label>
             <textarea class="form-control" name="" id="" cols="30" rows="2"></textarea>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-          </div>
+          <button type="submit" class="btn btn-primary-1 mb-2" style="width: 100%;">Simpan</button>
         </form>
       </div>
     </div>
@@ -104,7 +102,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Jenis Pelaporan</h1>
+        <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
+        <h1 class="modal-title fs-5 ms-2 fw-semibold" id="staticBackdropLabel">Gllery - Edit Jenis Pelaporan</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -118,10 +117,7 @@
             <label for="detail" class="col-form-label">Detail:</label>
             <textarea class="form-control" name="" id="" cols="30" rows="2"></textarea>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-          </div>
+          <button type="submit" class="btn btn-primary-1 mb-2" style="width: 100%;">Simpan</button>
         </form>
       </div>
     </div>
