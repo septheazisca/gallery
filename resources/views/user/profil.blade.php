@@ -12,7 +12,9 @@
       <div class="btn-detail-profil">
         <button class="btn btn-profil">{{ $totalPost }} Unggahan</button>
         <button class="btn btn-profil">{{ $totalAlbum }} Album</button>
+        @if($userss->user_id == auth()->id())
         <button class="btn btn-profil"><a href="/export-pdf" class="text-decoration-none text-white"><i class="fa-solid fa-print me-2"></i>Print Aktivitas</a></button>
+        @endif
       </div>
     </div>
   </div>
