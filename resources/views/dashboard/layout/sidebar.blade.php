@@ -31,7 +31,7 @@
     <li class="nav-heading">Pelaporan</li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="/dashboard-jenis-pelaporan">
+      <a class="nav-link collapsed" href="/dashboard-jenis-laporan">
         <i class="bi bi-flag"></i>
         <span>Jenis Laporan</span>
       </a>

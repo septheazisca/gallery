@@ -4,11 +4,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FotoController as DashboardFotoController;
+use App\Http\Controllers\Dashboard\JenisLaporanController;
 use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ExportController;
-use App\Http\Controllers\Dashboard\JenisPelaporanController;
 use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\FotoController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
@@ -34,7 +34,9 @@ Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.s
 Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->name('kategori.update');
 Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 Route::get('/dashboard-foto', [DashboardFotoController::class, 'foto'])->name('foto');
-Route::get('/dashboard-jenis-pelaporan', [JenisPelaporanController::class, 'jenisPelaporan'])->name('jenisPelaporan');
+Route::get('/dashboard-jenis-laporan', [JenisLaporanController::class, 'index'])->name('index');
+Route::post('/jenis-laporan', [JenisLaporanController::class, 'store'])->name('jenis-laporan.store');
+Route::post('/jenis-laporan/update/{id}', [JenisLaporanController::class, 'update'])->name('jenis-laporan.update');
 Route::get('/dashboard-user', [UserController::class, 'user'])->name('user');
 
 // LANDING ------------------------------------------------------------
