@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\Dashboard\JenisPelaporanController;
 use App\Http\Controllers\landing\AlbumController;
 use App\Http\Controllers\landing\FotoController;
 use App\Http\Controllers\landing\kategoriController as LandingKategoriController;
@@ -33,6 +34,7 @@ Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.s
 Route::post('/kategori/{id}/update', [KategoriController::class, 'update'])->name('kategori.update');
 Route::GET('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 Route::get('/dashboard-foto', [DashboardFotoController::class, 'foto'])->name('foto');
+Route::get('/dashboard-jenis-pelaporan', [JenisPelaporanController::class, 'jenisPelaporan'])->name('jenisPelaporan');
 Route::get('/dashboard-user', [UserController::class, 'user'])->name('user');
 
 // LANDING ------------------------------------------------------------
