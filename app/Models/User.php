@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(AktivitasUser::class);
     }
+
+    public function reportFotos()
+    {
+        return $this->hasMany(ReportFoto::class, 'pelapor_id', 'user_id');
+    }
 }

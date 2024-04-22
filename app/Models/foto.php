@@ -21,14 +21,8 @@ class foto extends Model
 
     public function album()
     {
-        // Sesuaikan nama kolom kunci asing dengan nama yang benar
         return $this->belongsTo(Album::class, 'album_id');
     }
-
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
 
     public function user()
     {
@@ -38,5 +32,10 @@ class foto extends Model
     public function komentar()
     {
         return $this->hasMany(KomentarFoto::class);
+    }
+
+    public function reportFotos()
+    {
+        return $this->hasMany(ReportFoto::class, 'foto_id', 'foto_id');
     }
 }

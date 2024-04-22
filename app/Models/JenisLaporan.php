@@ -13,4 +13,8 @@ class JenisLaporan extends Model
     protected $primaryKey = 'jenislaporan_id';
     protected $guarded = [];
 
+    public function reportFotos()
+    {
+        return $this->hasMany(ReportFoto::class, 'jenislaporan_id', 'jenislaporan_id');
+    }
 }
