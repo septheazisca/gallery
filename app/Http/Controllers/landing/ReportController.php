@@ -22,7 +22,7 @@ class ReportController extends Controller
         $report->foto_id = $request->input('foto_id'); // ID foto yang dilaporkan
         $report->jenislaporan_id = $request->input('jenis_laporan'); // ID jenis laporan
         $report->pelapor_id = Auth::id(); // ID pengguna yang melaporkan
-        $report->status = 'pending'; // Status awal laporan
+        $report->status = 'Panding'; // tambahkan style ini <span class="badge text-bg-danger">Panding</span>
         $report->save();
 
         // Redirect atau memberikan respons setelah laporan dibuat

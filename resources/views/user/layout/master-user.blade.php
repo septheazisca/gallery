@@ -147,7 +147,7 @@
                         <li><a class="dropdown-item text-danger" href="{{ route('hapusFoto', ['id' => $foto->foto_id]) }}">Hapus</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFoto{{ $foto->foto_id }}">Edit</a></li>
                         @else <!-- Jika pengguna melihat unggahan orang lain -->
-                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#reportUngghan">Report</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#reportUngghan{{ $foto->foto_id }}">Report</a></li>
                         @endif
                       </ul>
                       @endif
@@ -403,7 +403,8 @@
 
 
   <!----------------------------- MODAL REPORT -------------------------->
-  <div class="modal fade" id="reportUngghan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  @foreach ($fotos as $foto)
+  <div class="modal fade" id="reportUngghan{{ $foto->foto_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -432,6 +433,7 @@
 
     </div>
   </div>
+  @endforeach
   <!----------------------------- MODAL REPORT END -------------------------->
 
 
