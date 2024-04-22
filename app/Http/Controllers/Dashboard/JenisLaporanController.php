@@ -47,4 +47,16 @@ class JenisLaporanController extends Controller
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');
     }
 
+    public function destroy($id)
+    {
+        $jenisLaporan = JenisLaporan::find($id);
+
+        if (!$jenisLaporan) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        $jenisLaporan->delete();
+
+        return redirect()->back()->with('success', 'Jenis pelaporan berhasil dihapus.');
+    }
 }

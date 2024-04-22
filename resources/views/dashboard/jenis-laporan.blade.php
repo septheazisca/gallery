@@ -54,7 +54,7 @@
                     <td>{{ $jenisLaporan->created_at->format('d/m/Y') }}</td>
                     <td class="">
                       <button class="btn btn-warning-1" data-bs-toggle="modal" data-bs-target="#editenisJenisLaporan{{ $jenisLaporan->jenislaporan_id }}" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
-                      <button class="btn btn-danger-1 delete-category" data-id="{{ $jenisLaporan->id }}"><i class="bi bi-trash"></i></button>
+                      <button class="btn btn-danger-1 delete-category" data-id="{{ $jenisLaporan->jenislaporan_id }}"><i class="bi bi-trash"></i></button>
                     </td>
                   </tr>
                   @endforeach
@@ -138,4 +138,48 @@
 </script>
 @endif
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.delete-category').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const itemId = this.dataset.id; // Ambil ID dari data-id
+            const form = document.createElement('form'); // Buat formulir untuk penghapusan
+            form.action = `/jenis-laporan/delete/${itemId}`; // Ubah sesuai route
+            form.method = 'POST';
+            form.style.display = 'none';
+
+            const csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = '_token';
+            csrfToken.value = '{{ csrf_token() }}'; // Tambahkan CSRF token
+
+            const method = document.createElement('input');
+            method.type = 'hidden';
+            method.name = '_method';
+            method.value = 'DELETE'; // Untuk permintaan DELETE
+
+            form.appendChild(csrfToken);
+            form.appendChild(method);
+
+            Swal.fire({
+                title: 'Peringatan',
+                text: 'Apakah Anda yakin ingin menghapus item ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.body.appendChild(form); // Tambahkan formulir ke body
+                    form.submit(); // Kirim formulir untuk menghapus item
+                }
+            });
+        });
+    });
+});
+</script>
 @endsection

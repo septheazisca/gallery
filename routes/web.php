@@ -37,6 +37,7 @@ Route::get('/dashboard-foto', [DashboardFotoController::class, 'foto'])->name('f
 Route::get('/dashboard-jenis-laporan', [JenisLaporanController::class, 'index'])->name('index');
 Route::post('/jenis-laporan', [JenisLaporanController::class, 'store'])->name('jenis-laporan.store');
 Route::post('/jenis-laporan/update/{id}', [JenisLaporanController::class, 'update'])->name('jenis-laporan.update');
+Route::delete('/jenis-laporan/delete/{id}', [JenisLaporanController::class, 'destroy'])->name('jenis-laporan.destroy');
 Route::get('/dashboard-user', [UserController::class, 'user'])->name('user');
 
 // LANDING ------------------------------------------------------------
