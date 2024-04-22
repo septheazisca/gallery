@@ -142,7 +142,8 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kategori</h1>
+                    <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
+                    <h1 class="modal-title fs-5 ms-2 fw-semibold" id="staticBackdropLabel">Gllery - Tambah Kategori</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -160,10 +161,7 @@
                         <label for="detail" class="col-form-label">Detail Kategori:</label>
                         <textarea name="detail" class="form-control" id="detail"></textarea>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                      </div>
+                      <button type="submit" class="btn btn-primary-1 mb-2" style="width: 100%;">Simpan</button>
                     </form>
                   </div>
                 </div>
@@ -206,13 +204,10 @@
                                 <label for="detail" class="col-form-label">Detail Kategori:</label>
                                 <textarea name="detail" class="form-control" id="detail">{{ $kategori->deskripsi_kategori }}</textarea>
                               </div>
+                              <button type="submit" class="btn btn-primary-1 mt-1" style="width: 100%;">Simpan</button>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
                     </div>
                   </div>
