@@ -88,6 +88,24 @@
     z-index: 10;
   }
   
+  /* bafian report */
+  
+  .form-check-input[type="radio"]:checked {
+    background-color: #00044B;
+    border-color: #00044B;
+  }
+
+  .form-check-input[type="radio"]:checked::after {
+    border-radius: 50%;
+    content: '';
+    position: relative;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   /* bagian login */
   .btn-outline-secondary-gllery {

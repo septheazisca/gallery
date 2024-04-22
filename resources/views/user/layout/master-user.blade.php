@@ -146,7 +146,7 @@
                         <li><a class="dropdown-item text-danger" href="{{ route('hapusFoto', ['id' => $foto->foto_id]) }}">Hapus</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFoto{{ $foto->foto_id }}">Edit</a></li>
                         @else
-                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="">Report</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#reportUngghan">Report</a></li>
                         @endif
                       </ul>
                     </div>
@@ -395,6 +395,38 @@
   </div>
   @endforeach
   <!----------------------------- MODAL EDIT FOTO END -------------------------->
+
+
+
+
+  <!----------------------------- MODAL REPORT -------------------------->
+  <div class="modal fade" id="reportUngghan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img src="{{ asset('gllery.png') }}" alt="" style="width: 40px;">
+          <h1 class="modal-title fs-5 ms-2" id="staticBackdropLabel">Gllery - Report Unggahan</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+            @csrf
+            <p>Maaf atas ketidak nyamanan anda, anda dapat melaporkan unggahan ini di sini.</p>
+            <div class="form-check d-flex">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" style="width: 30px; height: 30px;">
+              <label class="form-check-label ms-2" for="flexRadioDefault1">
+                <p class="mb-1 fw-medium">Default radio</p>
+                <p style="font-size: 12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellendus iusto numquam tempore tenetur distinctio ad corrupti temporibus vitae eveniet!</p>
+              </label>
+            </div>
+            <button class="btn btn-gllery" style="width: 100%;" type="submit">Report</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!----------------------------- MODAL REPORT END -------------------------->
 
 
 
