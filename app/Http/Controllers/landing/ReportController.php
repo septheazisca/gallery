@@ -30,37 +30,33 @@ class ReportController extends Controller
         // // Redirect atau memberikan respons setelah laporan dibuat
         // return redirect()->back()->with('success', 'Laporan berhasil dibuat.');
 
-        // Validasi input yang masuk
+        // Validasi input
         $request->validate([
-            'jenis_laporan' => 'required|exists:jenis_laporan,jenislaporan_id', // Pastikan ini ada di DB
-            'foto_id' => 'required|exists:foto,foto_id', // ID foto yang akan dilaporkan
+            'jenis_laporan' => 'required|exists:jenis_laporan,jenislaporan_id', // Pastikan jenis laporan valid
+            'foto_id' => 'required|exists:foto,foto_id', // Pastikan foto ada
         ]);
 
         // Buat laporan baru
         $report = new ReportFoto();
-        $report->foto_id = $request->input('foto_id');
-        $report->jenislaporan_id = $request->input('jenis_laporan');
-        $report->pelapor_id = Auth::id();
-        $report->status = 'Pending'; // Menggunakan kata "Pending"
+        $report->foto_id = $request->input('foto_id'); // ID foto yang dilaporkan
+        $report->jenislaporan_id = $request->input('jenis_laporan'); // ID jenis laporan
+        $report->pelapor_id = Auth::id(); // Siapa yang melaporkan
+        $report->status = 'Pending'; // Status awal laporan
         $report->save();
 
-        // Dapatkan waktu lima menit yang lalu
-        $fiveMinutesAgo = Carbon::now()->subMinutes(5);
+        // Hitung jumlah laporan untuk foto ini
+        $totalReports = ReportFoto::where('foto_id', $request->input('foto_id'))->count();
 
-        // Hitung jumlah laporan untuk foto ini dalam lima menit terakhir
-        $recentReports = ReportFoto::where('foto_id', $request->input('foto_id'))
-            ->where('created_at', '>=', $fiveMinutesAgo)
-            ->count();
-
-        // Jika jumlah laporan lebih dari dua dalam lima menit, hapus foto
-        if ($recentReports >= 2) {
-            // Hapus foto dan semua terkait (jika perlu)
-            $foto = foto::find($request->input('foto_id'));
+        // Jika jumlah laporan lebih dari atau sama dengan 2, hapus foto
+        if ($totalReports >= 2) {
+            // Hapus foto yang dilaporkan
+            $foto = Foto::find($request->input('foto_id'));
             if ($foto) {
                 $foto->delete();
             }
         }
 
+        // Redirect kembali dengan pesan sukses
         return redirect()->back()->with('success', 'Laporan berhasil dibuat.');
     }
 }
