@@ -18,7 +18,8 @@ class ProfilController extends Controller
     {
         $kategoris = KategoriFoto::orderBy('judul_kategori', 'asc')->get();
         $fotos = Foto::where('user_id', $id)->get();
-        $albums = Album::where('user_id', $id)->get();
+        // $albums = Album::where('user_id', $id)->get();
+        $albums = Album::with('foto')->where('user_id', $id)->get(); // Eager loading
         $userss = User::find($id);
         $user = Auth::user();
         $totalPost = $fotos->count();

@@ -44,7 +44,7 @@
                   </div>
                   <div class="card-footer bg-transparent border-0 px-0 fs-5 ">
                     <p class="album-titel mb-0 fw-medium">{{ $album->nama_album }}</p>
-                    <!-- <p class="mb-0 text-body-tertiary" style="font-size: 15px;">ananna</p> -->
+                    <p class="mb-0 text-body-tertiary" style="font-size: 15px;">{{ $album->foto->count() }} Unggahan</p> <!-- Menampilkan jumlah foto -->
                   </div>
                 </div>
               </a>
