@@ -662,7 +662,7 @@
             // Handle error di sini
             console.error(xhr.responseText);
             // Tampilkan notifikasi error dengan toastr.js
-            toastr.error('Anda harus login atau register terlebih dahulu', 'Error', {
+            toastr.error('Anda harus login atau register terlebih dahuluuuuuuuuuuuuu', 'Error', {
               "progressBar": false,
               "positionClass": "toast-top-right",
               "showDuration": "300",

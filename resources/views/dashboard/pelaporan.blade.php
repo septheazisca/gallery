@@ -85,7 +85,7 @@
                       @endforeach
                     </td>
                     <td>
-                      <button class="btn btn-warning-1" data-bs-toggle="modal" data-bs-target="#detailUnggahan"><i class="bi bi-eye"></i></button>
+                      <!-- <button class="btn btn-warning-1" data-bs-toggle="modal" data-bs-target="#detailUnggahan"><i class="bi bi-eye"></i></button> -->
                       <button class="btn btn-danger-1 delete-category" data-id="{{ $foto_id }}"><i class="bi bi-trash"></i></button>
                     </td>
                   </tr>
@@ -102,4 +102,51 @@
     </div>
   </section>
 </main><!-- End #main -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.delete-category').click(function() {
+      var fotoId = $(this).data('id'); // Ambil ID foto
+      var url = '{{ route("foto.delete") }}'; // Endpoint delete
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: url,
+            type: 'DELETE',
+            data: {
+              foto_id: fotoId,
+              _token: '{{ csrf_token() }}' // CSRF token
+            },
+            success: function(response) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              }).then(() => {
+                location.reload(); // Muat ulang setelah penghapusan sukses
+              });
+            },
+            error: function(xhr, status, error) {
+              Swal.fire({
+                title: "Error!",
+                text: "There was an error deleting the file. Please try again.",
+                icon: "error"
+              });
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
 @endsection

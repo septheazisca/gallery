@@ -24,4 +24,17 @@ class PelaporanController extends Controller
             'groupedReports' => $groupedReports
         ]);
     }
+
+    public function destroy(Request $request)
+    {
+        $foto_id = $request->input('foto_id'); // Ambil ID foto
+        $foto = Foto::find($foto_id); // Cari foto berdasarkan ID
+    
+        if ($foto) {
+            $foto->delete(); // Hapus foto
+            return response()->json(['message' => 'Foto berhasil dihapus'], 200); // Respons sukses
+        }
+    
+        return response()->json(['message' => 'Foto tidak ditemukan'], 404); // Respons error
+    }
 }
